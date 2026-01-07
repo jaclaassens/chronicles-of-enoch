@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Greater Earth | Chronicles of Enoch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e8d48b;
+            --gold-dark: #8b6914;
+            --parchment: #f4e4bc;
+            --parchment-dark: #d4c4a0;
+            --ink: #0a0a0f;
+            --ink-light: #1a1a2f;
+            --blood: #6b1c1c;
+            --ocean-deep: #0a1628;
+            --ice: #a8c8d8;
+            --ice-glow: rgba(168, 200, 216, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--ink);
+            color: var(--parchment);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--ink);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        #loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loading-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .loading-subtitle {
+            font-size: 1.1rem;
+            color: var(--parchment-dark);
+            font-style: italic;
+            margin-bottom: 3rem;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .loading-ring {
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(201, 162, 39, 0.2);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+            position: relative;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Main Map Container */
+        #map-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            cursor: grab;
+            background: var(--ocean-deep);
+        }
+
+        #map-container:active {
+            cursor: grabbing;
+        }
+
+        /* The Map Itself */
+        #greater-earth-map {
+            position: absolute;
+            transform-origin: center center;
+            transition: transform 0.1s ease-out;
+            /* Will be sized dynamically */
+        }
+
+        #greater-earth-map img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* Header */
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(to bottom, rgba(10, 10, 15, 0.95), rgba(10, 10, 15, 0.7), transparent);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(0.7rem, 2vw, 1rem);
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .header-subtitle {
+            font-size: 0.7rem;
+            color: var(--parchment-dark);
+            font-style: italic;
+            display: none;
+        }
+
+        @media (min-width: 600px) {
+            .header-subtitle {
+                display: block;
+            }
+        }
+
+        .view-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--parchment);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn:hover {
+            background: rgba(201, 162, 39, 0.1);
+            border-color: var(--gold);
+        }
+
+        .view-btn.active {
+            background: var(--gold);
+            color: var(--ink);
+            border-color: var(--gold);
+        }
+
+        /* Zoom Controls */
+        #zoom-controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+
+        .zoom-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(10, 10, 15, 0.9);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .zoom-btn:hover {
+            background: rgba(201, 162, 39, 0.2);
+            border-color: var(--gold);
+        }
+
+        /* Location Markers */
+        .location-marker {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            z-index: 50;
+            pointer-events: auto;
+        }
+
+        .marker-dot {
+            width: 16px;
+            height: 16px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--gold), 0 0 30px rgba(201, 162, 39, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .marker-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: var(--ink);
+            border-radius: 50%;
+        }
+
+        .marker-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            animation: pulse 2.5s ease-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+        }
+
+        .location-marker:hover .marker-dot {
+            transform: scale(1.3);
+            box-shadow: 0 0 25px var(--gold), 0 0 50px rgba(201, 162, 39, 0.6);
+        }
+
+        .marker-label {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: rgba(10, 10, 15, 0.95);
+            padding: 0.3rem 0.6rem;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .location-marker:hover .marker-label {
+            opacity: 1;
+            top: -35px;
+        }
+
+        /* Special marker colors */
+        .marker-inner .marker-dot {
+            background: var(--gold);
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        .marker-outer .marker-dot {
+            background: #4a9eff;
+            box-shadow: 0 0 15px #4a9eff;
+        }
+
+        .marker-outer .marker-pulse {
+            border-color: #4a9eff;
+        }
+
+        .marker-forbidden .marker-dot {
+            background: var(--blood);
+            box-shadow: 0 0 15px var(--blood);
+        }
+
+        .marker-forbidden .marker-pulse {
+            border-color: var(--blood);
+        }
+
+        .marker-eden .marker-dot {
+            background: #4aff7f;
+            box-shadow: 0 0 15px #4aff7f;
+        }
+
+        .marker-eden .marker-pulse {
+            border-color: #4aff7f;
+        }
+
+        /* Info Panel */
+        #info-panel {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 420px;
+            max-width: 90vw;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(15, 12, 8, 0.98), rgba(10, 22, 40, 0.98));
+            z-index: 200;
+            padding: 2rem;
+            overflow-y: auto;
+            transition: right 0.4s ease;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+            border-left: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        #info-panel.active {
+            right: 0;
+        }
+
+        .panel-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .panel-close:hover {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        .panel-region {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .panel-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--parchment);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .panel-divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(to right, var(--gold), transparent);
+            margin-bottom: 1.5rem;
+        }
+
+        .panel-description {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--parchment-dark);
+            margin-bottom: 2rem;
+        }
+
+        .panel-description p {
+            margin-bottom: 1rem;
+        }
+
+        .panel-description strong {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .panel-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .meta-item {
+            padding: 0.8rem 1rem;
+            background: rgba(201, 162, 39, 0.05);
+            border-left: 2px solid var(--gold);
+        }
+
+        .meta-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .meta-value {
+            font-size: 0.95rem;
+            color: var(--parchment);
+            line-height: 1.5;
+        }
+
+        /* Panel Overlay */
+        #panel-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 150;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        #panel-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Cross-Section View */
+        #cross-section {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--ink);
+            z-index: 300;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        #cross-section.active {
+            display: flex;
+        }
+
+        .cross-section-diagram {
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 16/9;
+            position: relative;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            overflow: hidden;
+        }
+
+        .layer {
+            position: absolute;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+        }
+
+        .layer-label {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: rgba(10, 10, 15, 0.8);
+            padding: 0.3rem 0.8rem;
+            position: absolute;
+            left: 1rem;
+        }
+
+        .waters-above {
+            top: 0;
+            height: 15%;
+            background: linear-gradient(to bottom, #1a3a5c, #0a1628);
+        }
+
+        .firmament {
+            top: 15%;
+            height: 10%;
+            background: linear-gradient(to bottom, 
+                rgba(168, 200, 216, 0.3),
+                rgba(201, 162, 39, 0.2),
+                rgba(168, 200, 216, 0.3)
+            );
+            border-top: 2px solid var(--ice);
+            border-bottom: 2px solid var(--ice);
+        }
+
+        .atmosphere {
+            top: 25%;
+            height: 15%;
+            background: linear-gradient(to bottom, #1a2a3a, #2a3a4a, #3a4a5a);
+        }
+
+        .surface {
+            top: 40%;
+            height: 25%;
+            background: linear-gradient(to bottom, #2a4a3a, #1a3a2a);
+            position: relative;
+        }
+
+        .ice-wall-cross {
+            position: absolute;
+            height: 100%;
+            width: 8%;
+            background: linear-gradient(to bottom, var(--ice), #8ab8c8);
+            left: 25%;
+            box-shadow: 0 0 20px var(--ice-glow);
+        }
+
+        .ice-wall-cross.right {
+            left: auto;
+            right: 25%;
+        }
+
+        .inner-world-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            white-space: nowrap;
+        }
+
+        .depths {
+            top: 65%;
+            height: 20%;
+            background: linear-gradient(to bottom, #1a1a2a, #0a0a1a);
+        }
+
+        .waters-below {
+            top: 85%;
+            height: 15%;
+            background: linear-gradient(to bottom, #0a1628, #051018);
+        }
+
+        .close-cross-section {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.2rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-cross-section:hover {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        .cross-section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* Instructions */
+        #instructions {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 100;
+            font-size: 0.75rem;
+            color: var(--parchment-dark);
+            opacity: 0.6;
+            line-height: 1.6;
+        }
+
+        #instructions kbd {
+            display: inline-block;
+            padding: 0.1rem 0.4rem;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 2px;
+            font-family: inherit;
+            font-size: 0.65rem;
+            color: var(--gold);
+        }
+
+        /* Scale indicator */
+        #scale-indicator {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            text-align: center;
+        }
+
+        .scale-bar {
+            width: 100px;
+            height: 3px;
+            background: var(--gold);
+            margin-bottom: 0.3rem;
+            position: relative;
+        }
+
+        .scale-bar::before, .scale-bar::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 8px;
+            background: var(--gold);
+            top: -2px;
+        }
+
+        .scale-bar::before { left: 0; }
+        .scale-bar::after { right: 0; }
+
+        .scale-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            opacity: 0.8;
+        }
+
+        /* Minimap */
+        #minimap {
+            position: fixed;
+            bottom: 5rem;
+            right: 2rem;
+            width: 150px;
+            height: 150px;
+            background: rgba(10, 10, 15, 0.9);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            z-index: 100;
+            overflow: hidden;
+            display: none; /* Enable later */
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            #info-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            #zoom-controls {
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .zoom-btn {
+                width: 38px;
+                height: 38px;
+            }
+
+            #instructions {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <h1 class="loading-title">The Greater Earth</h1>
+        <p class="loading-subtitle">"The world is not what humanity has been told..."</p>
+        <div class="loading-ring"></div>
+    </div>
+
+    <!-- Main Map Container -->
+    <div id="map-container">
+        <div id="greater-earth-map">
+            <img src="Flat_Earth_map.jpg" alt="The World Beyond the Ice Wall" id="map-image">
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div>
+            <a href="index.html" class="logo">The Greater Earth</a>
+            <p class="header-subtitle">Chronicles of Enoch</p>
+        </div>
+        <div class="view-controls">
+            <button class="view-btn active" data-view="map">Map View</button>
+            <button class="view-btn" data-view="cross">Cross-Section</button>
+        </div>
+    </header>
+
+    <!-- Zoom Controls -->
+    <div id="zoom-controls">
+        <button class="zoom-btn" id="zoom-in">+</button>
+        <button class="zoom-btn" id="zoom-out">−</button>
+        <button class="zoom-btn" id="zoom-reset">⟲</button>
+    </div>
+
+    <!-- Instructions -->
+    <div id="instructions">
+        <kbd>Drag</kbd> to pan · <kbd>Scroll</kbd> to zoom · <kbd>Click</kbd> markers to explore
+    </div>
+
+    <!-- Scale Indicator -->
+    <div id="scale-indicator">
+        <div class="scale-bar"></div>
+        <span class="scale-label">Unknown Scale</span>
+    </div>
+
+    <!-- Panel Overlay -->
+    <div id="panel-overlay"></div>
+
+    <!-- Info Panel -->
+    <div id="info-panel">
+        <button class="panel-close" onclick="closeInfoPanel()">×</button>
+        <p class="panel-region" id="panel-region"></p>
+        <h2 class="panel-title" id="panel-title"></h2>
+        <div class="panel-divider"></div>
+        <div class="panel-description" id="panel-description"></div>
+        <div class="panel-meta" id="panel-meta"></div>
+    </div>
+
+    <!-- Cross-Section View -->
+    <div id="cross-section">
+        <button class="close-cross-section" onclick="closeCrossSection()">← Return to Map</button>
+        <h2 class="cross-section-title">The Structure of Creation</h2>
+        <div class="cross-section-diagram">
+            <div class="layer waters-above">
+                <span class="layer-label">The Waters Above</span>
+            </div>
+            <div class="layer firmament">
+                <span class="layer-label">The Firmament</span>
+            </div>
+            <div class="layer atmosphere">
+                <span class="layer-label">The Heavens (Sky)</span>
+            </div>
+            <div class="layer surface">
+                <span class="layer-label">The Greater Earth</span>
+                <div class="ice-wall-cross"></div>
+                <div class="ice-wall-cross right"></div>
+                <span class="inner-world-label">The Inner World</span>
+            </div>
+            <div class="layer depths">
+                <span class="layer-label">The Depths</span>
+            </div>
+            <div class="layer waters-below">
+                <span class="layer-label">The Waters Below</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // THE GREATER EARTH - FLAT EARTH MODEL
+        // Chronicles of Enoch - Interactive World Map
+        // ============================================
+
+        // Location Data - Positioned on the flat map
+        // Coordinates are percentages of the map dimensions
+        const locations = {
+            // ===== THE INNER WORLD (Within the Ice Wall) =====
+            'ice-wall': {
+                name: 'The Ice Wall',
+                region: 'The Barrier',
+                x: 50, y: 50, // Center ring
+                type: 'special',
+                description: `<p>A ring of frozen mountains encircling the inner world. <strong>Not natural—CONSTRUCTED.</strong> Built before the flood as containment, not punishment.</p>
+                <p>The wall is not merely physical—it has a <strong>frequency</strong>, a harmonic barrier that separates the inner world from the outer realms. The waters of the Flood were held within these walls while the outer continents remained untouched.</p>
+                <p>Miles high, impossibly cold, guarded by forces older than human memory. Some have crossed it. Few have returned to speak of what lies beyond.</p>`,
+                meta: {
+                    'Nature': 'Frequency barrier, physical wall',
+                    'Purpose': 'Containment of the Flood waters',
+                    'Built By': 'Unknown—predates human civilization',
+                    'Status': 'Still standing, still guarded'
+                }
+            },
+            'nippur': {
+                name: 'Nippur',
+                region: 'The Inner World • Mesopotamia',
+                x: 50, y: 48,
+                type: 'inner',
+                description: `<p>The city where <strong>Enoch</strong> lived and worked as a scribe. Here, on a rooftop overlooking the Euphrates, he first saw the burning letters that would change everything.</p>
+                <p>Beneath these streets, the ancient gears still turn—mechanisms from before the Watchers descended, built by hands that knew the frequency of creation.</p>
+                <p>This is where Sariel landed. Where Lila was born. Where the Chronicles began.</p>`,
+                meta: {
+                    'Books': 'Book 1, 2, 3',
+                    'Key Events': "Enoch's calling, Sariel's descent, Lila's birth",
+                    'Characters': 'Enoch, Lila, Namaah, Sariel',
+                    'Modern Location': 'Nuffar, Iraq'
+                }
+            },
+            'ararat': {
+                name: 'Mount Ararat',
+                region: 'The Inner World',
+                x: 52, y: 44,
+                type: 'inner',
+                description: `<p>Where the Ark came to rest after <strong>150 days</strong> of floating upon the waters of judgment. From this mountain, Noah's family descended to repopulate the cleansed world.</p>
+                <p>The mountain still holds secrets—fragments of gopher wood, traces of the kopher that sealed the vessel, and the memory of eight souls who survived when all others perished.</p>`,
+                meta: {
+                    'Books': 'Book 5, 6',
+                    'Key Events': 'The Landing, The Covenant of the Rainbow',
+                    'Characters': 'Noah, Emzara, Shem, Ham, Japheth',
+                    'Elevation': '5,137 meters'
+                }
+            },
+            'babel': {
+                name: 'Babel',
+                region: 'The Inner World • Plain of Shinar',
+                x: 49, y: 49,
+                type: 'inner',
+                description: `<p>The tower that almost pierced the firmament. Built with brick and <strong>bitumen</strong>—the same kopher that sealed the Ark, now perverted for rebellion.</p>
+                <p>Here, <strong>Nimrod</strong> the mighty hunter united humanity under one language, one purpose—to make a name for themselves, to reach the heavens by their own power.</p>
+                <p>And here, God confused their tongues and scattered them across the earth. The tower stands unfinished, a monument to human pride.</p>`,
+                meta: {
+                    'Books': 'Book 6',
+                    'Key Events': 'The Tower, The Confusion of Tongues',
+                    'Characters': 'Nimrod, The Divine Council',
+                    'Connection': 'Same land as Nippur—the cycle returning'
+                }
+            },
+            'sodom': {
+                name: 'Sodom',
+                region: 'The Inner World • Cities of the Plain',
+                x: 51, y: 51,
+                type: 'forbidden',
+                description: `<p>The city that burned with <strong>divine frequency</strong>. Not punishment alone—purification. The Silence had concentrated its corruption here until the Source responded.</p>
+                <p>Lot's wife didn't die looking back. She was <strong>TRANSFORMED</strong>—exposed to raw creation frequency, her body crystallizing, becoming part of the salt that saturates this land to this day.</p>
+                <p>Mount Sodom is 80% pure salt. The Dead Sea is the scar.</p>`,
+                meta: {
+                    'Books': 'Book 6',
+                    'Key Events': "Abraham's Intercession, The Fire, Lot's Wife",
+                    'Characters': 'Lot, Abraham, The Angels',
+                    'Evidence': 'Mount Sodom (80% salt), Dead Sea region'
+                }
+            },
+
+            // ===== THE OUTER REALMS (Beyond the Ice Wall) =====
+            'asgard': {
+                name: 'Asgard',
+                region: 'The Outer Realms • Northwest',
+                x: 25, y: 25,
+                type: 'outer',
+                description: `<p>Home to the <strong>Æsir</strong>—what Norse mythology remembers as gods. NOT gods, but ancient beings. Nephilim who fled the Flood? Watchers who retreated? First experiments in consciousness?</p>
+                <p>Thor, Odin, Loki—real beings, misremembered as deities across thousands of years of fading memory.</p>
+                <p>The halls are largely abandoned now, but not empty. <strong>Something still watches</strong> from those ancient places.</p>`,
+                meta: {
+                    'Nature': 'Ancient realm of the Æsir',
+                    'Inhabitants': 'Nephilim refugees / Ancient beings',
+                    'Status': 'Largely abandoned',
+                    'Connection': 'Norse mythology, The Watchers'
+                }
+            },
+            'aten': {
+                name: 'Aten',
+                region: 'The Outer Realms • North',
+                x: 50, y: 20,
+                type: 'outer',
+                description: `<p>Land of <strong>Perpetual Light</strong>. The sun's path passes closer here than anywhere else on the Greater Earth. A civilization that never knew the Flood.</p>
+                <p>They remember the Watchers as <strong>TEACHERS</strong>, not corruptors—because they met them before the Fall, before the corruption, before the descent into darkness.</p>
+                <p>Their astronomical knowledge exceeds anything preserved in the inner world.</p>`,
+                meta: {
+                    'Nature': 'Perpetual daylight',
+                    'Inhabitants': 'Pre-Flood civilization',
+                    'Relation to Watchers': 'Positive (pre-Fall contact)',
+                    'Knowledge': 'Advanced astronomy, frequency technology'
+                }
+            },
+            'eden': {
+                name: 'Eden',
+                region: 'The Outer Realms • East',
+                x: 75, y: 40,
+                type: 'eden',
+                description: `<p><strong>THE Garden.</strong> Still extant. Still guarded. The Cherubim with flaming swords patrol its borders—frequency barriers that no mortal from the inner world has crossed since Adam's expulsion.</p>
+                <p>The <strong>Tree of Life</strong> still grows. The <strong>Tree of Knowledge</strong> still bears fruit. And somewhere within, Enoch continues his scribal work, recording what angels and men must not forget.</p>
+                <p>No mortal from the inner world has seen it since Adam walked eastward, out of paradise, into the fallen world.</p>`,
+                meta: {
+                    'Status': 'Guarded, inaccessible',
+                    'Guardians': 'Cherubim with flaming swords',
+                    'Known Inhabitant': 'Enoch (translated)',
+                    'Contents': 'Tree of Life, Tree of Knowledge'
+                }
+            },
+            'lemuria': {
+                name: 'Lemuria',
+                region: 'The Outer Realms • East',
+                x: 70, y: 30,
+                type: 'outer',
+                description: `<p>The <strong>Sound Builders</strong>. They built with FREQUENCY before the Watchers taught humanity. Their structures resonate with the very hum of creation itself.</p>
+                <p>Mostly fallen, but ruins remain—dangerous places where the old frequencies still echo. Connected to the Chronophage technology. The gears beneath the Euphrates may have been Lemurian design.</p>`,
+                meta: {
+                    'Technology': 'Frequency/sound construction',
+                    'Status': 'Mostly fallen, ruins remain',
+                    'Connection': 'The Chronophage, frequency technology',
+                    'Warning': 'Ruins contain unstable frequencies'
+                }
+            },
+            'atlantis': {
+                name: 'Atlantis',
+                region: 'The Outer Realms • South',
+                x: 45, y: 70,
+                type: 'forbidden',
+                description: `<p>Not drowned by water. Destroyed by <strong>ANTI-FREQUENCY</strong>.</p>
+                <p>The Atlanteans tried to breach the ice wall from outside. They had frequency knowledge, power that rivaled the Watchers. They were building something that could pierce the barrier.</p>
+                <p>The Silence responded with a new weapon. It sang the <strong>opposite of creation</strong>. Ground turned to water. The city sank INTO THE LAND.</p>
+                <p>The <strong>Eye of Africa</strong>—the Richat Structure—is the SCAR where Atlantis was swallowed by the earth itself.</p>`,
+                meta: {
+                    'Destruction': 'Anti-frequency weapon',
+                    'Remnant': 'Eye of Africa (Richat Structure)',
+                    'Lesson': 'What the Silence learned here, it used at Babel',
+                    'Warning': 'The anti-frequency still echoes there'
+                }
+            },
+            'mu': {
+                name: 'Mu',
+                region: 'The Outer Realms • Southeast',
+                x: 80, y: 75,
+                type: 'forbidden',
+                description: `<p>Technologically advanced beyond any civilization that followed. They understood frequencies before anyone else. Then they were destroyed—not by flood, but by their own <strong>hubris</strong>.</p>
+                <p>They reached for something they shouldn't have. It consumed them.</p>
+                <p>The ruins contain <strong>dangerous knowledge</strong>. Some things are buried for good reason. Those who seek Mu's secrets rarely return unchanged.</p>`,
+                meta: {
+                    'Status': 'Destroyed (hubris)',
+                    'Cause': 'Overreach, forbidden knowledge',
+                    'Remnants': 'Ruins with dangerous knowledge',
+                    'Warning': 'Some knowledge should stay buried'
+                }
+            },
+
+            // ===== THE FORBIDDEN ZONES =====
+            'irradiated': {
+                name: 'The Irradiated Wastes',
+                region: 'The Forbidden Zones • West',
+                x: 15, y: 45,
+                type: 'forbidden',
+                description: `<p>A region destroyed by some <strong>ancient weapon</strong>. Nothing grows. The land itself is poisoned. Even the Watchers cannot survive there long.</p>
+                <p>What happened here, the texts do not say. Perhaps the war before the war. Perhaps a judgment that predates the Flood. Perhaps something that should <strong>never be remembered</strong>.</p>`,
+                meta: {
+                    'Status': 'Uninhabitable',
+                    'Cause': 'Unknown ancient weapon',
+                    'Duration': 'Poisoned since before human memory',
+                    'Warning': 'Even Watchers avoid this place'
+                }
+            },
+            'scorched': {
+                name: 'The Scorched Wastes',
+                region: 'The Forbidden Zones • Southwest',
+                x: 30, y: 80,
+                type: 'forbidden',
+                description: `<p>Burned, not by volcano but by something else. The ground is <strong>glass</strong> in places. Legends speak of a weapon of light.</p>
+                <p>May be connected to Sodom and Gomorrah—a preview of the judgment that would later fall on the Cities of the Plain. Or perhaps an earlier judgment, on an earlier corruption.</p>`,
+                meta: {
+                    'Status': 'Glassed terrain',
+                    'Cause': 'Weapon of light',
+                    'Connection': "Sodom's destruction?",
+                    'Evidence': 'Vitrified ground, glass formations'
+                }
+            },
+            'frozen': {
+                name: 'The Frozen Wastes',
+                region: 'The Forbidden Zones • Far North',
+                x: 85, y: 15,
+                type: 'forbidden',
+                description: `<p>Beyond even the ice wall's construction. Perpetual cold, no life as we understand it.</p>
+                <p>Said to be where the <strong>First Voice first spoke</strong>, and the cold is the echo of that silence before—the void that existed before "Let there be light."</p>
+                <p>Some say this is where the Silence originated. Where anti-frequency was born.</p>`,
+                meta: {
+                    'Status': 'Perpetual cold, lifeless',
+                    'Nature': 'Echo of pre-creation void',
+                    'Connection': 'The Silence, the void before Light',
+                    'Warning': 'The cold there is not natural'
+                }
+            },
+            'sunken': {
+                name: 'The Sunken Wastes',
+                region: 'The Forbidden Zones • South',
+                x: 55, y: 85,
+                type: 'forbidden',
+                description: `<p>Land that is slowly <strong>drowning</strong>. Not flooded—SINKING. As if the earth itself is swallowing this region inch by inch, year by year.</p>
+                <p>Connected to Atlantis's fate? The anti-frequency still working, still pulling downward?</p>
+                <p>The boundary between what is and what was. Between solid and liquid. Between existence and void.</p>`,
+                meta: {
+                    'Status': 'Actively sinking',
+                    'Cause': 'Lingering anti-frequency?',
+                    'Connection': 'Atlantis, dimensional instability',
+                    'Warning': 'Ground is not stable'
+                }
+            }
+        };
+
+        // ============================================
+        // MAP INTERACTION
+        // ============================================
+
+        const mapContainer = document.getElementById('map-container');
+        const mapElement = document.getElementById('greater-earth-map');
+        const mapImage = document.getElementById('map-image');
+
+        let scale = 1;
+        let translateX = 0;
+        let translateY = 0;
+        let isDragging = false;
+        let startX, startY;
+        let mapWidth, mapHeight;
+
+        const MIN_SCALE = 0.5;
+        const MAX_SCALE = 4;
+
+        // Initialize
+        function initMap() {
+            // Wait for image to load
+            if (mapImage.complete) {
+                setupMap();
+            } else {
+                mapImage.onload = setupMap;
+            }
+        }
+
+        function setupMap() {
+            // Set initial size based on container
+            const containerWidth = mapContainer.clientWidth;
+            const containerHeight = mapContainer.clientHeight;
+            
+            // Make map fill the container initially
+            const imgAspect = mapImage.naturalWidth / mapImage.naturalHeight;
+            const containerAspect = containerWidth / containerHeight;
+
+            if (imgAspect > containerAspect) {
+                mapHeight = containerHeight;
+                mapWidth = mapHeight * imgAspect;
+            } else {
+                mapWidth = containerWidth;
+                mapHeight = mapWidth / imgAspect;
+            }
+
+            mapElement.style.width = mapWidth + 'px';
+            mapElement.style.height = mapHeight + 'px';
+
+            // Center the map
+            translateX = (containerWidth - mapWidth) / 2;
+            translateY = (containerHeight - mapHeight) / 2;
+
+            updateMapTransform();
+            createLocationMarkers();
+
+            // Hide loading screen
+            setTimeout(() => {
+                document.getElementById('loading-screen').classList.add('hidden');
+            }, 1000);
+        }
+
+        function updateMapTransform() {
+            mapElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+            updateMarkerPositions();
+        }
+
+        function createLocationMarkers() {
+            Object.keys(locations).forEach(key => {
+                const loc = locations[key];
+                
+                // Skip the ice wall - it's the whole ring, not a single point
+                if (key === 'ice-wall') return;
+
+                const marker = document.createElement('div');
+                marker.className = `location-marker marker-${loc.type}`;
+                marker.innerHTML = `
+                    <div class="marker-pulse"></div>
+                    <div class="marker-dot"></div>
+                    <span class="marker-label">${loc.name}</span>
+                `;
+                marker.dataset.location = key;
+                marker.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showLocationInfo(key);
+                });
+
+                mapContainer.appendChild(marker);
+            });
+        }
+
+        function updateMarkerPositions() {
+            const markers = document.querySelectorAll('.location-marker');
+            markers.forEach(marker => {
+                const key = marker.dataset.location;
+                const loc = locations[key];
+                if (!loc) return;
+
+                // Calculate position based on percentage and current transform
+                const x = (loc.x / 100) * mapWidth * scale + translateX;
+                const y = (loc.y / 100) * mapHeight * scale + translateY;
+
+                marker.style.left = x + 'px';
+                marker.style.top = y + 'px';
+
+                // Scale marker size inversely with zoom (keep them readable)
+                const markerScale = Math.max(0.7, Math.min(1.2, 1 / Math.sqrt(scale)));
+                marker.style.transform = `translate(-50%, -50%) scale(${markerScale})`;
+            });
+        }
+
+        // Drag functionality
+        mapContainer.addEventListener('mousedown', (e) => {
+            if (e.target.closest('.location-marker')) return;
+            isDragging = true;
+            startX = e.clientX - translateX;
+            startY = e.clientY - translateY;
+            mapContainer.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            translateX = e.clientX - startX;
+            translateY = e.clientY - startY;
+            updateMapTransform();
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            mapContainer.style.cursor = 'grab';
+        });
+
+        // Touch support
+        mapContainer.addEventListener('touchstart', (e) => {
+            if (e.target.closest('.location-marker')) return;
+            if (e.touches.length === 1) {
+                isDragging = true;
+                startX = e.touches[0].clientX - translateX;
+                startY = e.touches[0].clientY - translateY;
+            }
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging || e.touches.length !== 1) return;
+            translateX = e.touches[0].clientX - startX;
+            translateY = e.touches[0].clientY - startY;
+            updateMapTransform();
+        });
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        // Zoom functionality
+        mapContainer.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            
+            const rect = mapContainer.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            const delta = e.deltaY > 0 ? 0.9 : 1.1;
+            const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale * delta));
+
+            if (newScale !== scale) {
+                // Zoom toward mouse position
+                const scaleChange = newScale / scale;
+                translateX = mouseX - (mouseX - translateX) * scaleChange;
+                translateY = mouseY - (mouseY - translateY) * scaleChange;
+                scale = newScale;
+                updateMapTransform();
+            }
+        });
+
+        // Zoom buttons
+        document.getElementById('zoom-in').addEventListener('click', () => {
+            const newScale = Math.min(MAX_SCALE, scale * 1.3);
+            zoomTo(newScale);
+        });
+
+        document.getElementById('zoom-out').addEventListener('click', () => {
+            const newScale = Math.max(MIN_SCALE, scale * 0.7);
+            zoomTo(newScale);
+        });
+
+        document.getElementById('zoom-reset').addEventListener('click', () => {
+            scale = 1;
+            const containerWidth = mapContainer.clientWidth;
+            const containerHeight = mapContainer.clientHeight;
+            translateX = (containerWidth - mapWidth) / 2;
+            translateY = (containerHeight - mapHeight) / 2;
+            updateMapTransform();
+        });
+
+        function zoomTo(newScale) {
+            const containerWidth = mapContainer.clientWidth;
+            const containerHeight = mapContainer.clientHeight;
+            const centerX = containerWidth / 2;
+            const centerY = containerHeight / 2;
+
+            const scaleChange = newScale / scale;
+            translateX = centerX - (centerX - translateX) * scaleChange;
+            translateY = centerY - (centerY - translateY) * scaleChange;
+            scale = newScale;
+            updateMapTransform();
+        }
+
+        // Location Info Panel
+        function showLocationInfo(key) {
+            const loc = locations[key];
+            if (!loc) return;
+
+            document.getElementById('panel-region').textContent = loc.region;
+            document.getElementById('panel-title').textContent = loc.name;
+            document.getElementById('panel-description').innerHTML = loc.description;
+
+            let metaHtml = '';
+            for (const [label, value] of Object.entries(loc.meta)) {
+                metaHtml += `
+                    <div class="meta-item">
+                        <p class="meta-label">${label}</p>
+                        <p class="meta-value">${value}</p>
+                    </div>
+                `;
+            }
+            document.getElementById('panel-meta').innerHTML = metaHtml;
+
+            document.getElementById('info-panel').classList.add('active');
+            document.getElementById('panel-overlay').classList.add('active');
+        }
+
+        function closeInfoPanel() {
+            document.getElementById('info-panel').classList.remove('active');
+            document.getElementById('panel-overlay').classList.remove('active');
+        }
+
+        document.getElementById('panel-overlay').addEventListener('click', closeInfoPanel);
+
+        // View switching
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const view = btn.dataset.view;
+                
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                if (view === 'cross') {
+                    document.getElementById('cross-section').classList.add('active');
+                } else {
+                    document.getElementById('cross-section').classList.remove('active');
+                }
+            });
+        });
+
+        function closeCrossSection() {
+            document.getElementById('cross-section').classList.remove('active');
+            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('.view-btn[data-view="map"]').classList.add('active');
+        }
+
+        // Window resize
+        window.addEventListener('resize', () => {
+            // Recenter on resize
+            const containerWidth = mapContainer.clientWidth;
+            const containerHeight = mapContainer.clientHeight;
+            translateX = (containerWidth - mapWidth * scale) / 2;
+            translateY = (containerHeight - mapHeight * scale) / 2;
+            updateMapTransform();
+        });
+
+        // Initialize
+        initMap();
+    </script>
+</body>
+</html>
