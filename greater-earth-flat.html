@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Greater Earth | Chronicles of Enoch</title>
+    <meta name="description" content="Explore the world beyond the ice wall - an interactive map of the Greater Earth from The Chronicles of Enoch">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
@@ -17,9 +18,14 @@
             --ink: #0a0a0f;
             --ink-light: #1a1a2f;
             --blood: #6b1c1c;
+            --blood-light: #8b2c2c;
             --ocean-deep: #0a1628;
             --ice: #a8c8d8;
-            --ice-glow: rgba(168, 200, 216, 0.3);
+            --ice-glow: rgba(168, 200, 216, 0.4);
+            --eden-green: #2a8b4a;
+            --eden-glow: rgba(42, 139, 74, 0.4);
+            --outer-blue: #4a7fff;
+            --outer-glow: rgba(74, 127, 255, 0.4);
         }
 
         * {
@@ -37,7 +43,7 @@
             width: 100vw;
         }
 
-        /* Loading Screen */
+        /* ==================== LOADING SCREEN ==================== */
         #loading-screen {
             position: fixed;
             top: 0;
@@ -49,8 +55,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            transition: opacity 1s ease, visibility 1s ease;
+            z-index: 2000;
+            transition: opacity 1.5s ease, visibility 1.5s ease;
         }
 
         #loading-screen.hidden {
@@ -63,9 +69,10 @@
             font-family: 'Cinzel', serif;
             font-size: clamp(1.5rem, 4vw, 2.5rem);
             color: var(--gold);
-            letter-spacing: 0.3em;
-            margin-bottom: 1rem;
+            letter-spacing: 0.4em;
+            margin-bottom: 0.5rem;
             text-align: center;
+            text-transform: uppercase;
         }
 
         .loading-subtitle {
@@ -77,87 +84,80 @@
             padding: 0 1rem;
         }
 
-        .loading-ring {
+        .loading-spinner {
             width: 80px;
             height: 80px;
-            border: 2px solid rgba(201, 162, 39, 0.2);
-            border-top-color: var(--gold);
-            border-radius: 50%;
-            animation: spin 1.5s linear infinite;
             position: relative;
+        }
+
+        .loading-spinner::before,
+        .loading-spinner::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .loading-spinner::before {
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(201, 162, 39, 0.1);
+            border-top-color: var(--gold);
+            animation: spin 1.2s linear infinite;
+        }
+
+        .loading-spinner::after {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            border: 2px solid rgba(201, 162, 39, 0.1);
+            border-bottom-color: var(--gold-light);
+            animation: spin 1.8s linear infinite reverse;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        /* Main Map Container */
-        #map-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            cursor: grab;
-            background: var(--ocean-deep);
-        }
-
-        #map-container:active {
-            cursor: grabbing;
-        }
-
-        /* The Map Itself */
-        #greater-earth-map {
-            position: absolute;
-            transform-origin: center center;
-            transition: transform 0.1s ease-out;
-            /* Will be sized dynamically */
-        }
-
-        #greater-earth-map img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            user-select: none;
-            -webkit-user-drag: none;
-        }
-
-        /* Header */
+        /* ==================== HEADER ==================== */
         #header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             padding: 1rem 1.5rem;
-            background: linear-gradient(to bottom, rgba(10, 10, 15, 0.95), rgba(10, 10, 15, 0.7), transparent);
-            z-index: 100;
+            background: linear-gradient(to bottom, rgba(10, 10, 15, 0.95), rgba(10, 10, 15, 0.8), transparent);
+            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            pointer-events: none;
+        }
+
+        #header > * {
+            pointer-events: auto;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
         }
 
         .logo {
             font-family: 'Cinzel', serif;
-            font-size: clamp(0.7rem, 2vw, 1rem);
+            font-size: clamp(0.8rem, 2.5vw, 1.1rem);
             font-weight: 600;
             color: var(--gold);
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
             text-decoration: none;
         }
 
-        .header-subtitle {
+        .logo-subtitle {
             font-size: 0.7rem;
             color: var(--parchment-dark);
             font-style: italic;
-            display: none;
-        }
-
-        @media (min-width: 600px) {
-            .header-subtitle {
-                display: block;
-            }
+            letter-spacing: 0.1em;
         }
 
         .view-controls {
@@ -168,10 +168,10 @@
         .view-btn {
             font-family: 'Cinzel', serif;
             font-size: 0.6rem;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             padding: 0.5rem 1rem;
-            background: transparent;
+            background: rgba(10, 10, 15, 0.8);
             border: 1px solid rgba(201, 162, 39, 0.3);
             color: var(--parchment);
             cursor: pointer;
@@ -179,7 +179,7 @@
         }
 
         .view-btn:hover {
-            background: rgba(201, 162, 39, 0.1);
+            background: rgba(201, 162, 39, 0.15);
             border-color: var(--gold);
         }
 
@@ -189,53 +189,57 @@
             border-color: var(--gold);
         }
 
-        /* Zoom Controls */
-        #zoom-controls {
+        /* ==================== MAP CONTAINER ==================== */
+        #map-container {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            z-index: 100;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            cursor: grab;
+            background: radial-gradient(ellipse at center, #0a1628 0%, #050a14 100%);
         }
 
-        .zoom-btn {
-            width: 44px;
-            height: 44px;
-            background: rgba(10, 10, 15, 0.9);
-            border: 1px solid rgba(201, 162, 39, 0.3);
-            color: var(--gold);
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
+        #map-container:active {
+            cursor: grabbing;
         }
 
-        .zoom-btn:hover {
-            background: rgba(201, 162, 39, 0.2);
-            border-color: var(--gold);
+        /* The map wrapper - this gets transformed */
+        #map-wrapper {
+            position: absolute;
+            transform-origin: 0 0;
+            will-change: transform;
         }
 
-        /* Location Markers */
-        .location-marker {
+        /* The actual map image */
+        #map-image {
+            display: block;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* ==================== LOCATION MARKERS ==================== */
+        /* Markers are now INSIDE map-wrapper, so they move with the map */
+        .marker {
             position: absolute;
             transform: translate(-50%, -50%);
             cursor: pointer;
-            z-index: 50;
-            pointer-events: auto;
+            z-index: 100;
+            transition: transform 0.2s ease;
+        }
+
+        .marker:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+            z-index: 101;
         }
 
         .marker-dot {
-            width: 16px;
-            height: 16px;
-            background: var(--gold);
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
-            box-shadow: 0 0 15px var(--gold), 0 0 30px rgba(201, 162, 39, 0.4);
-            transition: all 0.3s ease;
             position: relative;
+            box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
         }
 
         .marker-dot::before {
@@ -244,8 +248,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             background: var(--ink);
             border-radius: 50%;
         }
@@ -257,110 +261,132 @@
             transform: translate(-50%, -50%);
             width: 40px;
             height: 40px;
-            border: 1px solid var(--gold);
+            border: 1px solid currentColor;
             border-radius: 50%;
-            animation: pulse 2.5s ease-out infinite;
             opacity: 0;
+            animation: pulse 3s ease-out infinite;
         }
 
         @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0.8; }
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0.6; }
             100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
-        }
-
-        .location-marker:hover .marker-dot {
-            transform: scale(1.3);
-            box-shadow: 0 0 25px var(--gold), 0 0 50px rgba(201, 162, 39, 0.6);
         }
 
         .marker-label {
             position: absolute;
-            top: -30px;
+            bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
+            margin-bottom: 8px;
             white-space: nowrap;
             font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.1em;
+            font-size: 10px;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--gold);
             background: rgba(10, 10, 15, 0.95);
-            padding: 0.3rem 0.6rem;
-            border: 1px solid rgba(201, 162, 39, 0.3);
+            padding: 4px 8px;
+            border: 1px solid rgba(201, 162, 39, 0.4);
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease, margin-bottom 0.3s ease;
             pointer-events: none;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
         }
 
-        .location-marker:hover .marker-label {
+        .marker:hover .marker-label {
             opacity: 1;
-            top: -35px;
+            margin-bottom: 12px;
         }
 
-        /* Special marker colors */
-        .marker-inner .marker-dot {
-            background: var(--gold);
-            box-shadow: 0 0 15px var(--gold);
+        /* Marker type colors */
+        .marker-inner { color: var(--gold); }
+        .marker-inner .marker-dot { background: var(--gold); }
+
+        .marker-outer { color: var(--outer-blue); }
+        .marker-outer .marker-dot { background: var(--outer-blue); }
+
+        .marker-eden { color: var(--eden-green); }
+        .marker-eden .marker-dot { background: var(--eden-green); }
+
+        .marker-forbidden { color: var(--blood); }
+        .marker-forbidden .marker-dot { background: var(--blood); }
+
+        .marker-ice { color: var(--ice); }
+        .marker-ice .marker-dot { background: var(--ice); }
+
+        .marker-ancient { color: #9b59b6; }
+        .marker-ancient .marker-dot { background: #9b59b6; }
+
+        /* ==================== ZOOM CONTROLS ==================== */
+        #zoom-controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 1000;
         }
 
-        .marker-outer .marker-dot {
-            background: #4a9eff;
-            box-shadow: 0 0 15px #4a9eff;
+        .zoom-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(10, 10, 15, 0.9);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold);
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-family: inherit;
         }
 
-        .marker-outer .marker-pulse {
-            border-color: #4a9eff;
+        .zoom-btn:hover {
+            background: rgba(201, 162, 39, 0.2);
+            border-color: var(--gold);
         }
 
-        .marker-forbidden .marker-dot {
-            background: var(--blood);
-            box-shadow: 0 0 15px var(--blood);
-        }
-
-        .marker-forbidden .marker-pulse {
-            border-color: var(--blood);
-        }
-
-        .marker-eden .marker-dot {
-            background: #4aff7f;
-            box-shadow: 0 0 15px #4aff7f;
-        }
-
-        .marker-eden .marker-pulse {
-            border-color: #4aff7f;
-        }
-
-        /* Info Panel */
+        /* ==================== INFO PANEL ==================== */
         #info-panel {
             position: fixed;
             top: 0;
-            right: -450px;
-            width: 420px;
+            right: 0;
+            width: 400px;
             max-width: 90vw;
             height: 100vh;
             background: linear-gradient(135deg, rgba(15, 12, 8, 0.98), rgba(10, 22, 40, 0.98));
-            z-index: 200;
-            padding: 2rem;
+            z-index: 1500;
+            padding: 0;
             overflow-y: auto;
-            transition: right 0.4s ease;
-            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -10px 0 50px rgba(0, 0, 0, 0.5);
             border-left: 1px solid rgba(201, 162, 39, 0.2);
         }
 
         #info-panel.active {
-            right: 0;
+            transform: translateX(0);
+        }
+
+        .panel-header {
+            position: relative;
+            padding: 2rem;
+            background: linear-gradient(to bottom, rgba(201, 162, 39, 0.1), transparent);
+            border-bottom: 1px solid rgba(201, 162, 39, 0.1);
         }
 
         .panel-close {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: transparent;
-            border: 1px solid var(--gold);
+            border: 1px solid rgba(201, 162, 39, 0.3);
             color: var(--gold);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -375,39 +401,38 @@
 
         .panel-region {
             font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             color: var(--gold);
             margin-bottom: 0.5rem;
-            margin-top: 2rem;
         }
 
         .panel-title {
             font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 600;
             color: var(--parchment);
-            margin-bottom: 1.5rem;
             line-height: 1.2;
         }
 
-        .panel-divider {
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(to right, var(--gold), transparent);
-            margin-bottom: 1.5rem;
+        .panel-content {
+            padding: 1.5rem 2rem 2rem;
         }
 
         .panel-description {
-            font-size: 1.05rem;
-            line-height: 1.9;
+            font-size: 1rem;
+            line-height: 1.85;
             color: var(--parchment-dark);
             margin-bottom: 2rem;
         }
 
         .panel-description p {
             margin-bottom: 1rem;
+        }
+
+        .panel-description p:last-child {
+            margin-bottom: 0;
         }
 
         .panel-description strong {
@@ -423,45 +448,112 @@
 
         .meta-item {
             padding: 0.8rem 1rem;
-            background: rgba(201, 162, 39, 0.05);
+            background: rgba(201, 162, 39, 0.03);
             border-left: 2px solid var(--gold);
         }
 
         .meta-label {
             font-family: 'Cinzel', serif;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem;
         }
 
         .meta-value {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--parchment);
             line-height: 1.5;
         }
 
-        /* Panel Overlay */
-        #panel-overlay {
+        /* ==================== OVERLAY ==================== */
+        #overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 150;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1400;
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s ease;
         }
 
-        #panel-overlay.active {
+        #overlay.active {
             opacity: 1;
             visibility: visible;
         }
 
-        /* Cross-Section View */
+        /* ==================== INSTRUCTIONS ==================== */
+        #instructions {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.7rem;
+            color: var(--parchment-dark);
+            opacity: 0.7;
+        }
+
+        .instruction {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .instruction kbd {
+            display: inline-block;
+            padding: 2px 6px;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 3px;
+            font-family: inherit;
+            font-size: 0.6rem;
+            color: var(--gold);
+        }
+
+        /* ==================== LEGEND ==================== */
+        #legend {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            font-size: 0.65rem;
+            background: rgba(10, 10, 15, 0.9);
+            padding: 0.6rem 1.2rem;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--parchment-dark);
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.inner { background: var(--gold); }
+        .legend-dot.outer { background: var(--outer-blue); }
+        .legend-dot.eden { background: var(--eden-green); }
+        .legend-dot.forbidden { background: var(--blood); }
+        .legend-dot.ancient { background: #9b59b6; }
+
+        /* ==================== CROSS-SECTION VIEW ==================== */
         #cross-section {
             position: fixed;
             top: 0;
@@ -469,11 +561,9 @@
             width: 100%;
             height: 100%;
             background: var(--ink);
-            z-index: 300;
+            z-index: 1800;
             display: none;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
             padding: 2rem;
         }
 
@@ -481,110 +571,21 @@
             display: flex;
         }
 
-        .cross-section-diagram {
-            width: 100%;
-            max-width: 900px;
-            aspect-ratio: 16/9;
-            position: relative;
-            border: 1px solid rgba(201, 162, 39, 0.2);
-            overflow: hidden;
-        }
-
-        .layer {
-            position: absolute;
-            left: 0;
-            right: 0;
+        .cross-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            transition: all 0.5s ease;
+            margin-bottom: 2rem;
         }
 
-        .layer-label {
+        .cross-title {
             font-family: 'Cinzel', serif;
-            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+            font-size: 1.5rem;
+            color: var(--gold);
             letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--gold);
-            background: rgba(10, 10, 15, 0.8);
-            padding: 0.3rem 0.8rem;
-            position: absolute;
-            left: 1rem;
         }
 
-        .waters-above {
-            top: 0;
-            height: 15%;
-            background: linear-gradient(to bottom, #1a3a5c, #0a1628);
-        }
-
-        .firmament {
-            top: 15%;
-            height: 10%;
-            background: linear-gradient(to bottom, 
-                rgba(168, 200, 216, 0.3),
-                rgba(201, 162, 39, 0.2),
-                rgba(168, 200, 216, 0.3)
-            );
-            border-top: 2px solid var(--ice);
-            border-bottom: 2px solid var(--ice);
-        }
-
-        .atmosphere {
-            top: 25%;
-            height: 15%;
-            background: linear-gradient(to bottom, #1a2a3a, #2a3a4a, #3a4a5a);
-        }
-
-        .surface {
-            top: 40%;
-            height: 25%;
-            background: linear-gradient(to bottom, #2a4a3a, #1a3a2a);
-            position: relative;
-        }
-
-        .ice-wall-cross {
-            position: absolute;
-            height: 100%;
-            width: 8%;
-            background: linear-gradient(to bottom, var(--ice), #8ab8c8);
-            left: 25%;
-            box-shadow: 0 0 20px var(--ice-glow);
-        }
-
-        .ice-wall-cross.right {
-            left: auto;
-            right: 25%;
-        }
-
-        .inner-world-label {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
-            color: var(--gold);
-            white-space: nowrap;
-        }
-
-        .depths {
-            top: 65%;
-            height: 20%;
-            background: linear-gradient(to bottom, #1a1a2a, #0a0a1a);
-        }
-
-        .waters-below {
-            top: 85%;
-            height: 15%;
-            background: linear-gradient(to bottom, #0a1628, #051018);
-        }
-
-        .close-cross-section {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
+        .cross-close {
             font-family: 'Cinzel', serif;
             font-size: 0.7rem;
             letter-spacing: 0.1em;
@@ -597,103 +598,122 @@
             transition: all 0.3s ease;
         }
 
-        .close-cross-section:hover {
+        .cross-close:hover {
             background: var(--gold);
             color: var(--ink);
         }
 
-        .cross-section-title {
+        .cross-diagram {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            overflow: hidden;
+        }
+
+        .layer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 1rem;
+        }
+
+        .layer-name {
             font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            color: var(--gold);
-            margin-bottom: 2rem;
+            font-size: clamp(0.5rem, 1.5vw, 0.75rem);
             letter-spacing: 0.2em;
-        }
-
-        /* Instructions */
-        #instructions {
-            position: fixed;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            z-index: 100;
-            font-size: 0.75rem;
-            color: var(--parchment-dark);
-            opacity: 0.6;
-            line-height: 1.6;
-        }
-
-        #instructions kbd {
-            display: inline-block;
-            padding: 0.1rem 0.4rem;
-            background: rgba(201, 162, 39, 0.1);
-            border: 1px solid rgba(201, 162, 39, 0.3);
-            border-radius: 2px;
-            font-family: inherit;
-            font-size: 0.65rem;
+            text-transform: uppercase;
             color: var(--gold);
+            background: rgba(10, 10, 15, 0.8);
+            padding: 0.3rem 0.8rem;
+            position: absolute;
+            left: 1rem;
         }
 
-        /* Scale indicator */
-        #scale-indicator {
-            position: fixed;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 100;
-            text-align: center;
+        .waters-above {
+            flex: 0.8;
+            background: linear-gradient(to bottom, #0a2040, #0a1628);
         }
 
-        .scale-bar {
-            width: 100px;
-            height: 3px;
-            background: var(--gold);
-            margin-bottom: 0.3rem;
+        .firmament {
+            flex: 0.5;
+            background: linear-gradient(to bottom, 
+                rgba(168, 200, 216, 0.2),
+                rgba(201, 162, 39, 0.15),
+                rgba(168, 200, 216, 0.2)
+            );
+            border-top: 2px solid var(--ice);
+            border-bottom: 2px solid var(--ice);
+        }
+
+        .atmosphere {
+            flex: 0.8;
+            background: linear-gradient(to bottom, #1a2a3a, #3a4a5a);
+        }
+
+        .surface {
+            flex: 1.5;
+            background: linear-gradient(to bottom, #2a4a3a, #1a3a2a);
             position: relative;
         }
 
-        .scale-bar::before, .scale-bar::after {
-            content: '';
+        .ice-walls {
             position: absolute;
-            width: 3px;
-            height: 8px;
-            background: var(--gold);
-            top: -2px;
+            top: 0;
+            bottom: 0;
+            width: 12%;
+            background: linear-gradient(to bottom, var(--ice), #6a9aaa);
+            box-shadow: 0 0 30px var(--ice-glow);
         }
 
-        .scale-bar::before { left: 0; }
-        .scale-bar::after { right: 0; }
+        .ice-walls.left { left: 20%; }
+        .ice-walls.right { right: 20%; }
 
-        .scale-label {
+        .surface-label {
             font-family: 'Cinzel', serif;
             font-size: 0.6rem;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
             color: var(--gold);
-            opacity: 0.8;
+            text-align: center;
         }
 
-        /* Minimap */
-        #minimap {
-            position: fixed;
-            bottom: 5rem;
-            right: 2rem;
-            width: 150px;
-            height: 150px;
-            background: rgba(10, 10, 15, 0.9);
-            border: 1px solid rgba(201, 162, 39, 0.3);
-            z-index: 100;
-            overflow: hidden;
-            display: none; /* Enable later */
+        .depths {
+            flex: 1;
+            background: linear-gradient(to bottom, #1a1a2a, #0a0a1a);
         }
 
-        /* Mobile adjustments */
-        @media (max-width: 600px) {
+        .waters-below {
+            flex: 0.8;
+            background: linear-gradient(to bottom, #0a1628, #050a14);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
             #info-panel {
                 width: 100%;
-                right: -100%;
+            }
+
+            #instructions {
+                display: none;
+            }
+
+            #legend {
+                font-size: 0.55rem;
+                gap: 0.8rem;
+                padding: 0.5rem 0.8rem;
+            }
+
+            .view-btn {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.55rem;
             }
 
             #zoom-controls {
-                bottom: 1rem;
+                bottom: 5rem;
                 right: 1rem;
             }
 
@@ -701,609 +721,888 @@
                 width: 38px;
                 height: 38px;
             }
-
-            #instructions {
-                display: none;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <h1 class="loading-title">The Greater Earth</h1>
-        <p class="loading-subtitle">"The world is not what humanity has been told..."</p>
-        <div class="loading-ring"></div>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+    <h1 class="loading-title">The Greater Earth</h1>
+    <p class="loading-subtitle">"The world is not what humanity has been told..."</p>
+    <div class="loading-spinner"></div>
+</div>
+
+<!-- Header -->
+<header id="header">
+    <div class="header-left">
+        <a href="index.html" class="logo">The Greater Earth</a>
+        <span class="logo-subtitle">Chronicles of Enoch</span>
     </div>
-
-    <!-- Main Map Container -->
-    <div id="map-container">
-        <div id="greater-earth-map">
-            <img src="Flat_Earth_map.jpg" alt="The World Beyond the Ice Wall" id="map-image">
-        </div>
+    <div class="view-controls">
+        <button class="view-btn active" data-view="map">Map View</button>
+        <button class="view-btn" data-view="cross">Cross-Section</button>
     </div>
+</header>
 
-    <!-- Header -->
-    <header id="header">
-        <div>
-            <a href="index.html" class="logo">The Greater Earth</a>
-            <p class="header-subtitle">Chronicles of Enoch</p>
-        </div>
-        <div class="view-controls">
-            <button class="view-btn active" data-view="map">Map View</button>
-            <button class="view-btn" data-view="cross">Cross-Section</button>
-        </div>
-    </header>
-
-    <!-- Zoom Controls -->
-    <div id="zoom-controls">
-        <button class="zoom-btn" id="zoom-in">+</button>
-        <button class="zoom-btn" id="zoom-out">−</button>
-        <button class="zoom-btn" id="zoom-reset">⟲</button>
+<!-- Map Container -->
+<div id="map-container">
+    <div id="map-wrapper">
+        <img id="map-image" src="Flat_Earth_map.jpg" alt="The World Beyond the Ice Wall">
+        <!-- Markers will be injected here by JavaScript -->
     </div>
+</div>
 
-    <!-- Instructions -->
-    <div id="instructions">
-        <kbd>Drag</kbd> to pan · <kbd>Scroll</kbd> to zoom · <kbd>Click</kbd> markers to explore
-    </div>
+<!-- Zoom Controls -->
+<div id="zoom-controls">
+    <button class="zoom-btn" id="zoom-in" title="Zoom In">+</button>
+    <button class="zoom-btn" id="zoom-out" title="Zoom Out">−</button>
+    <button class="zoom-btn" id="zoom-reset" title="Reset View">⟲</button>
+</div>
 
-    <!-- Scale Indicator -->
-    <div id="scale-indicator">
-        <div class="scale-bar"></div>
-        <span class="scale-label">Unknown Scale</span>
-    </div>
+<!-- Instructions -->
+<div id="instructions">
+    <span class="instruction"><kbd>Drag</kbd> to pan</span>
+    <span class="instruction"><kbd>Scroll</kbd> to zoom</span>
+    <span class="instruction"><kbd>Click</kbd> markers to explore</span>
+</div>
 
-    <!-- Panel Overlay -->
-    <div id="panel-overlay"></div>
+<!-- Legend -->
+<div id="legend">
+    <span class="legend-item"><span class="legend-dot inner"></span> Inner World</span>
+    <span class="legend-item"><span class="legend-dot outer"></span> Outer Realms</span>
+    <span class="legend-item"><span class="legend-dot eden"></span> Eden</span>
+    <span class="legend-item"><span class="legend-dot forbidden"></span> Forbidden Zones</span>
+    <span class="legend-item"><span class="legend-dot ancient"></span> Ancient Ruins</span>
+</div>
 
-    <!-- Info Panel -->
-    <div id="info-panel">
-        <button class="panel-close" onclick="closeInfoPanel()">×</button>
+<!-- Overlay -->
+<div id="overlay"></div>
+
+<!-- Info Panel -->
+<div id="info-panel">
+    <div class="panel-header">
+        <button class="panel-close">×</button>
         <p class="panel-region" id="panel-region"></p>
         <h2 class="panel-title" id="panel-title"></h2>
-        <div class="panel-divider"></div>
+    </div>
+    <div class="panel-content">
         <div class="panel-description" id="panel-description"></div>
         <div class="panel-meta" id="panel-meta"></div>
     </div>
+</div>
 
-    <!-- Cross-Section View -->
-    <div id="cross-section">
-        <button class="close-cross-section" onclick="closeCrossSection()">← Return to Map</button>
-        <h2 class="cross-section-title">The Structure of Creation</h2>
-        <div class="cross-section-diagram">
-            <div class="layer waters-above">
-                <span class="layer-label">The Waters Above</span>
-            </div>
-            <div class="layer firmament">
-                <span class="layer-label">The Firmament</span>
-            </div>
-            <div class="layer atmosphere">
-                <span class="layer-label">The Heavens (Sky)</span>
-            </div>
-            <div class="layer surface">
-                <span class="layer-label">The Greater Earth</span>
-                <div class="ice-wall-cross"></div>
-                <div class="ice-wall-cross right"></div>
-                <span class="inner-world-label">The Inner World</span>
-            </div>
-            <div class="layer depths">
-                <span class="layer-label">The Depths</span>
-            </div>
-            <div class="layer waters-below">
-                <span class="layer-label">The Waters Below</span>
-            </div>
+<!-- Cross-Section View -->
+<div id="cross-section">
+    <div class="cross-header">
+        <h2 class="cross-title">The Structure of Creation</h2>
+        <button class="cross-close">← Return to Map</button>
+    </div>
+    <div class="cross-diagram">
+        <div class="layer waters-above">
+            <span class="layer-name">The Waters Above</span>
+        </div>
+        <div class="layer firmament">
+            <span class="layer-name">The Firmament (Raqia)</span>
+        </div>
+        <div class="layer atmosphere">
+            <span class="layer-name">The Heavens (Sky)</span>
+        </div>
+        <div class="layer surface">
+            <span class="layer-name">The Greater Earth</span>
+            <div class="ice-walls left"></div>
+            <div class="ice-walls right"></div>
+            <span class="surface-label">Inner World</span>
+        </div>
+        <div class="layer depths">
+            <span class="layer-name">The Depths (Sheol)</span>
+        </div>
+        <div class="layer waters-below">
+            <span class="layer-name">The Waters Below</span>
         </div>
     </div>
+</div>
 
-    <script>
-        // ============================================
-        // THE GREATER EARTH - FLAT EARTH MODEL
-        // Chronicles of Enoch - Interactive World Map
-        // ============================================
+<script>
+// ============================================
+// THE GREATER EARTH EXPLORER v2.0
+// Chronicles of Enoch - Interactive World Map
+// Fixed marker positioning + expanded locations
+// ============================================
 
-        // Location Data - Positioned on the flat map
-        // Coordinates are percentages of the map dimensions
-        const locations = {
-            // ===== THE INNER WORLD (Within the Ice Wall) =====
-            'ice-wall': {
-                name: 'The Ice Wall',
-                region: 'The Barrier',
-                x: 50, y: 50, // Center ring
-                type: 'special',
-                description: `<p>A ring of frozen mountains encircling the inner world. <strong>Not natural—CONSTRUCTED.</strong> Built before the flood as containment, not punishment.</p>
-                <p>The wall is not merely physical—it has a <strong>frequency</strong>, a harmonic barrier that separates the inner world from the outer realms. The waters of the Flood were held within these walls while the outer continents remained untouched.</p>
-                <p>Miles high, impossibly cold, guarded by forces older than human memory. Some have crossed it. Few have returned to speak of what lies beyond.</p>`,
-                meta: {
-                    'Nature': 'Frequency barrier, physical wall',
-                    'Purpose': 'Containment of the Flood waters',
-                    'Built By': 'Unknown—predates human civilization',
-                    'Status': 'Still standing, still guarded'
-                }
-            },
-            'nippur': {
-                name: 'Nippur',
-                region: 'The Inner World • Mesopotamia',
-                x: 50, y: 48,
-                type: 'inner',
-                description: `<p>The city where <strong>Enoch</strong> lived and worked as a scribe. Here, on a rooftop overlooking the Euphrates, he first saw the burning letters that would change everything.</p>
-                <p>Beneath these streets, the ancient gears still turn—mechanisms from before the Watchers descended, built by hands that knew the frequency of creation.</p>
-                <p>This is where Sariel landed. Where Lila was born. Where the Chronicles began.</p>`,
-                meta: {
-                    'Books': 'Book 1, 2, 3',
-                    'Key Events': "Enoch's calling, Sariel's descent, Lila's birth",
-                    'Characters': 'Enoch, Lila, Namaah, Sariel',
-                    'Modern Location': 'Nuffar, Iraq'
-                }
-            },
-            'ararat': {
-                name: 'Mount Ararat',
-                region: 'The Inner World',
-                x: 52, y: 44,
-                type: 'inner',
-                description: `<p>Where the Ark came to rest after <strong>150 days</strong> of floating upon the waters of judgment. From this mountain, Noah's family descended to repopulate the cleansed world.</p>
-                <p>The mountain still holds secrets—fragments of gopher wood, traces of the kopher that sealed the vessel, and the memory of eight souls who survived when all others perished.</p>`,
-                meta: {
-                    'Books': 'Book 5, 6',
-                    'Key Events': 'The Landing, The Covenant of the Rainbow',
-                    'Characters': 'Noah, Emzara, Shem, Ham, Japheth',
-                    'Elevation': '5,137 meters'
-                }
-            },
-            'babel': {
-                name: 'Babel',
-                region: 'The Inner World • Plain of Shinar',
-                x: 49, y: 49,
-                type: 'inner',
-                description: `<p>The tower that almost pierced the firmament. Built with brick and <strong>bitumen</strong>—the same kopher that sealed the Ark, now perverted for rebellion.</p>
-                <p>Here, <strong>Nimrod</strong> the mighty hunter united humanity under one language, one purpose—to make a name for themselves, to reach the heavens by their own power.</p>
-                <p>And here, God confused their tongues and scattered them across the earth. The tower stands unfinished, a monument to human pride.</p>`,
-                meta: {
-                    'Books': 'Book 6',
-                    'Key Events': 'The Tower, The Confusion of Tongues',
-                    'Characters': 'Nimrod, The Divine Council',
-                    'Connection': 'Same land as Nippur—the cycle returning'
-                }
-            },
-            'sodom': {
-                name: 'Sodom',
-                region: 'The Inner World • Cities of the Plain',
-                x: 51, y: 51,
-                type: 'forbidden',
-                description: `<p>The city that burned with <strong>divine frequency</strong>. Not punishment alone—purification. The Silence had concentrated its corruption here until the Source responded.</p>
-                <p>Lot's wife didn't die looking back. She was <strong>TRANSFORMED</strong>—exposed to raw creation frequency, her body crystallizing, becoming part of the salt that saturates this land to this day.</p>
-                <p>Mount Sodom is 80% pure salt. The Dead Sea is the scar.</p>`,
-                meta: {
-                    'Books': 'Book 6',
-                    'Key Events': "Abraham's Intercession, The Fire, Lot's Wife",
-                    'Characters': 'Lot, Abraham, The Angels',
-                    'Evidence': 'Mount Sodom (80% salt), Dead Sea region'
-                }
-            },
-
-            // ===== THE OUTER REALMS (Beyond the Ice Wall) =====
-            'asgard': {
-                name: 'Asgard',
-                region: 'The Outer Realms • Northwest',
-                x: 25, y: 25,
-                type: 'outer',
-                description: `<p>Home to the <strong>Æsir</strong>—what Norse mythology remembers as gods. NOT gods, but ancient beings. Nephilim who fled the Flood? Watchers who retreated? First experiments in consciousness?</p>
-                <p>Thor, Odin, Loki—real beings, misremembered as deities across thousands of years of fading memory.</p>
-                <p>The halls are largely abandoned now, but not empty. <strong>Something still watches</strong> from those ancient places.</p>`,
-                meta: {
-                    'Nature': 'Ancient realm of the Æsir',
-                    'Inhabitants': 'Nephilim refugees / Ancient beings',
-                    'Status': 'Largely abandoned',
-                    'Connection': 'Norse mythology, The Watchers'
-                }
-            },
-            'aten': {
-                name: 'Aten',
-                region: 'The Outer Realms • North',
-                x: 50, y: 20,
-                type: 'outer',
-                description: `<p>Land of <strong>Perpetual Light</strong>. The sun's path passes closer here than anywhere else on the Greater Earth. A civilization that never knew the Flood.</p>
-                <p>They remember the Watchers as <strong>TEACHERS</strong>, not corruptors—because they met them before the Fall, before the corruption, before the descent into darkness.</p>
-                <p>Their astronomical knowledge exceeds anything preserved in the inner world.</p>`,
-                meta: {
-                    'Nature': 'Perpetual daylight',
-                    'Inhabitants': 'Pre-Flood civilization',
-                    'Relation to Watchers': 'Positive (pre-Fall contact)',
-                    'Knowledge': 'Advanced astronomy, frequency technology'
-                }
-            },
-            'eden': {
-                name: 'Eden',
-                region: 'The Outer Realms • East',
-                x: 75, y: 40,
-                type: 'eden',
-                description: `<p><strong>THE Garden.</strong> Still extant. Still guarded. The Cherubim with flaming swords patrol its borders—frequency barriers that no mortal from the inner world has crossed since Adam's expulsion.</p>
-                <p>The <strong>Tree of Life</strong> still grows. The <strong>Tree of Knowledge</strong> still bears fruit. And somewhere within, Enoch continues his scribal work, recording what angels and men must not forget.</p>
-                <p>No mortal from the inner world has seen it since Adam walked eastward, out of paradise, into the fallen world.</p>`,
-                meta: {
-                    'Status': 'Guarded, inaccessible',
-                    'Guardians': 'Cherubim with flaming swords',
-                    'Known Inhabitant': 'Enoch (translated)',
-                    'Contents': 'Tree of Life, Tree of Knowledge'
-                }
-            },
-            'lemuria': {
-                name: 'Lemuria',
-                region: 'The Outer Realms • East',
-                x: 70, y: 30,
-                type: 'outer',
-                description: `<p>The <strong>Sound Builders</strong>. They built with FREQUENCY before the Watchers taught humanity. Their structures resonate with the very hum of creation itself.</p>
-                <p>Mostly fallen, but ruins remain—dangerous places where the old frequencies still echo. Connected to the Chronophage technology. The gears beneath the Euphrates may have been Lemurian design.</p>`,
-                meta: {
-                    'Technology': 'Frequency/sound construction',
-                    'Status': 'Mostly fallen, ruins remain',
-                    'Connection': 'The Chronophage, frequency technology',
-                    'Warning': 'Ruins contain unstable frequencies'
-                }
-            },
-            'atlantis': {
-                name: 'Atlantis',
-                region: 'The Outer Realms • South',
-                x: 45, y: 70,
-                type: 'forbidden',
-                description: `<p>Not drowned by water. Destroyed by <strong>ANTI-FREQUENCY</strong>.</p>
-                <p>The Atlanteans tried to breach the ice wall from outside. They had frequency knowledge, power that rivaled the Watchers. They were building something that could pierce the barrier.</p>
-                <p>The Silence responded with a new weapon. It sang the <strong>opposite of creation</strong>. Ground turned to water. The city sank INTO THE LAND.</p>
-                <p>The <strong>Eye of Africa</strong>—the Richat Structure—is the SCAR where Atlantis was swallowed by the earth itself.</p>`,
-                meta: {
-                    'Destruction': 'Anti-frequency weapon',
-                    'Remnant': 'Eye of Africa (Richat Structure)',
-                    'Lesson': 'What the Silence learned here, it used at Babel',
-                    'Warning': 'The anti-frequency still echoes there'
-                }
-            },
-            'mu': {
-                name: 'Mu',
-                region: 'The Outer Realms • Southeast',
-                x: 80, y: 75,
-                type: 'forbidden',
-                description: `<p>Technologically advanced beyond any civilization that followed. They understood frequencies before anyone else. Then they were destroyed—not by flood, but by their own <strong>hubris</strong>.</p>
-                <p>They reached for something they shouldn't have. It consumed them.</p>
-                <p>The ruins contain <strong>dangerous knowledge</strong>. Some things are buried for good reason. Those who seek Mu's secrets rarely return unchanged.</p>`,
-                meta: {
-                    'Status': 'Destroyed (hubris)',
-                    'Cause': 'Overreach, forbidden knowledge',
-                    'Remnants': 'Ruins with dangerous knowledge',
-                    'Warning': 'Some knowledge should stay buried'
-                }
-            },
-
-            // ===== THE FORBIDDEN ZONES =====
-            'irradiated': {
-                name: 'The Irradiated Wastes',
-                region: 'The Forbidden Zones • West',
-                x: 15, y: 45,
-                type: 'forbidden',
-                description: `<p>A region destroyed by some <strong>ancient weapon</strong>. Nothing grows. The land itself is poisoned. Even the Watchers cannot survive there long.</p>
-                <p>What happened here, the texts do not say. Perhaps the war before the war. Perhaps a judgment that predates the Flood. Perhaps something that should <strong>never be remembered</strong>.</p>`,
-                meta: {
-                    'Status': 'Uninhabitable',
-                    'Cause': 'Unknown ancient weapon',
-                    'Duration': 'Poisoned since before human memory',
-                    'Warning': 'Even Watchers avoid this place'
-                }
-            },
-            'scorched': {
-                name: 'The Scorched Wastes',
-                region: 'The Forbidden Zones • Southwest',
-                x: 30, y: 80,
-                type: 'forbidden',
-                description: `<p>Burned, not by volcano but by something else. The ground is <strong>glass</strong> in places. Legends speak of a weapon of light.</p>
-                <p>May be connected to Sodom and Gomorrah—a preview of the judgment that would later fall on the Cities of the Plain. Or perhaps an earlier judgment, on an earlier corruption.</p>`,
-                meta: {
-                    'Status': 'Glassed terrain',
-                    'Cause': 'Weapon of light',
-                    'Connection': "Sodom's destruction?",
-                    'Evidence': 'Vitrified ground, glass formations'
-                }
-            },
-            'frozen': {
-                name: 'The Frozen Wastes',
-                region: 'The Forbidden Zones • Far North',
-                x: 85, y: 15,
-                type: 'forbidden',
-                description: `<p>Beyond even the ice wall's construction. Perpetual cold, no life as we understand it.</p>
-                <p>Said to be where the <strong>First Voice first spoke</strong>, and the cold is the echo of that silence before—the void that existed before "Let there be light."</p>
-                <p>Some say this is where the Silence originated. Where anti-frequency was born.</p>`,
-                meta: {
-                    'Status': 'Perpetual cold, lifeless',
-                    'Nature': 'Echo of pre-creation void',
-                    'Connection': 'The Silence, the void before Light',
-                    'Warning': 'The cold there is not natural'
-                }
-            },
-            'sunken': {
-                name: 'The Sunken Wastes',
-                region: 'The Forbidden Zones • South',
-                x: 55, y: 85,
-                type: 'forbidden',
-                description: `<p>Land that is slowly <strong>drowning</strong>. Not flooded—SINKING. As if the earth itself is swallowing this region inch by inch, year by year.</p>
-                <p>Connected to Atlantis's fate? The anti-frequency still working, still pulling downward?</p>
-                <p>The boundary between what is and what was. Between solid and liquid. Between existence and void.</p>`,
-                meta: {
-                    'Status': 'Actively sinking',
-                    'Cause': 'Lingering anti-frequency?',
-                    'Connection': 'Atlantis, dimensional instability',
-                    'Warning': 'Ground is not stable'
-                }
-            }
-        };
-
-        // ============================================
-        // MAP INTERACTION
-        // ============================================
-
-        const mapContainer = document.getElementById('map-container');
-        const mapElement = document.getElementById('greater-earth-map');
-        const mapImage = document.getElementById('map-image');
-
-        let scale = 1;
-        let translateX = 0;
-        let translateY = 0;
-        let isDragging = false;
-        let startX, startY;
-        let mapWidth, mapHeight;
-
-        const MIN_SCALE = 0.5;
-        const MAX_SCALE = 4;
-
-        // Initialize
-        function initMap() {
-            // Wait for image to load
-            if (mapImage.complete) {
-                setupMap();
-            } else {
-                mapImage.onload = setupMap;
-            }
+// Location data with ACCURATE positions on the map
+// Coordinates are percentages of the map dimensions (0-100)
+const locations = {
+    // ==========================================
+    // THE INNER WORLD (Within the Ice Wall)
+    // ==========================================
+    
+    'nippur': {
+        name: 'Nippur',
+        region: 'The Inner World • Mesopotamia',
+        x: 50.5, y: 49,
+        type: 'inner',
+        description: `<p>The city where <strong>Enoch</strong> lived and worked as a scribe. Here, on a rooftop overlooking the Euphrates, he first saw the burning letters that would change everything.</p>
+        <p>Beneath these streets, the ancient gears still turn—mechanisms from before the Watchers descended, built by hands that knew the frequency of creation.</p>
+        <p>This is where Sariel landed. Where Lila was born. Where the Chronicles began.</p>`,
+        meta: {
+            'Books': 'Book 1, 2, 3, 4',
+            'Key Events': "Enoch's calling, Sariel's descent, Lila's birth",
+            'Characters': 'Enoch, Lila, Namaah, Sariel',
+            'Modern Location': 'Nuffar, Iraq'
         }
-
-        function setupMap() {
-            // Set initial size based on container
-            const containerWidth = mapContainer.clientWidth;
-            const containerHeight = mapContainer.clientHeight;
-            
-            // Make map fill the container initially
-            const imgAspect = mapImage.naturalWidth / mapImage.naturalHeight;
-            const containerAspect = containerWidth / containerHeight;
-
-            if (imgAspect > containerAspect) {
-                mapHeight = containerHeight;
-                mapWidth = mapHeight * imgAspect;
-            } else {
-                mapWidth = containerWidth;
-                mapHeight = mapWidth / imgAspect;
-            }
-
-            mapElement.style.width = mapWidth + 'px';
-            mapElement.style.height = mapHeight + 'px';
-
-            // Center the map
-            translateX = (containerWidth - mapWidth) / 2;
-            translateY = (containerHeight - mapHeight) / 2;
-
-            updateMapTransform();
-            createLocationMarkers();
-
-            // Hide loading screen
-            setTimeout(() => {
-                document.getElementById('loading-screen').classList.add('hidden');
-            }, 1000);
+    },
+    
+    'ararat': {
+        name: 'Mount Ararat',
+        region: 'The Inner World • Mountains of the North',
+        x: 51.5, y: 46,
+        type: 'inner',
+        description: `<p>Where the Ark came to rest after <strong>150 days</strong> of floating upon the waters of judgment. From this mountain, Noah's family descended to repopulate the cleansed world.</p>
+        <p>The mountain still holds secrets—fragments of gopher wood, traces of the <strong>kopher</strong> that sealed the vessel, and the memory of eight souls who survived when all others perished.</p>
+        <p>The covenant of the rainbow was established here—God's promise never to flood the inner world again.</p>`,
+        meta: {
+            'Books': 'Book 5, 6',
+            'Key Events': 'The Landing, The Covenant',
+            'Characters': 'Noah, Emzara, Shem, Ham, Japheth',
+            'Significance': 'Site of humanity\'s second beginning'
         }
-
-        function updateMapTransform() {
-            mapElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-            updateMarkerPositions();
+    },
+    
+    'babel': {
+        name: 'Babel',
+        region: 'The Inner World • Plain of Shinar',
+        x: 50, y: 50.5,
+        type: 'inner',
+        description: `<p>The tower that almost pierced the firmament. Built with brick and <strong>bitumen</strong>—the same kopher that sealed the Ark, now perverted for rebellion.</p>
+        <p>Here, <strong>Nimrod</strong> the mighty hunter (whose name means "we will rebel") united humanity under one language, one purpose—to make a name for themselves.</p>
+        <p>God's response was not destruction but <strong>division</strong>. The confusion of tongues scattered humanity, ensuring no single power could again threaten the firmament.</p>`,
+        meta: {
+            'Books': 'Book 6',
+            'Key Events': 'The Tower, The Confusion',
+            'Characters': 'Nimrod, The Divine Council',
+            'Lesson': 'Division, not destruction—the Silence learned from Atlantis'
         }
+    },
 
-        function createLocationMarkers() {
-            Object.keys(locations).forEach(key => {
-                const loc = locations[key];
-                
-                // Skip the ice wall - it's the whole ring, not a single point
-                if (key === 'ice-wall') return;
-
-                const marker = document.createElement('div');
-                marker.className = `location-marker marker-${loc.type}`;
-                marker.innerHTML = `
-                    <div class="marker-pulse"></div>
-                    <div class="marker-dot"></div>
-                    <span class="marker-label">${loc.name}</span>
-                `;
-                marker.dataset.location = key;
-                marker.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    showLocationInfo(key);
-                });
-
-                mapContainer.appendChild(marker);
-            });
+    'ur': {
+        name: 'Ur of the Chaldees',
+        region: 'The Inner World • Mesopotamia',
+        x: 51, y: 51,
+        type: 'inner',
+        description: `<p>Birthplace of <strong>Abram</strong>, who would become Abraham. Here, in a city of moon-worshippers, God called a man to leave everything and follow a promise.</p>
+        <p>The ziggurat of Ur still stands in the desert—a monument to the gods humanity created in the Silence's image after Babel scattered the true knowledge.</p>`,
+        meta: {
+            'Books': 'Book 6',
+            'Key Events': "Abram's Call",
+            'Characters': 'Abraham, Terah',
+            'Modern Location': 'Tell el-Muqayyar, Iraq'
         }
+    },
 
-        function updateMarkerPositions() {
-            const markers = document.querySelectorAll('.location-marker');
-            markers.forEach(marker => {
-                const key = marker.dataset.location;
-                const loc = locations[key];
-                if (!loc) return;
-
-                // Calculate position based on percentage and current transform
-                const x = (loc.x / 100) * mapWidth * scale + translateX;
-                const y = (loc.y / 100) * mapHeight * scale + translateY;
-
-                marker.style.left = x + 'px';
-                marker.style.top = y + 'px';
-
-                // Scale marker size inversely with zoom (keep them readable)
-                const markerScale = Math.max(0.7, Math.min(1.2, 1 / Math.sqrt(scale)));
-                marker.style.transform = `translate(-50%, -50%) scale(${markerScale})`;
-            });
+    'jerusalem': {
+        name: 'Salem / Jerusalem',
+        region: 'The Inner World • Canaan',
+        x: 49.5, y: 50,
+        type: 'inner',
+        description: `<p>The city of <strong>Melchizedek</strong>, priest of God Most High. Here Abraham paid tithes after rescuing Lot. Here David would reign. Here Solomon would build.</p>
+        <p>The Temple Mount sits on the stone where Abraham nearly sacrificed Isaac—the same pattern echoing forward to another sacrifice, another Son.</p>`,
+        meta: {
+            'Books': 'Book 6, 7',
+            'Key Events': "Melchizedek's Blessing, The Temple",
+            'Characters': 'Melchizedek, Abraham, David, Solomon',
+            'Significance': 'The frequency nexus of the inner world'
         }
+    },
 
-        // Drag functionality
-        mapContainer.addEventListener('mousedown', (e) => {
-            if (e.target.closest('.location-marker')) return;
-            isDragging = true;
-            startX = e.clientX - translateX;
-            startY = e.clientY - translateY;
-            mapContainer.style.cursor = 'grabbing';
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            translateX = e.clientX - startX;
-            translateY = e.clientY - startY;
-            updateMapTransform();
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            mapContainer.style.cursor = 'grab';
-        });
-
-        // Touch support
-        mapContainer.addEventListener('touchstart', (e) => {
-            if (e.target.closest('.location-marker')) return;
-            if (e.touches.length === 1) {
-                isDragging = true;
-                startX = e.touches[0].clientX - translateX;
-                startY = e.touches[0].clientY - translateY;
-            }
-        });
-
-        document.addEventListener('touchmove', (e) => {
-            if (!isDragging || e.touches.length !== 1) return;
-            translateX = e.touches[0].clientX - startX;
-            translateY = e.touches[0].clientY - startY;
-            updateMapTransform();
-        });
-
-        document.addEventListener('touchend', () => {
-            isDragging = false;
-        });
-
-        // Zoom functionality
-        mapContainer.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            
-            const rect = mapContainer.getBoundingClientRect();
-            const mouseX = e.clientX - rect.left;
-            const mouseY = e.clientY - rect.top;
-
-            const delta = e.deltaY > 0 ? 0.9 : 1.1;
-            const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale * delta));
-
-            if (newScale !== scale) {
-                // Zoom toward mouse position
-                const scaleChange = newScale / scale;
-                translateX = mouseX - (mouseX - translateX) * scaleChange;
-                translateY = mouseY - (mouseY - translateY) * scaleChange;
-                scale = newScale;
-                updateMapTransform();
-            }
-        });
-
-        // Zoom buttons
-        document.getElementById('zoom-in').addEventListener('click', () => {
-            const newScale = Math.min(MAX_SCALE, scale * 1.3);
-            zoomTo(newScale);
-        });
-
-        document.getElementById('zoom-out').addEventListener('click', () => {
-            const newScale = Math.max(MIN_SCALE, scale * 0.7);
-            zoomTo(newScale);
-        });
-
-        document.getElementById('zoom-reset').addEventListener('click', () => {
-            scale = 1;
-            const containerWidth = mapContainer.clientWidth;
-            const containerHeight = mapContainer.clientHeight;
-            translateX = (containerWidth - mapWidth) / 2;
-            translateY = (containerHeight - mapHeight) / 2;
-            updateMapTransform();
-        });
-
-        function zoomTo(newScale) {
-            const containerWidth = mapContainer.clientWidth;
-            const containerHeight = mapContainer.clientHeight;
-            const centerX = containerWidth / 2;
-            const centerY = containerHeight / 2;
-
-            const scaleChange = newScale / scale;
-            translateX = centerX - (centerX - translateX) * scaleChange;
-            translateY = centerY - (centerY - translateY) * scaleChange;
-            scale = newScale;
-            updateMapTransform();
+    'sodom': {
+        name: 'Sodom',
+        region: 'The Inner World • Cities of the Plain',
+        x: 49.8, y: 51.5,
+        type: 'forbidden',
+        description: `<p>The city that burned with <strong>divine frequency</strong>. Not punishment alone—purification. The Silence had concentrated its corruption here until the Source responded.</p>
+        <p>Lot's wife didn't simply die looking back. She was <strong>TRANSFORMED</strong>—exposed to raw creation frequency, her body crystallizing into the very salt that saturates this land.</p>
+        <p>Mount Sodom is 80% pure salt. The Dead Sea is the scar.</p>`,
+        meta: {
+            'Books': 'Book 6',
+            'Key Events': "Abraham's Intercession, The Fire",
+            'Characters': 'Lot, Abraham, The Angels',
+            'Evidence': 'Mount Sodom, Dead Sea region'
         }
+    },
 
-        // Location Info Panel
-        function showLocationInfo(key) {
-            const loc = locations[key];
-            if (!loc) return;
-
-            document.getElementById('panel-region').textContent = loc.region;
-            document.getElementById('panel-title').textContent = loc.name;
-            document.getElementById('panel-description').innerHTML = loc.description;
-
-            let metaHtml = '';
-            for (const [label, value] of Object.entries(loc.meta)) {
-                metaHtml += `
-                    <div class="meta-item">
-                        <p class="meta-label">${label}</p>
-                        <p class="meta-value">${value}</p>
-                    </div>
-                `;
-            }
-            document.getElementById('panel-meta').innerHTML = metaHtml;
-
-            document.getElementById('info-panel').classList.add('active');
-            document.getElementById('panel-overlay').classList.add('active');
+    'egypt': {
+        name: 'Egypt',
+        region: 'The Inner World • Land of the Nile',
+        x: 48, y: 52,
+        type: 'inner',
+        description: `<p>The great civilization that rose after Babel's scattering. Home to <strong>Pharaoh's magicians</strong>—warlocks who could copy Moses' signs... to a point.</p>
+        <p>At gnats, they failed. "This is the finger of God." Stolen power is finite. Channeled power is limitless.</p>
+        <p>The pyramids hold older secrets—construction techniques that whisper of pre-Flood knowledge, preserved by those who remembered Lemuria.</p>`,
+        meta: {
+            'Books': 'Book 6, 7',
+            'Key Events': 'The Exodus, The Plagues',
+            'Characters': 'Moses, Pharaoh, The Magicians',
+            'Mystery': 'How were the pyramids really built?'
         }
+    },
 
-        function closeInfoPanel() {
-            document.getElementById('info-panel').classList.remove('active');
-            document.getElementById('panel-overlay').classList.remove('active');
+    // ==========================================
+    // THE OUTER REALMS (Beyond the Ice Wall)
+    // ==========================================
+    
+    'asgard': {
+        name: 'Asgard',
+        region: 'The Outer Realms • Northwest',
+        x: 28, y: 24,
+        type: 'outer',
+        description: `<p>Home to the <strong>Æsir</strong>—what Norse mythology remembers as gods. NOT gods, but ancient beings. Nephilim who fled the Flood? Watchers who retreated?</p>
+        <p>Thor, Odin, Loki—real beings, misremembered as deities across thousands of years of fading memory. The Bifrost was not a rainbow bridge but a <strong>frequency pathway</strong>.</p>
+        <p>The halls are largely abandoned now, but not empty. Something still watches from those ancient places.</p>`,
+        meta: {
+            'Nature': 'Realm of the Æsir',
+            'Inhabitants': 'Nephilim refugees',
+            'Status': 'Largely abandoned',
+            'Connection': 'Norse mythology'
         }
+    },
 
-        document.getElementById('panel-overlay').addEventListener('click', closeInfoPanel);
+    'walls-of-asgard': {
+        name: 'The Walls of Asgard',
+        region: 'The Outer Realms • Northwest',
+        x: 18, y: 28,
+        type: 'ancient',
+        description: `<p>Massive fortifications built to defend against... something. The scale suggests builders who were not merely human.</p>
+        <p>These walls were not built to keep out armies. They were built to contain <strong>frequencies</strong>—or perhaps to keep them from spreading.</p>`,
+        meta: {
+            'Purpose': 'Frequency containment',
+            'Builders': 'Unknown—possibly Nephilim',
+            'Status': 'Partially standing'
+        }
+    },
 
-        // View switching
-        document.querySelectorAll('.view-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const view = btn.dataset.view;
-                
-                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+    'titanic-forest': {
+        name: 'The Titanic Forest',
+        region: 'The Outer Realms • North',
+        x: 50, y: 8,
+        type: 'outer',
+        description: `<p>Trees that dwarf redwoods. A forest where the Mother Trees still grow—the originals, the first frequency anchors planted by the Source at creation.</p>
+        <p>The pre-Flood world had forests like this everywhere. Now only here, beyond the ice wall, do they survive untouched by the corruption of the Silence.</p>`,
+        meta: {
+            'Nature': 'Primordial forest',
+            'Significance': 'Original Mother Trees',
+            'Atmosphere': 'Higher oxygen, denser frequency'
+        }
+    },
 
-                if (view === 'cross') {
-                    document.getElementById('cross-section').classList.add('active');
-                } else {
-                    document.getElementById('cross-section').classList.remove('active');
-                }
-            });
+    'skycaverns': {
+        name: 'The Skycaverns',
+        region: 'The Outer Realms • North',
+        x: 60, y: 12,
+        type: 'outer',
+        description: `<p>Caves that open into the sky itself. Places where the firmament seems... thinner. Where the waters above can almost be touched.</p>
+        <p>Some say the Watchers used these caverns as entry points when they descended. Others say they are exits—for those who learn the right frequency.</p>`,
+        meta: {
+            'Nature': 'Firmament weak points',
+            'Access': 'Frequency-dependent',
+            'Warning': 'Disorienting, dangerous'
+        }
+    },
+
+    'aten': {
+        name: 'Aten',
+        region: 'The Outer Realms • North',
+        x: 40, y: 18,
+        type: 'outer',
+        description: `<p>Land of <strong>Perpetual Light</strong>. The sun's path passes closer here than anywhere else on the Greater Earth.</p>
+        <p>They remember the Watchers as <strong>TEACHERS</strong>, not corruptors—because they met them before the Fall, before the corruption, before the descent into darkness.</p>
+        <p>Their astronomical knowledge exceeds anything preserved in the inner world. They mapped the firmament when humanity still lived in caves.</p>`,
+        meta: {
+            'Nature': 'Perpetual daylight',
+            'Inhabitants': 'Pre-Flood civilization',
+            'Knowledge': 'Advanced astronomy'
+        }
+    },
+
+    'eden': {
+        name: 'Eden',
+        region: 'The Outer Realms • East',
+        x: 77, y: 33,
+        type: 'eden',
+        description: `<p><strong>THE Garden.</strong> Still extant. Still guarded. The Cherubim with flaming swords patrol its borders—frequency barriers that no mortal from the inner world has crossed since Adam's expulsion.</p>
+        <p>The <strong>Tree of Life</strong> still grows. The <strong>Tree of Knowledge</strong> still bears fruit. And somewhere within, Enoch continues his scribal work, recording what angels and men must not forget.</p>`,
+        meta: {
+            'Status': 'Guarded, inaccessible',
+            'Guardians': 'Cherubim with flaming swords',
+            'Known Inhabitant': 'Enoch (translated)',
+            'Contents': 'Tree of Life, Tree of Knowledge'
+        }
+    },
+
+    'terra-nova': {
+        name: 'Terra Nova',
+        region: 'The Outer Realms • East',
+        x: 80, y: 45,
+        type: 'outer',
+        description: `<p>A land untouched by the Flood, untouched by corruption. Some say this is where humanity was meant to spread after Eden—the next garden, waiting.</p>
+        <p>Expeditions from the inner world have tried to reach it. None have succeeded in returning with proof.</p>`,
+        meta: {
+            'Nature': 'Pristine land',
+            'Status': 'Unexplored',
+            'Theory': 'Intended expansion territory'
+        }
+    },
+
+    'lemuria': {
+        name: 'Lemuria',
+        region: 'The Outer Realms • Northeast',
+        x: 65, y: 22,
+        type: 'ancient',
+        description: `<p>The <strong>Sound Builders</strong>. They built with FREQUENCY before the Watchers taught humanity. Their structures resonate with the very hum of creation itself.</p>
+        <p>The gears beneath the Euphrates may have been Lemurian design. The Chronophage—Lemurian technology, repurposed by those who did not understand its true function.</p>
+        <p>Mostly fallen, but ruins remain—dangerous places where the old frequencies still echo, waiting to be reawakened.</p>`,
+        meta: {
+            'Technology': 'Frequency construction',
+            'Status': 'Ruined, dangerous',
+            'Connection': 'The Chronophage',
+            'Warning': 'Unstable frequencies'
+        }
+    },
+
+    'garden-isles': {
+        name: 'The Garden Isles',
+        region: 'The Outer Realms • Southeast',
+        x: 73, y: 60,
+        type: 'outer',
+        description: `<p>Islands of impossible beauty, where plants grow in configurations unknown to the inner world. Some say seeds from Eden were scattered here during the first days.</p>
+        <p>The air itself feels different—cleaner, more alive. As if the frequency of creation still hums stronger here than elsewhere.</p>`,
+        meta: {
+            'Nature': 'Edenic remnants',
+            'Flora': 'Unknown species',
+            'Atmosphere': 'Higher frequency'
+        }
+    },
+
+    'mu': {
+        name: 'Mu',
+        region: 'The Outer Realms • Southeast',
+        x: 82, y: 68,
+        type: 'ancient',
+        description: `<p>Once technologically advanced beyond any civilization that followed. They understood frequencies before anyone else. Then they reached for something they shouldn't have.</p>
+        <p>It consumed them. The land itself seems... <strong>regretful</strong>. As if it remembers what was lost and grieves.</p>
+        <p>The ruins contain dangerous knowledge. Some things are buried for good reason.</p>`,
+        meta: {
+            'Status': 'Destroyed (hubris)',
+            'Cause': 'Forbidden knowledge',
+            'Warning': 'Dangerous remnants'
+        }
+    },
+
+    'horus': {
+        name: 'Horus',
+        region: 'The Outer Realms • South',
+        x: 62, y: 65,
+        type: 'outer',
+        description: `<p>Named by early explorers who saw winged figures in the sky. Not gods—something else. Watchers who never fell? A different order of being entirely?</p>
+        <p>The civilization here maintains careful records of every being that has passed through their lands. They know names that have been forgotten in the inner world for millennia.</p>`,
+        meta: {
+            'Inhabitants': 'Record-keepers',
+            'Nature': 'Observation post',
+            'Connection': 'The Watchers'
+        }
+    },
+
+    'amun-ra': {
+        name: 'Amun-Ra',
+        region: 'The Outer Realms • South',
+        x: 68, y: 58,
+        type: 'outer',
+        description: `<p>Where the sun rests closest to the outer realms. A land of light that mirrors Aten in the north. The two poles of the Greater Earth's illumination.</p>
+        <p>The inhabitants here worship the Source—not as a distant god, but as a present frequency they can feel in every sunrise.</p>`,
+        meta: {
+            'Nature': 'Land of light',
+            'Relation': 'Twin to Aten',
+            'Worship': 'Source-focused'
+        }
+    },
+
+    'atlantis': {
+        name: 'Atlantis',
+        region: 'The Outer Realms • South',
+        x: 48, y: 75,
+        type: 'forbidden',
+        description: `<p>Not drowned by water. Destroyed by <strong>ANTI-FREQUENCY</strong>.</p>
+        <p>The Atlanteans tried to breach the ice wall from outside. They had frequency knowledge that rivaled the Watchers. They were building something that could pierce the barrier.</p>
+        <p>The Silence responded with a new weapon. It sang the <strong>opposite of creation</strong>. Ground turned to water. The city sank INTO THE LAND.</p>
+        <p>The <strong>Eye of Africa</strong>—the Richat Structure—is the SCAR where Atlantis was swallowed.</p>`,
+        meta: {
+            'Destruction': 'Anti-frequency weapon',
+            'Remnant': 'Eye of Africa (Richat Structure)',
+            'Lesson': 'What the Silence learned, it used at Babel',
+            'Warning': 'The anti-frequency still echoes'
+        }
+    },
+
+    'glarnia': {
+        name: 'Glarnia',
+        region: 'The Outer Realms • Southwest',
+        x: 38, y: 68,
+        type: 'outer',
+        description: `<p>A land of crystals that sing. The very stones here vibrate with stored frequencies—recordings of sounds made millennia ago, playing back for anyone who knows how to listen.</p>
+        <p>Some crystals hold voices. Some hold music. Some hold screams.</p>`,
+        meta: {
+            'Nature': 'Crystal formations',
+            'Phenomenon': 'Frequency storage',
+            'Warning': 'Not all recordings should be heard'
+        }
+    },
+
+    'polybius': {
+        name: 'Polybius',
+        region: 'The Outer Realms • West',
+        x: 22, y: 55,
+        type: 'ancient',
+        description: `<p>Named for the Greek historian, though the ruins predate Greece by millennia. A civilization that documented everything—obsessively, compulsively.</p>
+        <p>Their libraries may contain records of the pre-Flood world. If the texts can be deciphered. If the libraries can be found. If they haven't already been claimed by the Silence.</p>`,
+        meta: {
+            'Nature': 'Archive civilization',
+            'Contents': 'Pre-Flood records (possibly)',
+            'Status': 'Ruined, partially accessible'
+        }
+    },
+
+    'weldrhom': {
+        name: 'Weldrhom',
+        region: 'The Outer Realms • West',
+        x: 25, y: 48,
+        type: 'outer',
+        description: `<p>Where the outer ocean meets the land in storms that never end. A civilization of shipbuilders who navigate waters that would destroy inner-world vessels.</p>
+        <p>They remember the Ark. They say their ancestors helped Noah build it.</p>`,
+        meta: {
+            'Nature': 'Storm-bound shores',
+            'Inhabitants': 'Shipbuilders',
+            'Legend': 'Ark construction knowledge'
+        }
+    },
+
+    'atania': {
+        name: 'Atania',
+        region: 'The Outer Realms • West',
+        x: 18, y: 40,
+        type: 'outer',
+        description: `<p>A land of miners who dig deep—too deep. They have found things in the earth that suggest other civilizations, other eras, buried beneath layers that should not exist.</p>
+        <p>How many resets have there been? Atania's mines suggest more than the texts record.</p>`,
+        meta: {
+            'Industry': 'Deep mining',
+            'Discoveries': 'Buried civilizations',
+            'Question': 'How many resets?'
+        }
+    },
+
+    'elwaar': {
+        name: 'Elwaar',
+        region: 'The Outer Realms • West',
+        x: 15, y: 35,
+        type: 'outer',
+        description: `<p>Where the walls of Asgard end and something else begins. A transitional land, neither fully of Asgard's realm nor entirely separate.</p>
+        <p>The beings here are hard to categorize. Not quite human. Not quite Nephilim. Something that emerged from the mixing of bloodlines over countless generations.</p>`,
+        meta: {
+            'Nature': 'Transitional zone',
+            'Inhabitants': 'Mixed-lineage beings',
+            'Status': 'Neutral territory'
+        }
+    },
+
+    // ==========================================
+    // THE FORBIDDEN ZONES
+    // ==========================================
+
+    'frozen-wastes': {
+        name: 'The Frozen Wastes',
+        region: 'The Forbidden Zones • Far Northeast',
+        x: 88, y: 15,
+        type: 'forbidden',
+        description: `<p>Beyond even the outer realms. Perpetual cold, no life as we understand it. The silence here is <strong>absolute</strong>—no frequency at all.</p>
+        <p>Some say this is where the Silence originated. Where anti-frequency was born. Where the void that existed before "Let there be light" still persists.</p>
+        <p>Nothing that enters returns unchanged. Most do not return at all.</p>`,
+        meta: {
+            'Nature': 'Frequency void',
+            'Temperature': 'Beyond cold',
+            'Warning': 'Do not enter',
+            'Theory': 'Origin of the Silence'
+        }
+    },
+
+    'irradiated-wastes': {
+        name: 'The Irradiated Wastes',
+        region: 'The Forbidden Zones • Far West',
+        x: 8, y: 38,
+        type: 'forbidden',
+        description: `<p>A region destroyed by some ancient weapon. Nothing grows. The land itself is poisoned. Even the Watchers cannot survive there long.</p>
+        <p>What happened here, the texts do not say. Perhaps the war before the war. Perhaps a judgment that predates the Flood.</p>
+        <p>Perhaps something that should <strong>never be remembered</strong>.</p>`,
+        meta: {
+            'Status': 'Uninhabitable',
+            'Cause': 'Unknown ancient weapon',
+            'Duration': 'Poisoned since before memory',
+            'Warning': 'Even Watchers avoid this place'
+        }
+    },
+
+    'scorched-wastes': {
+        name: 'The Scorched Wastes',
+        region: 'The Forbidden Zones • Southwest',
+        x: 18, y: 72,
+        type: 'forbidden',
+        description: `<p>Burned, not by volcano but by something else. The ground is <strong>glass</strong> in places—vitrified by heat that should not exist outside the sun itself.</p>
+        <p>Some connect this to Sodom's destruction—a preview of the judgment that would later fall on the Cities of the Plain. Or perhaps a test. The Silence learning what the Source could do.</p>`,
+        meta: {
+            'Status': 'Glassed terrain',
+            'Cause': 'Unknown—divine fire?',
+            'Connection': 'Sodom prototype?',
+            'Warning': 'Ground unstable'
+        }
+    },
+
+    'sunken-wastes': {
+        name: 'The Sunken Wastes',
+        region: 'The Forbidden Zones • South',
+        x: 50, y: 85,
+        type: 'forbidden',
+        description: `<p>Land that is slowly <strong>drowning</strong>. Not flooded—SINKING. As if the earth itself is swallowing this region inch by inch, year by year.</p>
+        <p>Connected to Atlantis's fate? The anti-frequency still working, still pulling downward? A wound in creation that has never healed?</p>`,
+        meta: {
+            'Status': 'Actively sinking',
+            'Cause': 'Lingering anti-frequency',
+            'Connection': 'Atlantis',
+            'Warning': 'Ground unstable, expanding'
+        }
+    },
+
+    'volcanic-wastes': {
+        name: 'The Volcanic Wastes',
+        region: 'The Forbidden Zones • East',
+        x: 88, y: 50,
+        type: 'forbidden',
+        description: `<p>Where the earth bleeds fire. Constant eruptions, rivers of lava, air thick with ash. Some say this is where the foundations of the earth are weakest.</p>
+        <p>Others say something is trying to break through from below. Something that was buried during the first creation. Something that wants out.</p>`,
+        meta: {
+            'Nature': 'Constant volcanic activity',
+            'Theory': 'Weak point in creation',
+            'Warning': 'Extreme danger',
+            'Phenomenon': 'Something beneath?'
+        }
+    },
+
+    'abyssal-ocean': {
+        name: 'The Abyssal Ocean',
+        region: 'The Forbidden Zones • Southeast',
+        x: 75, y: 78,
+        type: 'forbidden',
+        description: `<p>Waters so deep they touch the Waters Below. Where the frequency barrier between layers grows thin. Where things swim that should not exist in any creation.</p>
+        <p>Ships that sail here report seeing <strong>lights beneath</strong>—cities? Creatures? Something else entirely?</p>
+        <p>The water here is denser. Wrong. It resists navigation as if it does not want visitors.</p>`,
+        meta: {
+            'Depth': 'Approaches Waters Below',
+            'Phenomena': 'Lights beneath, dense water',
+            'Navigation': 'Nearly impossible',
+            'Warning': 'Ships do not return'
+        }
+    }
+};
+
+// ============================================
+// MAP INITIALIZATION
+// ============================================
+
+const mapContainer = document.getElementById('map-container');
+const mapWrapper = document.getElementById('map-wrapper');
+const mapImage = document.getElementById('map-image');
+const infoPanel = document.getElementById('info-panel');
+const overlay = document.getElementById('overlay');
+const loadingScreen = document.getElementById('loading-screen');
+
+let scale = 1;
+let translateX = 0;
+let translateY = 0;
+let isDragging = false;
+let startX = 0;
+let startY = 0;
+let imgWidth = 0;
+let imgHeight = 0;
+
+const MIN_SCALE = 0.3;
+const MAX_SCALE = 5;
+
+// Wait for image to load
+if (mapImage.complete) {
+    initializeMap();
+} else {
+    mapImage.onload = initializeMap;
+}
+
+function initializeMap() {
+    imgWidth = mapImage.naturalWidth;
+    imgHeight = mapImage.naturalHeight;
+    
+    // Set wrapper size to match image
+    mapWrapper.style.width = imgWidth + 'px';
+    mapWrapper.style.height = imgHeight + 'px';
+    
+    // Center and fit the map
+    fitMapToScreen();
+    
+    // Create markers INSIDE the map wrapper
+    createMarkers();
+    
+    // Hide loading screen
+    setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+    }, 800);
+}
+
+function fitMapToScreen() {
+    const containerWidth = mapContainer.clientWidth;
+    const containerHeight = mapContainer.clientHeight;
+    
+    // Calculate scale to fit
+    const scaleX = containerWidth / imgWidth;
+    const scaleY = containerHeight / imgHeight;
+    scale = Math.min(scaleX, scaleY) * 0.95;
+    
+    // Center the map
+    const scaledWidth = imgWidth * scale;
+    const scaledHeight = imgHeight * scale;
+    translateX = (containerWidth - scaledWidth) / 2;
+    translateY = (containerHeight - scaledHeight) / 2;
+    
+    updateTransform();
+}
+
+function updateTransform() {
+    mapWrapper.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+}
+
+function createMarkers() {
+    Object.entries(locations).forEach(([key, loc]) => {
+        const marker = document.createElement('div');
+        marker.className = `marker marker-${loc.type}`;
+        marker.dataset.key = key;
+        
+        // Position based on percentage of image dimensions
+        marker.style.left = (loc.x / 100 * imgWidth) + 'px';
+        marker.style.top = (loc.y / 100 * imgHeight) + 'px';
+        
+        marker.innerHTML = `
+            <div class="marker-pulse"></div>
+            <div class="marker-dot"></div>
+            <span class="marker-label">${loc.name}</span>
+        `;
+        
+        marker.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showInfo(key);
         });
+        
+        mapWrapper.appendChild(marker);
+    });
+}
 
-        function closeCrossSection() {
+// ============================================
+// INTERACTION HANDLERS
+// ============================================
+
+// Mouse drag
+mapContainer.addEventListener('mousedown', (e) => {
+    if (e.target.closest('.marker')) return;
+    isDragging = true;
+    startX = e.clientX - translateX;
+    startY = e.clientY - translateY;
+    mapContainer.style.cursor = 'grabbing';
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    translateX = e.clientX - startX;
+    translateY = e.clientY - startY;
+    updateTransform();
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+    mapContainer.style.cursor = 'grab';
+});
+
+// Touch support
+let lastTouchDistance = 0;
+
+mapContainer.addEventListener('touchstart', (e) => {
+    if (e.target.closest('.marker')) return;
+    
+    if (e.touches.length === 1) {
+        isDragging = true;
+        startX = e.touches[0].clientX - translateX;
+        startY = e.touches[0].clientY - translateY;
+    } else if (e.touches.length === 2) {
+        isDragging = false;
+        lastTouchDistance = getTouchDistance(e.touches);
+    }
+});
+
+document.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1 && isDragging) {
+        translateX = e.touches[0].clientX - startX;
+        translateY = e.touches[0].clientY - startY;
+        updateTransform();
+    } else if (e.touches.length === 2) {
+        e.preventDefault();
+        const newDistance = getTouchDistance(e.touches);
+        const delta = newDistance / lastTouchDistance;
+        
+        const centerX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        const centerY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+        
+        zoomAt(centerX, centerY, delta);
+        lastTouchDistance = newDistance;
+    }
+}, { passive: false });
+
+document.addEventListener('touchend', () => {
+    isDragging = false;
+    lastTouchDistance = 0;
+});
+
+function getTouchDistance(touches) {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+// Mouse wheel zoom
+mapContainer.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+    zoomAt(e.clientX, e.clientY, delta);
+}, { passive: false });
+
+function zoomAt(clientX, clientY, delta) {
+    const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale * delta));
+    if (newScale === scale) return;
+    
+    const rect = mapContainer.getBoundingClientRect();
+    const mouseX = clientX - rect.left;
+    const mouseY = clientY - rect.top;
+    
+    // Zoom toward mouse position
+    const scaleChange = newScale / scale;
+    translateX = mouseX - (mouseX - translateX) * scaleChange;
+    translateY = mouseY - (mouseY - translateY) * scaleChange;
+    scale = newScale;
+    
+    updateTransform();
+}
+
+// Zoom buttons
+document.getElementById('zoom-in').addEventListener('click', () => {
+    const rect = mapContainer.getBoundingClientRect();
+    zoomAt(rect.width / 2, rect.height / 2, 1.3);
+});
+
+document.getElementById('zoom-out').addEventListener('click', () => {
+    const rect = mapContainer.getBoundingClientRect();
+    zoomAt(rect.width / 2, rect.height / 2, 0.7);
+});
+
+document.getElementById('zoom-reset').addEventListener('click', fitMapToScreen);
+
+// ============================================
+// INFO PANEL
+// ============================================
+
+function showInfo(key) {
+    const loc = locations[key];
+    if (!loc) return;
+    
+    document.getElementById('panel-region').textContent = loc.region;
+    document.getElementById('panel-title').textContent = loc.name;
+    document.getElementById('panel-description').innerHTML = loc.description;
+    
+    let metaHTML = '';
+    for (const [label, value] of Object.entries(loc.meta)) {
+        metaHTML += `
+            <div class="meta-item">
+                <p class="meta-label">${label}</p>
+                <p class="meta-value">${value}</p>
+            </div>
+        `;
+    }
+    document.getElementById('panel-meta').innerHTML = metaHTML;
+    
+    infoPanel.classList.add('active');
+    overlay.classList.add('active');
+}
+
+function closeInfo() {
+    infoPanel.classList.remove('active');
+    overlay.classList.remove('active');
+}
+
+document.querySelector('.panel-close').addEventListener('click', closeInfo);
+overlay.addEventListener('click', closeInfo);
+
+// ============================================
+// VIEW SWITCHING
+// ============================================
+
+document.querySelectorAll('.view-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const view = btn.dataset.view;
+        
+        document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        if (view === 'cross') {
+            document.getElementById('cross-section').classList.add('active');
+        } else {
             document.getElementById('cross-section').classList.remove('active');
-            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('.view-btn[data-view="map"]').classList.add('active');
         }
+    });
+});
 
-        // Window resize
-        window.addEventListener('resize', () => {
-            // Recenter on resize
-            const containerWidth = mapContainer.clientWidth;
-            const containerHeight = mapContainer.clientHeight;
-            translateX = (containerWidth - mapWidth * scale) / 2;
-            translateY = (containerHeight - mapHeight * scale) / 2;
-            updateMapTransform();
-        });
+document.querySelector('.cross-close').addEventListener('click', () => {
+    document.getElementById('cross-section').classList.remove('active');
+    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.view-btn[data-view="map"]').classList.add('active');
+});
 
-        // Initialize
-        initMap();
-    </script>
+// ============================================
+// KEYBOARD SHORTCUTS
+// ============================================
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeInfo();
+        document.getElementById('cross-section').classList.remove('active');
+    }
+    if (e.key === '+' || e.key === '=') {
+        const rect = mapContainer.getBoundingClientRect();
+        zoomAt(rect.width / 2, rect.height / 2, 1.2);
+    }
+    if (e.key === '-') {
+        const rect = mapContainer.getBoundingClientRect();
+        zoomAt(rect.width / 2, rect.height / 2, 0.8);
+    }
+    if (e.key === '0') {
+        fitMapToScreen();
+    }
+});
+
+// Window resize
+window.addEventListener('resize', () => {
+    // Recenter on resize
+    fitMapToScreen();
+});
+</script>
+
 </body>
 </html>
