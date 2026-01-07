@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Chronicles of Enoch | Portal to the Greater Earth</title>
+    <meta name="description" content="A biblical fantasy epic exploring what lies beyond the ice wall, beneath the firmament, and within the frequency that sang creation into being.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=MedievalSharp&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #c9a227;
@@ -94,11 +95,11 @@
 
         .logo {
             font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--gold);
             text-decoration: none;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
         }
 
@@ -110,10 +111,10 @@
 
         .nav-links a {
             font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--parchment);
             text-decoration: none;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             opacity: 0.8;
             transition: all 0.3s ease;
@@ -140,6 +141,42 @@
             width: 100%;
         }
 
+        .nav-links a.highlight {
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 0.4rem 0.8rem;
+            opacity: 1;
+        }
+
+        .nav-links a.highlight:hover {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        .nav-links a.highlight::after {
+            display: none;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
         /* Hero Section */
         .hero {
             position: relative;
@@ -155,8 +192,8 @@
 
         .hero-decoration {
             position: absolute;
-            width: 600px;
-            height: 600px;
+            width: 500px;
+            height: 500px;
             border: 1px solid rgba(201, 162, 39, 0.1);
             border-radius: 50%;
             animation: rotate-slow 120s linear infinite;
@@ -168,8 +205,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 500px;
-            height: 500px;
+            width: 400px;
+            height: 400px;
             border: 1px solid rgba(201, 162, 39, 0.08);
             border-radius: 50%;
         }
@@ -180,8 +217,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
+            width: 300px;
+            height: 300px;
             border: 1px solid rgba(201, 162, 39, 0.05);
             border-radius: 50%;
         }
@@ -193,18 +230,18 @@
 
         .hero-subtitle {
             font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            letter-spacing: 0.5em;
+            font-size: 0.75rem;
+            letter-spacing: 0.4em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             opacity: 0;
             animation: fade-in 1s ease 0.5s forwards;
         }
 
         .hero-title {
             font-family: 'Cinzel', serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(2.2rem, 7vw, 4.5rem);
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 0.5rem;
@@ -218,7 +255,7 @@
 
         .hero-title-sub {
             font-family: 'Cinzel', serif;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(1.2rem, 3.5vw, 2rem);
             font-weight: 400;
             color: var(--parchment);
             margin-bottom: 2rem;
@@ -227,7 +264,7 @@
         }
 
         .hero-tagline {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-style: italic;
             max-width: 600px;
             line-height: 1.8;
@@ -253,10 +290,10 @@
 
         .cta-btn {
             font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
             border: 1px solid var(--gold);
             background: transparent;
             color: var(--gold);
@@ -283,7 +320,7 @@
 
         .scroll-indicator {
             position: absolute;
-            bottom: 3rem;
+            bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -296,7 +333,7 @@
 
         .scroll-indicator span {
             font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             color: var(--gold);
@@ -305,259 +342,155 @@
 
         .scroll-line {
             width: 1px;
-            height: 60px;
+            height: 50px;
             background: linear-gradient(to bottom, var(--gold), transparent);
             animation: scroll-pulse 2s ease-in-out infinite;
         }
 
         @keyframes scroll-pulse {
-            0%, 100% { opacity: 0.3; height: 60px; }
-            50% { opacity: 1; height: 80px; }
+            0%, 100% { opacity: 0.3; height: 50px; }
+            50% { opacity: 1; height: 70px; }
         }
 
         /* Section Styles */
         section {
             position: relative;
             z-index: 2;
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
 
         .section-label {
             font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            letter-spacing: 0.4em;
+            font-size: 0.7rem;
+            letter-spacing: 0.35em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .section-title {
             font-family: 'Cinzel', serif;
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 600;
             color: var(--parchment);
             margin-bottom: 1rem;
         }
 
         .section-divider {
-            width: 100px;
+            width: 80px;
             height: 1px;
             background: linear-gradient(to right, transparent, var(--gold), transparent);
             margin: 0 auto;
         }
 
-        /* Interactive Map Section */
-        #map-section {
+        /* Map Preview Section */
+        #explore-section {
             background: linear-gradient(to bottom, transparent, rgba(10, 22, 40, 0.5), transparent);
+            padding: 6rem 2rem;
         }
 
-        .map-container {
-            max-width: 1200px;
+        .map-preview-container {
+            max-width: 1000px;
             margin: 0 auto;
             position: relative;
         }
 
-        .interactive-map {
+        .map-preview {
             position: relative;
             width: 100%;
             aspect-ratio: 1;
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             border-radius: 50%;
             overflow: hidden;
             box-shadow: 
                 0 0 0 2px rgba(201, 162, 39, 0.2),
                 0 0 60px rgba(10, 22, 40, 0.8),
-                inset 0 0 100px rgba(10, 22, 40, 0.5);
+                inset 0 0 60px rgba(10, 22, 40, 0.5);
+            cursor: pointer;
+            transition: all 0.5s ease;
         }
 
-        .map-base {
+        .map-preview:hover {
+            box-shadow: 
+                0 0 0 2px rgba(201, 162, 39, 0.4),
+                0 0 80px rgba(201, 162, 39, 0.2),
+                inset 0 0 60px rgba(10, 22, 40, 0.3);
+            transform: scale(1.02);
+        }
+
+        .map-preview img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(0.2) saturate(0.9) brightness(0.85);
+            filter: sepia(0.15) saturate(0.9) brightness(0.85);
             transition: filter 0.5s ease;
         }
 
-        .interactive-map:hover .map-base {
+        .map-preview:hover img {
             filter: sepia(0.1) saturate(1) brightness(0.9);
         }
 
-        .map-overlay {
+        .map-preview-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-        }
-
-        /* Map Location Markers */
-        .map-marker {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            transform: translate(-50%, -50%);
-            cursor: pointer;
-            pointer-events: auto;
-            z-index: 10;
-        }
-
-        .marker-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--gold);
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px var(--gold);
-            transition: all 0.3s ease;
-        }
-
-        .marker-pulse {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 30px;
-            height: 30px;
-            border: 1px solid var(--gold);
-            border-radius: 50%;
-            animation: marker-pulse 2s ease-in-out infinite;
-            opacity: 0;
-        }
-
-        @keyframes marker-pulse {
-            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.8; }
-            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
-        }
-
-        .map-marker:hover .marker-dot {
-            transform: translate(-50%, -50%) scale(1.5);
-            box-shadow: 0 0 20px var(--gold);
-        }
-
-        .marker-label {
-            position: absolute;
-            white-space: nowrap;
-            font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--gold-light);
-            background: rgba(10, 22, 40, 0.9);
-            padding: 0.3rem 0.6rem;
-            border-radius: 2px;
-            opacity: 0;
-            transition: all 0.3s ease;
-            pointer-events: none;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .map-marker:hover .marker-label {
-            opacity: 1;
-            top: -35px;
-        }
-
-        /* Location Info Panel */
-        .location-panel {
-            position: fixed;
-            top: 0;
-            right: -500px;
-            width: 450px;
-            max-width: 90vw;
-            height: 100vh;
-            background: linear-gradient(135deg, rgba(26, 20, 8, 0.98), rgba(10, 22, 40, 0.98));
-            z-index: 1001;
-            padding: 3rem;
-            overflow-y: auto;
-            transition: right 0.5s ease;
-            box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .location-panel.active {
-            right: 0;
-        }
-
-        .panel-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--gold);
-            background: transparent;
-            color: var(--gold);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            background: radial-gradient(circle, transparent 30%, rgba(10, 22, 40, 0.4) 100%);
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        .panel-close:hover {
-            background: var(--gold);
-            color: var(--ink);
+        .map-preview:hover .map-preview-overlay {
+            opacity: 1;
         }
 
-        .panel-category {
+        .map-preview-text {
             font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            letter-spacing: 0.3em;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 0.5rem;
+            background: rgba(10, 22, 40, 0.8);
+            padding: 1rem 2rem;
+            border: 1px solid var(--gold);
         }
 
-        .panel-title {
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--parchment);
-            margin-bottom: 1.5rem;
-        }
-
-        .panel-content {
+        .map-description {
+            text-align: center;
+            max-width: 600px;
+            margin: 2rem auto 0;
             font-size: 1.1rem;
-            line-height: 1.9;
+            line-height: 1.8;
             color: var(--parchment-dark);
-        }
-
-        .panel-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .panel-content strong {
-            color: var(--gold);
-            font-weight: 500;
         }
 
         /* Books Section */
         #books-section {
-            background: linear-gradient(to bottom, transparent, rgba(107, 28, 28, 0.05), transparent);
+            background: linear-gradient(to bottom, transparent, rgba(107, 28, 28, 0.03), transparent);
         }
 
         .books-grid {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
+            gap: 2rem;
         }
 
         .book-card {
             position: relative;
-            background: linear-gradient(135deg, rgba(26, 20, 8, 0.6), rgba(10, 22, 40, 0.6));
+            background: linear-gradient(135deg, rgba(26, 20, 8, 0.5), rgba(10, 22, 40, 0.5));
             border: 1px solid rgba(201, 162, 39, 0.1);
             padding: 2rem;
             transition: all 0.5s ease;
@@ -570,16 +503,16 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
+            height: 2px;
             background: linear-gradient(to right, transparent, var(--gold), transparent);
             opacity: 0;
             transition: opacity 0.5s ease;
         }
 
         .book-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: rgba(201, 162, 39, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
         .book-card:hover::before {
@@ -588,8 +521,8 @@
 
         .book-number {
             font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            letter-spacing: 0.3em;
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
             color: var(--gold);
             margin-bottom: 0.5rem;
@@ -597,7 +530,7 @@
 
         .book-title {
             font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 600;
             color: var(--parchment);
             margin-bottom: 1rem;
@@ -605,7 +538,7 @@
         }
 
         .book-excerpt {
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.8;
             color: var(--parchment-dark);
             margin-bottom: 1.5rem;
@@ -614,8 +547,8 @@
         .book-link {
             display: inline-block;
             font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--gold);
             text-decoration: none;
@@ -628,137 +561,77 @@
             border-bottom-color: var(--gold);
         }
 
-        /* Cosmology Section */
-        #cosmology-section {
-            text-align: center;
-        }
-
-        .cosmology-visual {
-            max-width: 800px;
-            margin: 0 auto 4rem;
-            position: relative;
-        }
-
-        .firmament-diagram {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: 
-                radial-gradient(ellipse at center top, rgba(168, 200, 216, 0.1) 0%, transparent 50%),
-                linear-gradient(to bottom, rgba(10, 22, 40, 0.8), var(--ink));
-            border: 1px solid rgba(201, 162, 39, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .firmament-layer {
-            position: absolute;
-            left: 10%;
-            right: 10%;
-            border-top: 1px dashed rgba(201, 162, 39, 0.3);
-            display: flex;
-            align-items: flex-start;
-            padding-top: 0.5rem;
-        }
-
-        .firmament-layer span {
-            font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--gold);
-            background: var(--ink);
-            padding: 0 0.5rem;
-        }
-
-        .layer-1 { top: 15%; }
-        .layer-2 { top: 35%; }
-        .layer-3 { top: 60%; }
-        .layer-4 { top: 85%; }
-
-        .cosmology-text {
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.2rem;
-            line-height: 2;
-            color: var(--parchment-dark);
-        }
-
-        .cosmology-text em {
-            color: var(--gold);
-            font-style: italic;
-        }
-
         /* Characters Section */
         #characters-section {
             background: linear-gradient(to bottom, transparent, rgba(201, 162, 39, 0.02), transparent);
         }
 
         .characters-showcase {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
         .character-card {
             position: relative;
-            padding: 2.5rem;
-            background: linear-gradient(135deg, rgba(26, 20, 8, 0.4), rgba(10, 22, 40, 0.4));
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(26, 20, 8, 0.3), rgba(10, 22, 40, 0.3));
             border-left: 2px solid var(--gold);
             transition: all 0.4s ease;
         }
 
         .character-card:hover {
-            background: linear-gradient(135deg, rgba(26, 20, 8, 0.6), rgba(10, 22, 40, 0.6));
-            transform: translateX(10px);
+            background: linear-gradient(135deg, rgba(26, 20, 8, 0.5), rgba(10, 22, 40, 0.5));
+            transform: translateX(5px);
         }
 
         .character-type {
             font-family: 'Cinzel', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.3em;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .character-name {
             font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--parchment);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .character-role {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-style: italic;
             color: var(--gold-light);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .character-desc {
-            font-size: 1rem;
-            line-height: 1.8;
+            font-size: 0.95rem;
+            line-height: 1.7;
             color: var(--parchment-dark);
         }
 
-        /* Easter Eggs Section */
+        /* Mysteries Section */
         #mysteries-section {
-            background: linear-gradient(to bottom, transparent, rgba(107, 28, 28, 0.03), transparent);
+            background: linear-gradient(to bottom, transparent, rgba(107, 28, 28, 0.02), transparent);
         }
 
         .mysteries-grid {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
             display: grid;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .mystery-card {
-            padding: 2rem;
-            background: rgba(10, 22, 40, 0.4);
+            padding: 1.5rem 2rem;
+            background: rgba(10, 22, 40, 0.3);
             border: 1px solid rgba(201, 162, 39, 0.1);
             transition: all 0.4s ease;
             cursor: pointer;
@@ -766,27 +639,34 @@
 
         .mystery-card:hover {
             border-color: rgba(201, 162, 39, 0.3);
-            background: rgba(10, 22, 40, 0.6);
+            background: rgba(10, 22, 40, 0.5);
         }
 
         .mystery-title {
             font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--gold);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .mystery-teaser {
-            font-size: 1rem;
-            line-height: 1.8;
+            font-size: 0.95rem;
+            line-height: 1.7;
             color: var(--parchment-dark);
         }
 
         .mystery-reveal {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
+            margin-top: 1.2rem;
+            padding-top: 1.2rem;
             border-top: 1px solid rgba(201, 162, 39, 0.1);
             display: none;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--parchment);
+        }
+
+        .mystery-reveal strong {
+            color: var(--gold);
         }
 
         .mystery-card.expanded .mystery-reveal {
@@ -797,25 +677,24 @@
         /* Quote Section */
         .quote-section {
             text-align: center;
-            padding: 8rem 2rem;
-            background: 
-                radial-gradient(ellipse at center, rgba(201, 162, 39, 0.03) 0%, transparent 70%);
+            padding: 6rem 2rem;
+            background: radial-gradient(ellipse at center, rgba(201, 162, 39, 0.02) 0%, transparent 70%);
         }
 
         .quote-text {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(1.3rem, 3.5vw, 2rem);
             font-style: italic;
-            line-height: 1.6;
+            line-height: 1.7;
             color: var(--parchment);
-            max-width: 900px;
-            margin: 0 auto 2rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
         }
 
         .quote-attribution {
             font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            letter-spacing: 0.3em;
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
             color: var(--gold);
         }
@@ -825,24 +704,24 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 3rem 2rem;
             border-top: 1px solid rgba(201, 162, 39, 0.1);
         }
 
         .footer-logo {
             font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            letter-spacing: 0.3em;
+            font-size: 0.9rem;
+            letter-spacing: 0.25em;
             color: var(--gold);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .footer-text {
             font-size: 0.9rem;
             color: var(--parchment-dark);
-            max-width: 500px;
-            margin: 0 auto 2rem;
-            line-height: 1.8;
+            max-width: 450px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.7;
         }
 
         .footer-links {
@@ -854,8 +733,8 @@
 
         .footer-links a {
             font-family: 'Cinzel', serif;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--parchment-dark);
             text-decoration: none;
@@ -868,52 +747,28 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
             .hero-decoration {
-                width: 300px;
-                height: 300px;
+                width: 280px;
+                height: 280px;
             }
             
             .hero-decoration::before {
-                width: 250px;
-                height: 250px;
+                width: 220px;
+                height: 220px;
             }
             
             .hero-decoration::after {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .location-panel {
-                width: 100%;
-                max-width: 100vw;
+                width: 160px;
+                height: 160px;
             }
             
             .characters-showcase {
                 grid-template-columns: 1fr;
             }
-        }
 
-        /* Overlay for panel */
-        .panel-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
-
-        .panel-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
+            section {
+                padding: 4rem 1.5rem;
+            }
         }
     </style>
 </head>
@@ -926,12 +781,13 @@
         <div class="nav-content">
             <a href="#" class="logo">Chronicles of Enoch</a>
             <ul class="nav-links">
-                <li><a href="#map-section">The Greater Earth</a></li>
+                <li><a href="#explore-section">The Greater Earth</a></li>
                 <li><a href="#books-section">The Books</a></li>
-                <li><a href="#cosmology-section">Cosmology</a></li>
                 <li><a href="#characters-section">Characters</a></li>
                 <li><a href="#mysteries-section">Mysteries</a></li>
+                <li><a href="greater-earth-flat.html" class="highlight">Explore Map</a></li>
             </ul>
+            <button class="mobile-menu-btn">☰</button>
         </div>
     </nav>
 
@@ -947,7 +803,7 @@
             that would change everything humanity thought it knew about creation.
         </p>
         <div class="cta-group">
-            <a href="#map-section" class="cta-btn primary">Explore the World</a>
+            <a href="greater-earth-flat.html" class="cta-btn primary">Explore the Greater Earth</a>
             <a href="#books-section" class="cta-btn">Read the Chronicles</a>
         </div>
         <div class="scroll-indicator">
@@ -956,67 +812,26 @@
         </div>
     </section>
 
-    <!-- Interactive Map Section -->
-    <section id="map-section">
+    <!-- Map Preview Section -->
+    <section id="explore-section">
         <div class="section-header">
             <p class="section-label">The World Beyond the Ice Wall</p>
             <h2 class="section-title">The Greater Earth</h2>
             <div class="section-divider"></div>
         </div>
         
-        <div class="map-container">
-            <div class="interactive-map" id="world-map">
-                <img src="Flat_Earth_map.jpg" alt="The World Beyond the Ice Wall" class="map-base" id="map-image">
-                
-                <!-- Map Markers -->
-                <div class="map-marker" style="top: 50%; left: 50%;" data-location="ice-wall">
-                    <div class="marker-dot"></div>
-                    <div class="marker-pulse"></div>
-                    <span class="marker-label">The Ice Wall</span>
+        <div class="map-preview-container">
+            <a href="greater-earth-flat.html" class="map-preview">
+                <img src="Flat_Earth_map.jpg" alt="The World Beyond the Ice Wall">
+                <div class="map-preview-overlay">
+                    <span class="map-preview-text">Enter the Explorer</span>
                 </div>
-                
-                <div class="map-marker" style="top: 25%; left: 30%;" data-location="asgard">
-                    <div class="marker-dot"></div>
-                    <div class="marker-pulse"></div>
-                    <span class="marker-label">Asgard</span>
-                </div>
-                
-                <div class="map-marker" style="top: 22%; left: 50%;" data-location="aten">
-                    <div class="marker-dot"></div>
-                    <div class="marker-pulse"></div>
-                    <span class="marker-label">Aten</span>
-                </div>
-                
-                <div class="map-marker" style="top: 35%; left: 75%;" data-location="eden">
-                    <div class="marker-dot"></div>
-                    <div class="marker-pulse"></div>
-                    <span class="marker-label">Eden</span>
-                </div>
-                
-                <div class="map-marker" style="top: 30%; left: 65%;" data-location="lemuria">
-                    <div class="marker-dot"></div>
-                    <div class="marker-pulse"></div>
-                    <span class="marker-label">Lemuria</span>
-                </div>
-                
-                <div class="map-marker" style="top: 70%; left: 45%;" data-location="atlantis">
-                    <div class="marker-dot"></div>
-                    <div class="marker-pulse"></div>
-                    <span class="marker-label">Atlantis</span>
-                </div>
-                
-                <div class="map-marker" style="top: 75%; left: 70%;" data-location="mu">
-                    <div class="marker-dot"></div>
-                    <div class="marker-pulse"></div>
-                    <span class="marker-label">Mu</span>
-                </div>
-                
-                <div class="map-marker" style="top: 45%; left: 20%;" data-location="irradiated">
-                    <div class="marker-dot" style="background: #6b1c1c; box-shadow: 0 0 10px #6b1c1c;"></div>
-                    <div class="marker-pulse" style="border-color: #6b1c1c;"></div>
-                    <span class="marker-label">Irradiated Wastes</span>
-                </div>
-            </div>
+            </a>
+            <p class="map-description">
+                The world is not what humanity has been told. What we call "Earth" is a section 
+                of a vastly larger creation—a circular region enclosed by walls of ancient ice, 
+                surrounded by oceans, continents, and realms that the children of Noah have never seen.
+            </p>
         </div>
     </section>
 
@@ -1068,7 +883,7 @@
                 <p class="book-excerpt">
                     Noah bears the mark of Adam's line—the light that has passed from 
                     generation to generation. But to save humanity, he must build something 
-                    impossible while the world laughs and the Silence whispers.
+                    impossible while the world laughs.
                 </p>
                 <a href="#" class="book-link">Continue Reading →</a>
             </div>
@@ -1084,45 +899,17 @@
                 <a href="#" class="book-link">Continue Reading →</a>
             </div>
             
-            <div class="book-card" style="border: 1px dashed rgba(201, 162, 39, 0.3);">
-                <p class="book-number">Coming</p>
-                <h3 class="book-title">Books Six & Seven</h3>
+            <div class="book-card" style="border-style: dashed;">
+                <p class="book-number">Coming Soon</p>
+                <h3 class="book-title">The Second Reset</h3>
                 <p class="book-excerpt">
-                    The story continues toward the final revelation—the bridge between 
-                    the ancient world and our own, and the truth that has been hidden 
-                    beneath the ice since the beginning.
+                    The epic continues—from the Tower of Babel to the prophets of old. 
+                    Sorcerers who channel the Source. Warlocks who steal its power. 
+                    And the lands beyond the ice wall, watching.
                 </p>
                 <span class="book-link" style="opacity: 0.5;">In Progress</span>
             </div>
         </div>
-    </section>
-
-    <!-- Cosmology Section -->
-    <section id="cosmology-section">
-        <div class="section-header">
-            <p class="section-label">The Shape of Creation</p>
-            <h2 class="section-title">The Firmament</h2>
-            <div class="section-divider"></div>
-        </div>
-        
-        <div class="cosmology-visual">
-            <div class="firmament-diagram">
-                <div class="firmament-layer layer-1"><span>The Waters Above</span></div>
-                <div class="firmament-layer layer-2"><span>The Firmament</span></div>
-                <div class="firmament-layer layer-3"><span>The Luminaries</span></div>
-                <div class="firmament-layer layer-4"><span>The Greater Earth</span></div>
-            </div>
-        </div>
-        
-        <p class="cosmology-text">
-            Above the world—both inner and outer—stretches the firmament: the dome of the sky. 
-            Not empty space but a <em>barrier</em>. Separating the waters above from the waters below. 
-            The sun travels in a circuit; it does not orbit. The stars are fixed in the firmament; 
-            some are windows to what lies beyond.<br><br>
-            When the flood came, <em>the windows of heaven were opened</em>. 
-            The waters above poured through. This water is not like earthly water—it carries 
-            the frequency of creation itself. It can purify or destroy depending on how it's channeled.
-        </p>
     </section>
 
     <!-- Characters Section -->
@@ -1151,8 +938,7 @@
                 <p class="character-role">"Night" — Daughter of forbidden union</p>
                 <p class="character-desc">
                     Born with sacred letters burning on her palms, Lila carries power she does not 
-                    understand. Half-angel, half-human, she must choose which world she belongs to 
-                    before both worlds burn.
+                    understand. Half-angel, half-human, she must choose which world she belongs to.
                 </p>
             </div>
             
@@ -1162,19 +948,7 @@
                 <p class="character-role">"Prince of God" — Fallen, Rising</p>
                 <p class="character-desc">
                     One of the Watchers who descended to teach humanity. Unlike his brothers, Sariel 
-                    seeks redemption rather than domination. His journey asks: can what has fallen 
-                    ever rise again?
-                </p>
-            </div>
-            
-            <div class="character-card">
-                <p class="character-type">The Line of Cain</p>
-                <h3 class="character-name">Namaah</h3>
-                <p class="character-role">"Pleasant" — Bearer of the Mark</p>
-                <p class="character-desc">
-                    Sister of Tubal-Cain, descendant of the first murderer. Namaah carries knowledge 
-                    that predates the Watchers' teaching—and a curse that will echo through 
-                    generations she cannot imagine.
+                    seeks redemption rather than domination. Can what has fallen ever rise again?
                 </p>
             </div>
             
@@ -1188,21 +962,10 @@
                     Ninety years of faith. One door that closes.
                 </p>
             </div>
-            
-            <div class="character-card">
-                <p class="character-type">The Enemy</p>
-                <h3 class="character-name">The Silence</h3>
-                <p class="character-role">Anti-frequency — The Unmaker</p>
-                <p class="character-desc">
-                    Not a being but an absence. The Silence is what exists in the space where 
-                    the Voice is not—the anti-frequency that corrupts, takes, and unmakes. 
-                    It cannot create. It can only twist what others have made.
-                </p>
-            </div>
         </div>
     </section>
 
-    <!-- Mysteries/Easter Eggs Section -->
+    <!-- Mysteries Section -->
     <section id="mysteries-section">
         <div class="section-header">
             <p class="section-label">For Those Who Dig Deeper</p>
@@ -1222,7 +985,7 @@
                     <p>
                         <strong>Kaphar (כָּפַר)</strong> means "to cover, to atone, to make reconciliation." 
                         The pitch that sealed Noah's ark is the same word used for atonement throughout 
-                        the Old Testament. The ark wasn't just waterproofed—it was <em>atoned</em>. 
+                        the Old Testament. The ark wasn't just waterproofed—it was <strong>atoned</strong>. 
                         Covered inside and outside with a ransom.
                     </p>
                 </div>
@@ -1231,53 +994,34 @@
             <div class="mystery-card" onclick="this.classList.toggle('expanded')">
                 <h3 class="mystery-title">The Earth's Gift: Abiotic Oil</h3>
                 <p class="mystery-teaser">
-                    What if oil isn't dead dinosaurs? Russian-Ukrainian scientists have proposed 
-                    that petroleum is continuously produced by Earth's mantle. If true, it changes 
-                    everything about what the pitch really was...
+                    What if oil isn't dead dinosaurs? What if the Earth continuously produces it 
+                    from deep within—a healing substance she provides when asked?
                 </p>
                 <div class="mystery-reveal">
                     <p>
                         Evidence includes: hydrocarbons on lifeless moons like Titan, depleted wells 
-                        that refill, and the Lost City Hydrothermal Field producing oil abiotically. 
+                        that refill, and deep-sea vents producing oil abiotically. 
                         In our story, oil is <strong>the Earth's lymph system</strong>—a healing 
-                        substance she provides when asked. Noah didn't extract the pitch. 
+                        substance she provides. Noah didn't extract the pitch. 
                         He asked, and she gave.
                     </p>
                 </div>
             </div>
             
             <div class="mystery-card" onclick="this.classList.toggle('expanded')">
-                <h3 class="mystery-title">Ham's Curse and Nimrod's Tower</h3>
+                <h3 class="mystery-title">Sorcerers vs Warlocks</h3>
                 <p class="mystery-teaser">
-                    The man who helped build the ark would have his grandson cursed as 
-                    "servant of servants." But follow that bloodline forward, and you find 
-                    the builder of Babel itself...
+                    Moses parted the sea. Pharaoh's magicians turned staffs to snakes. 
+                    Both wielded power—but the source was fundamentally different...
                 </p>
                 <div class="mystery-reveal">
                     <p>
-                        Ham → Cush → <strong>Nimrod</strong>, the mighty hunter and rebel who built Babel. 
-                        And if tradition is correct that Ham's wife was Naamah (sister of Tubal-Cain), 
-                        then Nimrod carried both Noah's blood and <strong>Cain's blood</strong>. 
-                        The builder of Babel was the convergence of both cursed lineages. 
-                        The Silence is patient.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="mystery-card" onclick="this.classList.toggle('expanded')">
-                <h3 class="mystery-title">Gopher Wood: A Tree That Remembers</h3>
-                <p class="mystery-teaser">
-                    The Hebrew word "gopher" appears exactly once in all of scripture—and no one 
-                    knows what tree it describes. Unless you consider what the trees themselves 
-                    might have been waiting for...
-                </p>
-                <div class="mystery-reveal">
-                    <p>
-                        In the Chronicles, gopher trees are <strong>descendants of the Mother Trees</strong>—
-                        the great trees that once touched the sky before the Watchers cut them down. 
-                        They carried the frequency memory of creation, waiting through generations 
-                        for their purpose. When Noah asked, they <em>volunteered</em>. 
-                        They didn't fall—they offered themselves.
+                        <strong>Sorcerers</strong> CHANNEL the creative frequency of God. They ask, receive, conduct. 
+                        The power flows through them but is not of them. Moses, Elijah, Enoch.
+                        <br><br>
+                        <strong>Warlocks</strong> STEAL frequency. Energy vampires. They cannot create—only consume, 
+                        corrupt, and counterfeit. Pharaoh's magicians could copy Moses' signs... to a point. 
+                        At gnats, they failed. "This is the finger of God."
                     </p>
                 </div>
             </div>
@@ -1287,9 +1031,8 @@
     <!-- Quote Section -->
     <section class="quote-section">
         <blockquote class="quote-text">
-            "The story becomes a vessel that catches what pours through. Not generation. 
-            Channeling. Reaching toward something. The creative act as a form of projection—
-            expressing what moves through the system, not just producing output."
+            "The story becomes a vessel that catches what pours through. Not generation—channeling. 
+            The creative act as a form of reaching toward something larger than oneself."
         </blockquote>
         <p class="quote-attribution">— From the Writing Process</p>
     </section>
@@ -1303,19 +1046,10 @@
         </p>
         <div class="footer-links">
             <a href="#">Amazon</a>
+            <a href="greater-earth-flat.html">Explore Map</a>
             <a href="#">About the Author</a>
-            <a href="#">Contact</a>
         </div>
     </footer>
-
-    <!-- Location Panel -->
-    <div class="panel-overlay" id="panel-overlay"></div>
-    <div class="location-panel" id="location-panel">
-        <button class="panel-close" onclick="closePanel()">×</button>
-        <p class="panel-category" id="panel-category"></p>
-        <h2 class="panel-title" id="panel-title"></h2>
-        <div class="panel-content" id="panel-content"></div>
-    </div>
 
     <script>
         // Navigation scroll effect
@@ -1327,109 +1061,6 @@
                 nav.classList.remove('scrolled');
             }
         });
-
-        // Location data
-        const locations = {
-            'ice-wall': {
-                category: 'The Barrier',
-                title: 'The Ice Wall',
-                content: `
-                    <p>A ring of frozen mountains encircling the inner world. <strong>Not natural—constructed.</strong></p>
-                    <p>Built before the flood as containment, not punishment. Maintained by forces that predate human civilization. Passable in theory, but guarded, hidden, forbidden.</p>
-                    <p>The wall is not merely physical—it has a <strong>frequency</strong>, a harmonic barrier that keeps the inner world separate from the outer realms.</p>
-                    <p>Within these walls, the flood occurred. Within these walls, Noah's descendants repopulated. This is the "world" of human memory—but it is only a section of a vastly larger creation.</p>
-                `
-            },
-            'asgard': {
-                category: 'The Old Powers',
-                title: 'Asgard',
-                content: `
-                    <p>A realm of the old powers—beings who predate the Watchers. Not gods, but <strong>ancient</strong>—first experiments in consciousness.</p>
-                    <p>The Norse traditions remember them dimly as the Æsir, but their true nature is older and stranger than any human mythology captured.</p>
-                    <p>Largely abandoned now, but not empty. Something still watches from those ancient halls.</p>
-                `
-            },
-            'aten': {
-                category: 'Land of Perpetual Light',
-                title: 'Aten',
-                content: `
-                    <p>Named for the sun-disk—a place of <strong>perpetual light</strong>. The sun's path passes closer here than anywhere else on the Greater Earth.</p>
-                    <p>Inhabited by a civilization that never knew the flood. They remember the Watchers as teachers, not corruptors—because they met the Watchers before the Fall.</p>
-                    <p>Their astronomical knowledge exceeds anything preserved in the inner world. They understand the true paths of the luminaries.</p>
-                `
-            },
-            'eden': {
-                category: 'The Garden',
-                title: 'Eden',
-                content: `
-                    <p><strong>THE Garden</strong>—still extant, still guarded. Cherubim with flaming swords patrol its borders.</p>
-                    <p>Enoch was taken here to continue his scribal work. The Tree of Life still grows; the Tree of Knowledge still bears fruit.</p>
-                    <p>No mortal from the inner world has seen it since Adam's expulsion. But it exists. It waits. And someday, the way back will open.</p>
-                `
-            },
-            'lemuria': {
-                category: 'The Sound Builders',
-                title: 'Lemuria',
-                content: `
-                    <p>An old civilization, mostly fallen. They built with <strong>sound</strong>—structures that resonate with the frequency of creation itself.</p>
-                    <p>Connected to the frequency technology that powers the Chronophage and other ancient mechanisms.</p>
-                    <p>Ruins remain; some say inhabitants survive in hidden places, guarding knowledge too dangerous for the unprepared.</p>
-                `
-            },
-            'atlantis': {
-                category: 'The Folded City',
-                title: 'Atlantis',
-                content: `
-                    <p>The most famous of the lost civilizations. They tried to breach the ice wall from outside—and they were destroyed for it.</p>
-                    <p>Not drowned but <strong>folded</strong>—existing in a dimensional wrinkle, inverted, collapsed inward upon itself.</p>
-                    <p>The Eye of Africa may be its remnant, visible even from within the wall. A scar on the earth where something vast once stood.</p>
-                `
-            },
-            'mu': {
-                category: 'The Fallen Wisdom',
-                title: 'Mu',
-                content: `
-                    <p>An ancient civilization, technologically advanced beyond any that followed. They understood frequencies before the Watchers taught humanity.</p>
-                    <p>Destroyed—not by flood, but by their own hubris. They reached for something they shouldn't have, and it consumed them.</p>
-                    <p>Ruins contain <strong>dangerous knowledge</strong>. Some things are buried for good reason.</p>
-                `
-            },
-            'irradiated': {
-                category: 'The Forbidden Zone',
-                title: 'The Irradiated Wastes',
-                content: `
-                    <p>A region destroyed by some <strong>ancient weapon</strong>. Nothing grows; the land itself is poisoned.</p>
-                    <p>The Watchers warn against it—even they cannot survive there long. What happened here, the texts do not say.</p>
-                    <p>Perhaps the war before the war. Perhaps a judgment that predates the flood. Perhaps something that should never be remembered.</p>
-                `
-            }
-        };
-
-        // Map marker click handlers
-        document.querySelectorAll('.map-marker').forEach(marker => {
-            marker.addEventListener('click', () => {
-                const locationKey = marker.dataset.location;
-                const location = locations[locationKey];
-                if (location) {
-                    openPanel(location);
-                }
-            });
-        });
-
-        function openPanel(location) {
-            document.getElementById('panel-category').textContent = location.category;
-            document.getElementById('panel-title').textContent = location.title;
-            document.getElementById('panel-content').innerHTML = location.content;
-            document.getElementById('location-panel').classList.add('active');
-            document.getElementById('panel-overlay').classList.add('active');
-        }
-
-        function closePanel() {
-            document.getElementById('location-panel').classList.remove('active');
-            document.getElementById('panel-overlay').classList.remove('active');
-        }
-
-        document.getElementById('panel-overlay').addEventListener('click', closePanel);
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1457,11 +1088,10 @@
             });
         }, observerOptions);
 
-        // Apply to section headers and cards
-        document.querySelectorAll('.section-header, .book-card, .character-card, .mystery-card').forEach(el => {
+        document.querySelectorAll('.section-header, .book-card, .character-card, .mystery-card, .map-preview-container').forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
     </script>
