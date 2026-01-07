@@ -611,6 +611,51 @@
         .book-card:not(.expanded) .book-link::after {
             content: '';
         }
+
+        /* Buy Now Buttons */
+        .buy-links {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .buy-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .buy-btn:hover {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        .buy-btn.kindle {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        .buy-btn.kindle:hover {
+            background: var(--gold-light);
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.3);
+        }
+
+        .buy-btn-icon {
+            font-size: 0.8rem;
+        }
         /* Characters Section */
         #characters-section {
             background: linear-gradient(to bottom, transparent, rgba(201, 162, 39, 0.02), transparent);
@@ -795,6 +840,13 @@
             color: var(--gold);
         }
 
+        .affiliate-disclosure {
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            color: var(--parchment-dark);
+            opacity: 0.6;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero-decoration {
@@ -895,7 +947,7 @@
         
         <div class="books-grid">
             <div class="book-card" onclick="this.classList.toggle('expanded')">
-                <p class="book-number">Book One</p>
+                <p class="book-number">Book One — Available Now</p>
                 <h3 class="book-title">Whispers from the Firmament</h3>
                 <p class="book-excerpt">
                     In a world where the dome of heaven is more than myth, a scribe named Enoch
@@ -910,10 +962,21 @@
                     <p>He remembered the moment before. The Council of Seven, gathered in the Forge where stars were kindled and fates were sealed. Their forms blazed with the light of the First Voice—crystalline giants whose eyes held the memory of creation's first breath, whose words carried the weight of absolute law.</p>
                     <p>"The earth is corrupted," the Voice had spoken—not in words, but in frequencies that rewrote reality as they passed. "The creatures we shaped from clay have twisted themselves into abominations..."</p>
                 </div>
+                <div class="buy-links" onclick="event.stopPropagation()">
+                    <a href="https://www.amazon.com/dp/B0GDK9Z8R8?tag=lucianashviel-20" target="_blank" rel="noopener" class="buy-btn kindle">
+                        <span class="buy-btn-icon">📖</span> Kindle $7.50
+                    </a>
+                    <a href="https://www.amazon.com/dp/B0GF276KP4?tag=lucianashviel-20" target="_blank" rel="noopener" class="buy-btn">
+                        <span class="buy-btn-icon">📕</span> Paperback $15
+                    </a>
+                    <a href="https://www.amazon.com/dp/B0GF23DMBJ?tag=lucianashviel-20" target="_blank" rel="noopener" class="buy-btn">
+                        <span class="buy-btn-icon">📚</span> Hardcover $25
+                    </a>
+                </div>
             </div>
 
             <div class="book-card" onclick="this.classList.toggle('expanded')">
-                <p class="book-number">Book Two</p>
+                <p class="book-number">Book Two — Available Now</p>
                 <h3 class="book-title">Beyond the Firmament</h3>
                 <p class="book-excerpt">
                     The journey expands beyond the known world as Enoch is called to witness
@@ -927,10 +990,15 @@
                     <p>He stood at the edge of what had been the village square—what was now a scar of scorched earth and crystallized time, the place where the Fractured Choir's song had unmade reality itself. The morning light caught the strange formations that jutted from the ground like frozen screams.</p>
                     <p>His prism eye throbbed. It did that now—pulsed with light when strong emotions moved through him, broadcasting his inner weather to anyone who cared to look. He hated it. Hated the way the villagers flinched when they saw it flare...</p>
                 </div>
+                <div class="buy-links" onclick="event.stopPropagation()">
+                    <a href="https://www.amazon.com/dp/B0GDMMNDLV?tag=lucianashviel-20" target="_blank" rel="noopener" class="buy-btn kindle">
+                        <span class="buy-btn-icon">📖</span> Kindle $7.50
+                    </a>
+                </div>
             </div>
 
             <div class="book-card" onclick="this.classList.toggle('expanded')">
-                <p class="book-number">Book Three</p>
+                <p class="book-number">Book Three — Available Now</p>
                 <h3 class="book-title">Songs of the Firmament</h3>
                 <p class="book-excerpt">
                     The corruption spreads. The nephilim rise. And Enoch must learn that
@@ -944,10 +1012,15 @@
                     <p>Lila had known this before she descended—had understood it the way a child understands fire: abstractly, distantly, as a thing that hurts others but surely could never hurt <em>her</em>. Now she lived inside that understanding, and it was nothing like she had imagined.</p>
                     <p>She counted the days in refrains. The lullaby her mother had given her—the one that rose in her throat without permission—had verses. Stanzas. Down here, in the space between the waters and the door, the lullaby was infinite. Each note fractured into harmonics she had never heard before...</p>
                 </div>
+                <div class="buy-links" onclick="event.stopPropagation()">
+                    <a href="https://www.amazon.com/dp/B0GDQZ7338?tag=lucianashviel-20" target="_blank" rel="noopener" class="buy-btn kindle">
+                        <span class="buy-btn-icon">📖</span> Kindle $7.50
+                    </a>
+                </div>
             </div>
 
             <div class="book-card" onclick="this.classList.toggle('expanded')">
-                <p class="book-number">Book Four</p>
+                <p class="book-number">Book Four — Available Now</p>
                 <h3 class="book-title">The Marked Child</h3>
                 <p class="book-excerpt">
                     Noah bears the mark of Adam's line—the light that has passed from
@@ -962,10 +1035,15 @@
                     <p>But the darkness pressed against him like a living thing, and he could not shake the feeling that something was watching. Waiting.</p>
                     <p>From inside, his wife screamed...</p>
                 </div>
+                <div class="buy-links" onclick="event.stopPropagation()">
+                    <a href="https://www.amazon.com/dp/B0GDYZN46W?tag=lucianashviel-20" target="_blank" rel="noopener" class="buy-btn kindle">
+                        <span class="buy-btn-icon">📖</span> Kindle $7.50
+                    </a>
+                </div>
             </div>
 
             <div class="book-card" onclick="this.classList.toggle('expanded')">
-                <p class="book-number">Book Five</p>
+                <p class="book-number">Book Five — Available Now</p>
                 <h3 class="book-title">The Voice in the Wilderness</h3>
                 <p class="book-excerpt">
                     Ninety years of building. One hundred fifty days of floating.
@@ -979,6 +1057,11 @@
                     <p>Noah stood before it in the gray light of dawn, his hand pressed against bark that was older than his grandfather's grandfather. He could feel it—the hum beneath the surface, the frequency that ran through the heartwood like blood through veins.</p>
                     <p>This tree had stood here when the world was younger. When the air was thicker with the presence of the Most High. When other trees—greater trees, impossible trees—had stretched their canopies into the firmament itself.</p>
                     <p>"I need you," Noah whispered. Not a demand. A request. A prayer, perhaps...</p>
+                </div>
+                <div class="buy-links" onclick="event.stopPropagation()">
+                    <a href="https://www.amazon.com/dp/B0GF8TWJB5?tag=lucianashviel-20" target="_blank" rel="noopener" class="buy-btn kindle">
+                        <span class="buy-btn-icon">📖</span> Kindle $7.50
+                    </a>
                 </div>
             </div>
 
@@ -1124,14 +1207,17 @@
     <footer>
         <p class="footer-logo">The Chronicles of Enoch</p>
         <p class="footer-text">
-            A biblical fantasy series exploring what lies beyond the ice wall, beneath the 
+            A biblical fantasy series exploring what lies beyond the ice wall, beneath the
             firmament, and within the frequency that sang creation into being.
         </p>
         <div class="footer-links">
-            <a href="#">Amazon</a>
+            <a href="https://www.amazon.com/dp/B0GDK9Z8R8?tag=lucianashviel-20" target="_blank" rel="noopener">Amazon</a>
             <a href="greater-earth-flat.html">Explore Map</a>
             <a href="#">About the Author</a>
         </div>
+        <p class="affiliate-disclosure">
+            As an Amazon Associate I earn from qualifying purchases.
+        </p>
     </footer>
 
     <script>
