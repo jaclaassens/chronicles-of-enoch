@@ -749,6 +749,167 @@
             color: var(--parchment-dark);
         }
 
+        /* Expandable Character Cards */
+        .character-card {
+            cursor: pointer;
+        }
+
+        .character-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease, opacity 0.4s ease, margin-top 0.4s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .character-card.expanded .character-details {
+            max-height: 600px;
+            opacity: 1;
+            margin-top: 1.2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .character-expand-hint {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-top: 1rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .character-card:hover .character-expand-hint {
+            opacity: 1;
+        }
+
+        .character-card.expanded .character-expand-hint {
+            display: none;
+        }
+
+        .detail-section {
+            margin-bottom: 1rem;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.4rem;
+        }
+
+        .detail-content {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--parchment-dark);
+        }
+
+        .detail-content a {
+            color: var(--gold-light);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .detail-content a:hover {
+            border-bottom-color: var(--gold-light);
+        }
+
+        .reference-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .reference-list li {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--parchment-dark);
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.3rem;
+        }
+
+        .reference-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .etymology {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .book-appearances {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.3rem;
+        }
+
+        .book-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            padding: 0.3rem 0.6rem;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold-light);
+        }
+
+        /* Character Category Headers */
+        .character-category {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+
+        .character-category:first-child {
+            margin-top: 0;
+        }
+
+        .category-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            position: relative;
+            display: inline-block;
+        }
+
+        .category-label::before,
+        .category-label::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+
+        .category-label::before {
+            right: 100%;
+            margin-right: 1rem;
+            background: linear-gradient(to left, transparent, var(--gold));
+        }
+
+        .category-label::after {
+            left: 100%;
+            margin-left: 1rem;
+        }
+
         /* Mysteries Section */
         #mysteries-section {
             background: linear-gradient(to bottom, transparent, rgba(107, 28, 28, 0.02), transparent);
@@ -1122,48 +1283,428 @@
             <h2 class="section-title">The Characters</h2>
             <div class="section-divider"></div>
         </div>
-        
+
         <div class="characters-showcase">
-            <div class="character-card">
+            <!-- THE FAITHFUL -->
+            <div class="character-category">
+                <span class="category-label">The Faithful</span>
+            </div>
+
+            <div class="character-card" onclick="this.classList.toggle('expanded')">
                 <p class="character-type">The Scribe</p>
                 <h3 class="character-name">Enoch</h3>
                 <p class="character-role">"He who walks with God"</p>
                 <p class="character-desc">
-                    A scribe of Nippur who discovers that the burning letters appearing in his visions 
-                    are the language of creation itself. Called to record what angels and men would 
-                    rather forget.
+                    A scribe of Nippur who discovers that the burning letters appearing in his visions
+                    are the language of creation itself. Translated to Eden, he has watched humanity
+                    for three thousand years.
                 </p>
+                <span class="character-expand-hint">Discover More +</span>
+                <div class="character-details">
+                    <div class="detail-section">
+                        <p class="detail-label">Etymology</p>
+                        <p class="detail-content"><span class="etymology">Chanokh (חֲנוֹךְ)</span> — "dedicated" or "initiated"</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Biblical References</p>
+                        <ul class="reference-list">
+                            <li>Genesis 5:24 — "Enoch walked with God; then he was no more, because God took him"</li>
+                            <li>Hebrews 11:5 — "By faith Enoch was taken from this life, so that he did not experience death"</li>
+                            <li>Jude 1:14-15 — Enoch's prophecy about judgment</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Apocryphal Sources</p>
+                        <ul class="reference-list">
+                            <li>1 Enoch (Book of the Watchers) — His journeys through heaven</li>
+                            <li>2 Enoch (Slavonic Enoch) — The ten heavens he visited</li>
+                            <li>3 Enoch — His transformation into the angel Metatron</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Appears In</p>
+                        <div class="book-appearances">
+                            <span class="book-tag">Book 1</span>
+                            <span class="book-tag">Book 2</span>
+                            <span class="book-tag">Book 3</span>
+                            <span class="book-tag">Book 6</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="character-card">
+
+            <div class="character-card" onclick="this.classList.toggle('expanded')">
                 <p class="character-type">The Fire-Bearer</p>
                 <h3 class="character-name">Lila</h3>
                 <p class="character-role">"Night" — Daughter of forbidden union</p>
                 <p class="character-desc">
-                    Born with sacred letters burning on her palms, Lila carries power she does not 
+                    Born with sacred letters burning on her palms, Lila carries power she does not
                     understand. Half-angel, half-human, she must choose which world she belongs to.
                 </p>
+                <span class="character-expand-hint">Discover More +</span>
+                <div class="character-details">
+                    <div class="detail-section">
+                        <p class="detail-label">Etymology</p>
+                        <p class="detail-content"><span class="etymology">Laylah (לַיְלָה)</span> — "night" in Hebrew</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Character Connections</p>
+                        <ul class="reference-list">
+                            <li>The Nephilim — Half-human, half-angel hybrids (Genesis 6:4)</li>
+                            <li>Fire symbolism — Divine presence, purification, the burning bush</li>
+                            <li>Sacred letters — The Hebrew alphabet as creative force</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Appears In</p>
+                        <div class="book-appearances">
+                            <span class="book-tag">Book 1</span>
+                            <span class="book-tag">Book 2</span>
+                            <span class="book-tag">Book 3</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="character-card">
-                <p class="character-type">The Watcher</p>
+
+            <div class="character-card" onclick="this.classList.toggle('expanded')">
+                <p class="character-type">The Translated Watcher</p>
                 <h3 class="character-name">Sariel</h3>
-                <p class="character-role">"Prince of God" — Fallen, Rising</p>
+                <p class="character-role">"Prince of God" — Redeemed</p>
                 <p class="character-desc">
-                    One of the Watchers who descended to teach humanity. Unlike his brothers, Sariel 
-                    seeks redemption rather than domination. Can what has fallen ever rise again?
+                    A female Watcher who was translated before the flood. She walks freely between
+                    Eden and the world, carrying memories preserved by love. "Love has a way of
+                    preserving what should be lost."
                 </p>
+                <span class="character-expand-hint">Discover More +</span>
+                <div class="character-details">
+                    <div class="detail-section">
+                        <p class="detail-label">Etymology</p>
+                        <p class="detail-content"><span class="etymology">Sariel (שריאל)</span> — "Prince of God" or "Command of God"</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Apocryphal Sources</p>
+                        <ul class="reference-list">
+                            <li>1 Enoch 6:7 — Listed among the chiefs of the Watchers</li>
+                            <li>Book of Jubilees — One of four angels of the Presence</li>
+                            <li>Dead Sea Scrolls — Named in the War Scroll</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">In Our Story</p>
+                        <p class="detail-content">Sariel loved Enoch's grandfather and was saved by that love. She can sense frequencies beyond even translated prophets and knows about "the door that is not a door."</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Appears In</p>
+                        <div class="book-appearances">
+                            <span class="book-tag">Book 1</span>
+                            <span class="book-tag">Book 2</span>
+                            <span class="book-tag">Book 6</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="character-card">
+
+            <div class="character-card" onclick="this.classList.toggle('expanded')">
                 <p class="character-type">The Builder</p>
                 <h3 class="character-name">Noah</h3>
                 <p class="character-role">"Rest" — Preserver of the Light</p>
                 <p class="character-desc">
-                    Born glowing with the light of Adam's line, Noah must build the impossible 
-                    while the world mocks and the Silence corrupts his own family. 
-                    Ninety years of faith. One door that closes.
+                    Born glowing with the light of Adam's line, Noah built the impossible
+                    while the world mocked. Ninety years of faith. One door that closes.
+                    He lived to see Babel rise—and fall.
                 </p>
+                <span class="character-expand-hint">Discover More +</span>
+                <div class="character-details">
+                    <div class="detail-section">
+                        <p class="detail-label">Etymology</p>
+                        <p class="detail-content"><span class="etymology">Noach (נֹחַ)</span> — "rest" or "comfort"</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Biblical References</p>
+                        <ul class="reference-list">
+                            <li>Genesis 5:29 — "He will comfort us in the labor and painful toil"</li>
+                            <li>Genesis 6-9 — The flood narrative</li>
+                            <li>Genesis 9:28 — Lived 350 years after the flood (950 total)</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Key Insight</p>
+                        <p class="detail-content">Noah was likely still alive during Babel. He witnessed both resets—the flood and the scattering. What weight did he carry, watching humanity rebel again?</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Appears In</p>
+                        <div class="book-appearances">
+                            <span class="book-tag">Book 4</span>
+                            <span class="book-tag">Book 5</span>
+                            <span class="book-tag">Book 6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" onclick="this.classList.toggle('expanded')">
+                <p class="character-type">Son of Noah</p>
+                <h3 class="character-name">Shem</h3>
+                <p class="character-role">The Blessed Line — Bearer of Esh</p>
+                <p class="character-desc">
+                    The son who covered his father's shame. From his line would come Abraham,
+                    David, and the Messiah. He wields the blade called Esh—fire—and nearly
+                    died in battle against Nimrod.
+                </p>
+                <span class="character-expand-hint">Discover More +</span>
+                <div class="character-details">
+                    <div class="detail-section">
+                        <p class="detail-label">Etymology</p>
+                        <p class="detail-content"><span class="etymology">Shem (שֵׁם)</span> — "name" or "renown"</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Biblical References</p>
+                        <ul class="reference-list">
+                            <li>Genesis 9:26 — "Blessed be the LORD, the God of Shem"</li>
+                            <li>Genesis 11:10-26 — The genealogy from Shem to Abraham</li>
+                            <li>Luke 3:36 — Jesus' lineage through Shem</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Connection to Babel</p>
+                        <p class="detail-content">At Babel, they said "let us make a SHEM (name) for ourselves." Were they trying to create their own blessing to rival Shem's? Replacing divine favor with human achievement?</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Appears In</p>
+                        <div class="book-appearances">
+                            <span class="book-tag">Book 5</span>
+                            <span class="book-tag">Book 6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THE ANTAGONISTS -->
+            <div class="character-category">
+                <span class="category-label">The Antagonists</span>
+            </div>
+
+            <div class="character-card" onclick="this.classList.toggle('expanded')">
+                <p class="character-type">The Mighty Hunter</p>
+                <h3 class="character-name">Nimrod</h3>
+                <p class="character-role">"We Will Rebel" — First Warlock-King</p>
+                <p class="character-desc">
+                    Born in silence, with eyes that absorb light rather than reflect it.
+                    Great-grandson of Noah through the cursed line, Nimrod became the vessel
+                    the Silence had been waiting for. Builder of Babel. Hunter of souls.
+                </p>
+                <span class="character-expand-hint">Discover More +</span>
+                <div class="character-details">
+                    <div class="detail-section">
+                        <p class="detail-label">Etymology</p>
+                        <p class="detail-content"><span class="etymology">Nimrod (נִמְרוֹד)</span> — from "marad" (מרד), meaning "to rebel." His name is a declaration: "We will rebel."</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Biblical References</p>
+                        <ul class="reference-list">
+                            <li>Genesis 10:8-9 — "A mighty hunter BEFORE the Lord" (or "against"?)</li>
+                            <li>Genesis 10:10 — His kingdom: Babel, Erech, Accad, Calneh</li>
+                            <li>Micah 5:6 — "The land of Nimrod" synonymous with rebellion</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">The Hebrew Mystery</p>
+                        <p class="detail-content">"Before the Lord" (liphnei) can mean "in the face of" or "in defiance of." Some scholars read this as hunting AGAINST the Lord. What was Nimrod really hunting? Souls? Frequency? Power?</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">The Cursed Line</p>
+                        <p class="detail-content">Noah → Ham (saw his shame) → Canaan (cursed) → Cush → Nimrod. Each generation concentrated the darkness until Nimrod became something more than human.</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Appears In</p>
+                        <div class="book-appearances">
+                            <span class="book-tag">Book 6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" onclick="this.classList.toggle('expanded')">
+                <p class="character-type">Queen of Heaven</p>
+                <h3 class="character-name">Semiramis</h3>
+                <p class="character-role">Daughter of Silence — The Woman Who Was Not a Woman</p>
+                <p class="character-desc">
+                    She came from beyond the eastern settlements. No one knew her origins.
+                    Beautiful, sharp, ambitious—she didn't just marry Cush. She chose him.
+                    Her influence will haunt humanity's religions for millennia.
+                </p>
+                <span class="character-expand-hint">Discover More +</span>
+                <div class="character-details">
+                    <div class="detail-section">
+                        <p class="detail-label">Historical Connections</p>
+                        <ul class="reference-list">
+                            <li>Akkadian queen associated with Nimrod in later traditions</li>
+                            <li>Connected to Ishtar/Inanna worship</li>
+                            <li>The "Queen of Heaven" condemned in Jeremiah 7:18, 44:17-25</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">In Our Story</p>
+                        <p class="detail-content">Semiramis is not passive. She is the one who chose Cush, waited until Canaan died, and conceived Nimrod with purpose. She carries something ancient—possibly Nephilim blood, possibly something worse. A vessel of the Silence itself.</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Her Legacy</p>
+                        <p class="detail-content">Traces of her worship appear in: Babylonian Ishtar, Phoenician Astarte, Greek Aphrodite, Roman Venus, and even corrupted forms of Mary veneration. The Silence ensures she is remembered.</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Appears In</p>
+                        <div class="book-appearances">
+                            <span class="book-tag">Book 6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" onclick="this.classList.toggle('expanded')">
+                <p class="character-type">The Fallen Teacher</p>
+                <h3 class="character-name">Azazel</h3>
+                <p class="character-role">Chief of the Watchers — He Who Taught Forbidden Things</p>
+                <p class="character-desc">
+                    He taught humanity to forge weapons, paint faces, and make mirrors.
+                    When the flood came, he fled to Atlantis. He cannot be destroyed—but
+                    creation itself is slowly rejecting him.
+                </p>
+                <span class="character-expand-hint">Discover More +</span>
+                <div class="character-details">
+                    <div class="detail-section">
+                        <p class="detail-label">Etymology</p>
+                        <p class="detail-content"><span class="etymology">Azazel (עֲזָאזֵל)</span> — "scapegoat" or "total removal." The name given to the wilderness demon in Leviticus 16.</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Apocryphal Sources</p>
+                        <ul class="reference-list">
+                            <li>1 Enoch 8:1 — Taught metalworking, weapons, cosmetics, mirrors</li>
+                            <li>1 Enoch 10:4-6 — Bound and cast into darkness until judgment</li>
+                            <li>Apocalypse of Abraham — A fallen angel associated with hell</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">What He Taught</p>
+                        <p class="detail-content">"Azazel taught men to make swords, knives, shields, breastplates... bracelets, ornaments, cosmetics, the beautifying of eyelids..." The arts of war and vanity—both designed to corrupt.</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Appears In</p>
+                        <div class="book-appearances">
+                            <span class="book-tag">Book 1</span>
+                            <span class="book-tag">Book 2</span>
+                            <span class="book-tag">Book 6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THE OUTER REALMS -->
+            <div class="character-category">
+                <span class="category-label">The Outer Realms</span>
+            </div>
+
+            <div class="character-card" onclick="this.classList.toggle('expanded')">
+                <p class="character-type">All-Father of Asgard</p>
+                <h3 class="character-name">Odin</h3>
+                <p class="character-role">Ruler of the Asgardian Council — The One-Eyed Seer</p>
+                <p class="character-desc">
+                    He sacrificed one eye at the Well of Memory, trading sight for insight.
+                    Not a god—but ancient. When Thor wanted to save the drowning world,
+                    Odin understood why it couldn't be done.
+                </p>
+                <span class="character-expand-hint">Discover More +</span>
+                <div class="character-details">
+                    <div class="detail-section">
+                        <p class="detail-label">Norse Sources</p>
+                        <ul class="reference-list">
+                            <li>Poetic Edda — The Hávamál describes his sacrifice for wisdom</li>
+                            <li>Prose Edda — Snorri's account of Asgard and its rulers</li>
+                            <li>Völuspá — The prophecy Odin receives about Ragnarök</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">In Our Story</p>
+                        <p class="detail-content">The Norse "gods" are Nephilim who fled over the Ice Wall before the flood. They became legends. Odin sees more with one eye than most with two—he understands that the flood is not cruelty but surgery.</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Connection</p>
+                        <p class="detail-content">The Greek Zeus, Roman Jupiter, and Hindu Indra may all be fragments of the same memory—powerful beings who existed before the flood reshaped the world.</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Appears In</p>
+                        <div class="book-appearances">
+                            <span class="book-tag">Book 6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" onclick="this.classList.toggle('expanded')">
+                <p class="character-type">God of Thunder</p>
+                <h3 class="character-name">Thor</h3>
+                <p class="character-role">Young Awakened — Carrier of Guilt</p>
+                <p class="character-desc">
+                    Young for an Awakened—barely three centuries old. His passion burns
+                    brighter than those who have lived millennia. He wanted to save the
+                    drowning children. His father stopped him. He has carried that weight ever since.
+                </p>
+                <span class="character-expand-hint">Discover More +</span>
+                <div class="character-details">
+                    <div class="detail-section">
+                        <p class="detail-label">Norse Sources</p>
+                        <ul class="reference-list">
+                            <li>Poetic Edda — Thor's journeys and battles</li>
+                            <li>Mjölnir — His hammer that returns when thrown</li>
+                            <li>Protector of humanity against giants (Jötnar)</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">In Our Story</p>
+                        <p class="detail-content">"We have ships. We have knowledge. We could save thousands." But Odin explained: if you cross the Wall during judgment, you cannot return. The choice to stay was harder than the choice to go.</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">The Thunder</p>
+                        <p class="detail-content">When Thor slammed his fist on Valhalla's table, the thunder rattled the foundations. His emotion manifests as weather. What we call storms may be his grief, echoing across millennia.</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Appears In</p>
+                        <div class="book-appearances">
+                            <span class="book-tag">Book 6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" onclick="this.classList.toggle('expanded')">
+                <p class="character-type">Sound-Weaver of Lemuria</p>
+                <h3 class="character-name">Mirael</h3>
+                <p class="character-role">Eldest of the Sound-Weavers — She Who Hears the Waters</p>
+                <p class="character-desc">
+                    In the Chamber of Echoes, Mirael communicates with the waters themselves.
+                    She understands the mathematics of creation—and weeps for the drowning
+                    while understanding the necessity.
+                </p>
+                <span class="character-expand-hint">Discover More +</span>
+                <div class="character-details">
+                    <div class="detail-section">
+                        <p class="detail-label">Lemuria</p>
+                        <ul class="reference-list">
+                            <li>19th century hypothesis of a lost continent</li>
+                            <li>In our story: The Sound Builders who knew frequency before the Watchers taught humanity</li>
+                            <li>Crystal towers grown through harmonic resonance</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">What the Waters Said</p>
+                        <p class="detail-content">"The nephilim did not just breed with humans—they bred with the song itself. They created harmonics that should never have existed. This is not punishment. This is recalculation."</p>
+                    </div>
+                    <div class="detail-section">
+                        <p class="detail-label">Appears In</p>
+                        <div class="book-appearances">
+                            <span class="book-tag">Book 6</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
