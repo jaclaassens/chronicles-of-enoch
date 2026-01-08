@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Archives | The Chronicles of Enoch</title>
+    <meta name="description" content="Deep dive into the lore, mythology, and research behind The Chronicles of Enoch. Explore the Watchers, Norse connections, cosmology, and hidden biblical mysteries.">
+
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="Book of Enoch research, Watchers angels, Nephilim mythology, Norse gods Nephilim, biblical cosmology, Grigori, fallen angels, 1 Enoch, Book of Giants, biblical fantasy lore">
+    <meta name="author" content="Lucian Ashviel">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#c9a227">
+    <link rel="canonical" href="https://jaclaassens.github.io/chronicles-of-enoch/archives.html">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Research Archives | The Chronicles of Enoch">
+    <meta property="og:description" content="Deep dive into the lore, mythology, and research behind The Chronicles of Enoch.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jaclaassens.github.io/chronicles-of-enoch/archives.html">
+    <meta property="og:site_name" content="The Chronicles of Enoch">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Research Archives | The Chronicles of Enoch">
+    <meta name="twitter:description" content="Deep dive into the lore, mythology, and research behind The Chronicles of Enoch.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e8d48b;
+            --gold-dark: #8b6914;
+            --parchment: #f4e4bc;
+            --parchment-dark: #d4c4a0;
+            --ink: #1a1408;
+            --ink-light: #3d2f1a;
+            --blood: #6b1c1c;
+            --deep-blue: #0a1628;
+            --ocean: #1a3a5c;
+            --ice: #a8c8d8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--ink);
+            color: var(--parchment);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-atmosphere {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(201, 162, 39, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(107, 28, 28, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(26, 58, 92, 0.05) 0%, transparent 70%);
+        }
+
+        .bg-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 22, 40, 0.98);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            color: var(--parchment);
+            text-decoration: none;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+            opacity: 1;
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 2;
+            padding-top: 100px;
+        }
+
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--parchment);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .page-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--parchment-dark);
+            font-style: italic;
+        }
+
+        .page-divider {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            margin: 2rem auto;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--parchment);
+            margin-bottom: 1rem;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            margin: 0 auto;
+        }
+
+        /* Archive Category Cards */
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .archive-card {
+            background: linear-gradient(135deg, rgba(26, 20, 8, 0.4), rgba(10, 22, 40, 0.4));
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .archive-card:hover {
+            border-color: rgba(201, 162, 39, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .archive-card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .archive-card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .archive-card-subtitle {
+            font-size: 0.85rem;
+            color: var(--gold-light);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .archive-card-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--parchment-dark);
+            margin-bottom: 1rem;
+        }
+
+        .archive-card-meta {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.7;
+        }
+
+        /* Encyclopedia Sections */
+        .encyclopedia-section {
+            margin-bottom: 4rem;
+        }
+
+        .encyclopedia-intro {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .encyclopedia-intro p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--parchment-dark);
+            font-style: italic;
+        }
+
+        /* Entry Cards */
+        .entries-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .entry-card {
+            background: linear-gradient(135deg, rgba(26, 20, 8, 0.3), rgba(10, 22, 40, 0.3));
+            border-left: 3px solid var(--gold);
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .entry-card:hover {
+            background: linear-gradient(135deg, rgba(26, 20, 8, 0.5), rgba(10, 22, 40, 0.5));
+            transform: translateX(5px);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .entry-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--parchment);
+        }
+
+        .entry-type {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+        }
+
+        .entry-title {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--gold-light);
+            margin-bottom: 0.8rem;
+        }
+
+        .entry-summary {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--parchment-dark);
+        }
+
+        .entry-expand-hint {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-top: 1rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .entry-card:hover .entry-expand-hint {
+            opacity: 1;
+        }
+
+        .entry-card.expanded .entry-expand-hint {
+            display: none;
+        }
+
+        /* Entry Details */
+        .entry-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease, opacity 0.4s ease, margin-top 0.4s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .entry-card.expanded .entry-details {
+            max-height: 2000px;
+            opacity: 1;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .detail-block {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--parchment-dark);
+        }
+
+        .detail-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .detail-list li {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--parchment-dark);
+            padding-left: 1.2rem;
+            position: relative;
+            margin-bottom: 0.4rem;
+        }
+
+        .detail-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6em;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .etymology {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .scripture-ref {
+            font-style: italic;
+            color: var(--gold-light);
+            font-size: 0.9rem;
+        }
+
+        /* Topic Cards (for Cosmology, Magic System, etc.) */
+        .topic-card {
+            background: linear-gradient(135deg, rgba(26, 20, 8, 0.4), rgba(10, 22, 40, 0.4));
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .topic-header {
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .topic-header:hover {
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .topic-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-subtitle {
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--parchment-dark);
+        }
+
+        .topic-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease;
+        }
+
+        .topic-card.expanded .topic-content {
+            max-height: 5000px;
+        }
+
+        .topic-content-inner {
+            padding: 0 2rem 2rem;
+        }
+
+        .topic-section {
+            margin-bottom: 2rem;
+        }
+
+        .topic-section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .topic-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--parchment-dark);
+            margin-bottom: 1rem;
+        }
+
+        .topic-quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--gold-light);
+            padding: 1rem 1.5rem;
+            border-left: 2px solid var(--gold);
+            margin: 1.5rem 0;
+        }
+
+        /* Back to Portal Link */
+        .back-link {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .back-link a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border: 1px solid var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .back-link a:hover {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--parchment-dark);
+            opacity: 0.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .archive-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-atmosphere"></div>
+    <div class="bg-noise"></div>
+
+    <nav>
+        <div class="nav-content">
+            <a href="index.html" class="logo">Chronicles of Enoch</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Portal</a></li>
+                <li><a href="index.html#books-section">Books</a></li>
+                <li><a href="index.html#characters-section">Characters</a></li>
+                <li><a href="archives.html" style="color: var(--gold); opacity: 1;">Archives</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Page Header -->
+        <header class="page-header">
+            <p class="page-label">The Research Archives</p>
+            <h1 class="page-title">Deep Dives & Hidden Knowledge</h1>
+            <p class="page-description">
+                Behind every chapter lies research. Behind every name, an etymology.
+                Behind every myth, a thread connecting to something older and stranger.
+                These archives preserve the rabbit holes.
+            </p>
+            <div class="page-divider"></div>
+        </header>
+
+        <!-- Quick Navigation -->
+        <section>
+            <div class="archive-grid">
+                <div class="archive-card" onclick="location.href='#cosmology'">
+                    <div class="archive-card-icon">&#x1F30D;</div>
+                    <h3 class="archive-card-title">The Cosmology</h3>
+                    <p class="archive-card-subtitle">How the World Was Remade</p>
+                    <p class="archive-card-description">
+                        Before the flood, a flat disc beneath the firmament. After—something vastly larger.
+                        The Greater Earth, the Ice Wall, and the realms beyond.
+                    </p>
+                    <span class="archive-card-meta">World-Building</span>
+                </div>
+
+                <div class="archive-card" onclick="location.href='#magic'">
+                    <div class="archive-card-icon">&#x2728;</div>
+                    <h3 class="archive-card-title">The Magic System</h3>
+                    <p class="archive-card-subtitle">Sorcerers vs Warlocks</p>
+                    <p class="archive-card-description">
+                        Those who channel the Source frequency versus those who steal it.
+                        The difference between asking and taking. Between Moses and Pharaoh's magicians.
+                    </p>
+                    <span class="archive-card-meta">Power Systems</span>
+                </div>
+
+                <div class="archive-card" onclick="location.href='#watchers'">
+                    <div class="archive-card-icon">&#x1F441;</div>
+                    <h3 class="archive-card-title">The Watchers</h3>
+                    <p class="archive-card-subtitle">The 200 Who Descended</p>
+                    <p class="archive-card-description">
+                        Two hundred angels descended on Mount Hermon. Each taught humanity something
+                        forbidden. Each was named. Each was judged.
+                    </p>
+                    <span class="archive-card-meta">Encyclopedia</span>
+                </div>
+
+                <div class="archive-card" onclick="location.href='#norse'">
+                    <div class="archive-card-icon">&#x26A1;</div>
+                    <h3 class="archive-card-title">The Norse "Gods"</h3>
+                    <p class="archive-card-subtitle">Nephilim Beyond the Wall</p>
+                    <p class="archive-card-description">
+                        What if Odin, Thor, and Freya weren't gods at all—but Nephilim who escaped
+                        the flood by fleeing beyond the Ice Wall? What if their myths are memories?
+                    </p>
+                    <span class="archive-card-meta">Encyclopedia</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- COSMOLOGY SECTION -->
+        <section id="cosmology" class="encyclopedia-section">
+            <div class="section-header">
+                <p class="section-label">World-Building</p>
+                <h2 class="section-title">The Cosmology</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="encyclopedia-intro">
+                <p>
+                    "The earth was formless and void, and darkness was over the surface of the deep."
+                    But what shape did God give it? And did that shape survive the flood?
+                </p>
+            </div>
+
+            <div class="topic-card" onclick="this.classList.toggle('expanded')">
+                <div class="topic-header">
+                    <h3 class="topic-title">The Pre-Flood World</h3>
+                    <p class="topic-subtitle">A flat disc beneath the firmament, suspended on nothing</p>
+                </div>
+                <div class="topic-content">
+                    <div class="topic-content-inner">
+                        <div class="topic-section">
+                            <h4 class="topic-section-title">The Biblical Foundation</h4>
+                            <p class="topic-text">
+                                Job 26:7 says God "hangs the earth on nothing." The Hebrew word for earth here
+                                is <span class="etymology">erets</span>—not a sphere, but land, territory, ground.
+                                Something suspended, yes. But suspended how?
+                            </p>
+                            <p class="topic-text">
+                                Genesis describes waters above the firmament and waters below. The firmament
+                                (<span class="etymology">raqia</span>) is something beaten out, spread thin,
+                                like hammered metal. A dome. A barrier.
+                            </p>
+                        </div>
+                        <div class="topic-section">
+                            <h4 class="topic-section-title">In Our Story</h4>
+                            <p class="topic-text">
+                                Before the flood, the world was a flat disc—the "hanging stone" of Job.
+                                The firmament arched above, holding back the waters of the heavens.
+                                The sun, moon, and stars moved within this dome, not beyond it.
+                            </p>
+                            <div class="topic-quote">
+                                "They think they know the shape of the world. They are wrong.
+                                The world they know is a wound that hasn't finished healing."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="topic-card" onclick="this.classList.toggle('expanded')">
+                <div class="topic-header">
+                    <h3 class="topic-title">The Post-Flood World</h3>
+                    <p class="topic-subtitle">God didn't just flood the world. He remade it.</p>
+                </div>
+                <div class="topic-content">
+                    <div class="topic-content-inner">
+                        <div class="topic-section">
+                            <h4 class="topic-section-title">The Greater Earth</h4>
+                            <p class="topic-text">
+                                What we call "the world" is merely the Inner World—the known continents
+                                enclosed by the Ice Wall. But beyond the wall? Realms that survived the flood
+                                because they were never part of the original judgment.
+                            </p>
+                            <ul class="detail-list">
+                                <li><strong>Asgard</strong> — Where the Norse "gods" (Nephilim) fled</li>
+                                <li><strong>Eden</strong> — Still guarded, still growing the Tree of Life</li>
+                                <li><strong>Atlantis</strong> — Where Azazel escaped to (later destroyed)</li>
+                                <li><strong>Lemuria</strong> — The Sound Builders and their crystal towers</li>
+                                <li><strong>Mu, Aten, Hyperborea</strong> — Other realms, other survivors</li>
+                            </ul>
+                        </div>
+                        <div class="topic-section">
+                            <h4 class="topic-section-title">The Waters Below</h4>
+                            <p class="topic-text">
+                                Inside the sphere of the Greater Earth, accessible only through frequency
+                                barriers, lies an uncorrupted world—the Waters Below. A world waiting
+                                to be found. A world that never fell.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAGIC SYSTEM SECTION -->
+        <section id="magic" class="encyclopedia-section">
+            <div class="section-header">
+                <p class="section-label">Power Systems</p>
+                <h2 class="section-title">Sorcerers vs Warlocks</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="encyclopedia-intro">
+                <p>
+                    At the gnats, Pharaoh's magicians failed. "This is the finger of God," they said.
+                    Why gnats? Because stolen power is finite. You can only take what exists.
+                    But creating life from dust? That requires the Source.
+                </p>
+            </div>
+
+            <div class="topic-card" onclick="this.classList.toggle('expanded')">
+                <div class="topic-header">
+                    <h3 class="topic-title">Sorcerers: Those Who Channel</h3>
+                    <p class="topic-subtitle">Ask. Receive. Conduct.</p>
+                </div>
+                <div class="topic-content">
+                    <div class="topic-content-inner">
+                        <div class="topic-section">
+                            <h4 class="topic-section-title">The Method</h4>
+                            <p class="topic-text">
+                                Sorcerers do not generate power—they channel it. The Source frequency
+                                flows through them but is not of them. They are instruments, not batteries.
+                            </p>
+                            <ul class="detail-list">
+                                <li>Power comes through prayer, alignment, surrender</li>
+                                <li>The frequency passes through; it does not stay</li>
+                                <li>Unlimited potential—limited only by faith and obedience</li>
+                                <li>Cannot be depleted because it's not theirs to deplete</li>
+                            </ul>
+                        </div>
+                        <div class="topic-section">
+                            <h4 class="topic-section-title">Biblical Examples</h4>
+                            <ul class="detail-list">
+                                <li><strong>Moses</strong> — Staff became serpent, parted the sea, struck the rock</li>
+                                <li><strong>Elijah</strong> — Called fire from heaven, raised the dead</li>
+                                <li><strong>Enoch</strong> — Walked with God, never died</li>
+                                <li><strong>Jesus</strong> — "I only do what I see the Father doing"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="topic-card" onclick="this.classList.toggle('expanded')">
+                <div class="topic-header">
+                    <h3 class="topic-title">Warlocks: Those Who Steal</h3>
+                    <p class="topic-subtitle">Take. Steal. Consume.</p>
+                </div>
+                <div class="topic-content">
+                    <div class="topic-content-inner">
+                        <div class="topic-section">
+                            <h4 class="topic-section-title">The Method</h4>
+                            <p class="topic-text">
+                                Warlocks cannot create—they can only corrupt. They are frequency vampires,
+                                stealing power from existing sources: blood, fear, death, forbidden contracts.
+                            </p>
+                            <ul class="detail-list">
+                                <li>Power comes through taking, not asking</li>
+                                <li>Energy is stored, hoarded, depleted</li>
+                                <li>Limited by what can be stolen</li>
+                                <li>Eventually runs out—requires constant feeding</li>
+                            </ul>
+                        </div>
+                        <div class="topic-section">
+                            <h4 class="topic-section-title">Why the Gnats?</h4>
+                            <p class="topic-text">
+                                Pharaoh's magicians matched Moses plague for plague—until the gnats.
+                                They could transform existing matter (staffs to serpents, water to blood).
+                                But creating life from dust? That requires generating, not stealing.
+                            </p>
+                            <div class="topic-quote">
+                                "This is the finger of God." — Exodus 8:19
+                            </div>
+                        </div>
+                        <div class="topic-section">
+                            <h4 class="topic-section-title">Examples</h4>
+                            <ul class="detail-list">
+                                <li><strong>Cain's line</strong> — The first murderer, the first to take life for power</li>
+                                <li><strong>Nimrod</strong> — The mighty hunter, consuming souls</li>
+                                <li><strong>Pharaoh's magicians</strong> — Matched, then failed</li>
+                                <li><strong>The Witch of Endor</strong> — Trading in stolen frequencies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WATCHERS SECTION -->
+        <section id="watchers" class="encyclopedia-section">
+            <div class="section-header">
+                <p class="section-label">Encyclopedia</p>
+                <h2 class="section-title">The Watchers</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="encyclopedia-intro">
+                <p>
+                    "And it came to pass, when the children of men had multiplied, that in those days
+                    were born unto them beautiful and comely daughters. And the angels, the children
+                    of the heaven, saw and lusted after them..." — 1 Enoch 6:1-2
+                </p>
+            </div>
+
+            <div class="entries-container" id="watchers-list">
+                <!-- Watchers will be added here -->
+                <p style="text-align: center; color: var(--parchment-dark); font-style: italic; padding: 2rem;">
+                    The complete Watcher encyclopedia is being compiled...
+                </p>
+            </div>
+        </section>
+
+        <!-- NORSE GODS SECTION -->
+        <section id="norse" class="encyclopedia-section">
+            <div class="section-header">
+                <p class="section-label">Encyclopedia</p>
+                <h2 class="section-title">The Norse "Gods"</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="encyclopedia-intro">
+                <p>
+                    They weren't gods. They were survivors—Nephilim and Watchers who fled beyond
+                    the Ice Wall before the flood swept the Inner World clean. Their myths are
+                    memories. Their powers are remnants. Their grief is eternal.
+                </p>
+            </div>
+
+            <div class="entries-container" id="norse-list">
+                <!-- Norse gods will be added here -->
+                <p style="text-align: center; color: var(--parchment-dark); font-style: italic; padding: 2rem;">
+                    The complete Norse encyclopedia is being compiled...
+                </p>
+            </div>
+        </section>
+
+        <!-- Back Link -->
+        <div class="back-link">
+            <a href="index.html">Return to the Portal</a>
+        </div>
+    </main>
+
+    <footer>
+        <p class="footer-text">The Chronicles of Enoch &copy; Lucian Ashviel</p>
+    </footer>
+
+    <script>
+        // Add click handlers for expandable cards
+        document.querySelectorAll('.entry-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('expanded');
+            });
+        });
+    </script>
+</body>
+</html>
