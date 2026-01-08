@@ -867,7 +867,170 @@
             color: var(--gold-light);
         }
 
-        /* Character Category Headers */
+        /* Era Accordion Structure */
+        .eras-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .era-card {
+            background: linear-gradient(135deg, rgba(26, 20, 8, 0.4), rgba(10, 22, 40, 0.4));
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .era-card:hover {
+            border-color: rgba(201, 162, 39, 0.4);
+        }
+
+        .era-header {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .era-header:hover {
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .era-header-content {
+            flex: 1;
+        }
+
+        .era-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .era-description {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--parchment-dark);
+            line-height: 1.6;
+        }
+
+        .era-toggle {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            transition: transform 0.4s ease;
+            margin-left: 1rem;
+        }
+
+        .era-card.expanded .era-toggle {
+            transform: rotate(45deg);
+        }
+
+        .era-characters {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .era-card.expanded .era-characters {
+            max-height: 5000px;
+        }
+
+        .era-characters-inner {
+            padding: 1.5rem 2rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Character cards within eras */
+        .era-character-card {
+            position: relative;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(26, 20, 8, 0.3), rgba(10, 22, 40, 0.3));
+            border-left: 2px solid var(--gold);
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .era-character-card:hover {
+            background: linear-gradient(135deg, rgba(26, 20, 8, 0.5), rgba(10, 22, 40, 0.5));
+            transform: translateX(5px);
+        }
+
+        .era-character-card .character-type {
+            font-family: 'Cinzel', serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .era-character-card .character-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--parchment);
+            margin-bottom: 0.2rem;
+        }
+
+        .era-character-card .character-role {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--gold-light);
+            margin-bottom: 0.6rem;
+        }
+
+        .era-character-card .character-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--parchment-dark);
+        }
+
+        .era-character-card .character-expand-hint {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-top: 0.8rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .era-character-card:hover .character-expand-hint {
+            opacity: 1;
+        }
+
+        .era-character-card.expanded .character-expand-hint {
+            display: none;
+        }
+
+        .era-character-card .character-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .era-character-card.expanded .character-details {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        /* Legacy character category headers - keeping for backwards compatibility */
         .character-category {
             grid-column: 1 / -1;
             text-align: center;
@@ -1284,91 +1447,682 @@
             <div class="section-divider"></div>
         </div>
 
-        <div class="characters-showcase">
-            <!-- THE FAITHFUL -->
-            <div class="character-category">
-                <span class="category-label">The Faithful</span>
-            </div>
+        <div class="eras-container">
+            <!-- ERA 1: THE WATCHERS' DESCENT -->
+            <div class="era-card" onclick="this.classList.toggle('expanded')">
+                <div class="era-header">
+                    <div class="era-header-content">
+                        <h3 class="era-title">The Watchers' Descent</h3>
+                        <p class="era-description">Two hundred angels abandoned heaven's mandate. They came to destroy, but chose to teach instead. Their love for humanity would doom them both.</p>
+                    </div>
+                    <span class="era-toggle">+</span>
+                </div>
+                <div class="era-characters">
+                    <div class="era-characters-inner">
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">Prince of God</p>
+                            <h3 class="character-name">Sariel</h3>
+                            <p class="character-role">The Witness — Redeemed by Love</p>
+                            <p class="character-desc">A Watcher who was translated before the flood. She walks freely between Eden and the world, carrying memories preserved by love.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Etymology</p>
+                                    <p class="detail-content"><span class="etymology">Sariel (שריאל)</span> — "Prince of God" or "Command of God"</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Apocryphal Sources</p>
+                                    <ul class="reference-list">
+                                        <li>1 Enoch 6:7 — Listed among the chiefs of the Watchers</li>
+                                        <li>Book of Jubilees — One of four angels of the Presence</li>
+                                        <li>Dead Sea Scrolls — Named in the War Scroll</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 1</span>
+                                        <span class="book-tag">Book 2</span>
+                                        <span class="book-tag">Book 6</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="character-card" onclick="this.classList.toggle('expanded')">
-                <p class="character-type">The Scribe</p>
-                <h3 class="character-name">Enoch</h3>
-                <p class="character-role">"He who walks with God"</p>
-                <p class="character-desc">
-                    A scribe of Nippur who discovers that the burning letters appearing in his visions
-                    are the language of creation itself. Translated to Eden, he has watched humanity
-                    for three thousand years.
-                </p>
-                <span class="character-expand-hint">Discover More +</span>
-                <div class="character-details">
-                    <div class="detail-section">
-                        <p class="detail-label">Etymology</p>
-                        <p class="detail-content"><span class="etymology">Chanokh (חֲנוֹךְ)</span> — "dedicated" or "initiated"</p>
-                    </div>
-                    <div class="detail-section">
-                        <p class="detail-label">Biblical References</p>
-                        <ul class="reference-list">
-                            <li>Genesis 5:24 — "Enoch walked with God; then he was no more, because God took him"</li>
-                            <li>Hebrews 11:5 — "By faith Enoch was taken from this life, so that he did not experience death"</li>
-                            <li>Jude 1:14-15 — Enoch's prophecy about judgment</li>
-                        </ul>
-                    </div>
-                    <div class="detail-section">
-                        <p class="detail-label">Apocryphal Sources</p>
-                        <ul class="reference-list">
-                            <li>1 Enoch (Book of the Watchers) — His journeys through heaven</li>
-                            <li>2 Enoch (Slavonic Enoch) — The ten heavens he visited</li>
-                            <li>3 Enoch — His transformation into the angel Metatron</li>
-                        </ul>
-                    </div>
-                    <div class="detail-section">
-                        <p class="detail-label">Appears In</p>
-                        <div class="book-appearances">
-                            <span class="book-tag">Book 1</span>
-                            <span class="book-tag">Book 2</span>
-                            <span class="book-tag">Book 3</span>
-                            <span class="book-tag">Book 6</span>
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Dark Teacher</p>
+                            <h3 class="character-name">Azazel</h3>
+                            <p class="character-role">He Who Taught Forbidden Things</p>
+                            <p class="character-desc">He taught humanity to forge weapons, paint faces, and make mirrors. When the flood came, he fled to Atlantis. Creation itself is slowly rejecting him.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Etymology</p>
+                                    <p class="detail-content"><span class="etymology">Azazel (עֲזָאזֵל)</span> — "scapegoat" or "total removal." The wilderness demon of Leviticus 16.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">What He Taught</p>
+                                    <ul class="reference-list">
+                                        <li>1 Enoch 8:1 — Metalworking, weapons, cosmetics, mirrors</li>
+                                        <li>The arts of war and vanity—both designed to corrupt</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 1</span>
+                                        <span class="book-tag">Book 2</span>
+                                        <span class="book-tag">Book 6</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">Leader of the 200</p>
+                            <h3 class="character-name">Shemyaza</h3>
+                            <p class="character-role">Crown of Burning Stars</p>
+                            <p class="character-desc">He led the descent on Mount Hermon. "Let us teach instead of destroy. Let us lift these creatures from corruption rather than burn them for it."</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Etymology</p>
+                                    <p class="detail-content"><span class="etymology">Shemyaza (שמיחזה)</span> — "My name has seen" or "He sees the name"</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Apocryphal Sources</p>
+                                    <ul class="reference-list">
+                                        <li>1 Enoch 6:3 — "Semjaza, who was their leader"</li>
+                                        <li>1 Enoch 8:3 — Taught enchantments and root-cuttings</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Unmaker</p>
+                            <h3 class="character-name">Inanna</h3>
+                            <p class="character-role">She Who Commands the Chronophage</p>
+                            <p class="character-desc">She descended in violence—the sky didn't darken, it ruptured. Her armor is fractured light; her wings are shards of broken sanctuary. "Your daughter is a dissonance."</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Mythological Connections</p>
+                                    <ul class="reference-list">
+                                        <li>Sumerian goddess of love, war, and the heavens</li>
+                                        <li>Her descent to the underworld mirrors the Watchers' fall</li>
+                                        <li>Associated with the planet Venus (the morning star)</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 1</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="character-card" onclick="this.classList.toggle('expanded')">
-                <p class="character-type">The Fire-Bearer</p>
-                <h3 class="character-name">Lila</h3>
-                <p class="character-role">"Night" — Daughter of forbidden union</p>
-                <p class="character-desc">
-                    Born with sacred letters burning on her palms, Lila carries power she does not
-                    understand. Half-angel, half-human, she must choose which world she belongs to.
-                </p>
-                <span class="character-expand-hint">Discover More +</span>
-                <div class="character-details">
-                    <div class="detail-section">
-                        <p class="detail-label">Etymology</p>
-                        <p class="detail-content"><span class="etymology">Laylah (לַיְלָה)</span> — "night" in Hebrew</p>
+            <!-- ERA 2: ENOCH'S GENERATION -->
+            <div class="era-card" onclick="this.classList.toggle('expanded')">
+                <div class="era-header">
+                    <div class="era-header-content">
+                        <h3 class="era-title">Enoch's Generation</h3>
+                        <p class="era-description">A village scribe who saw burning letters in his dreams. A daughter born with silver in her veins. A village caught between heaven's wrath and a father's love.</p>
                     </div>
-                    <div class="detail-section">
-                        <p class="detail-label">Character Connections</p>
-                        <ul class="reference-list">
-                            <li>The Nephilim — Half-human, half-angel hybrids (Genesis 6:4)</li>
-                            <li>Fire symbolism — Divine presence, purification, the burning bush</li>
-                            <li>Sacred letters — The Hebrew alphabet as creative force</li>
-                        </ul>
-                    </div>
-                    <div class="detail-section">
-                        <p class="detail-label">Appears In</p>
-                        <div class="book-appearances">
-                            <span class="book-tag">Book 1</span>
-                            <span class="book-tag">Book 2</span>
-                            <span class="book-tag">Book 3</span>
+                    <span class="era-toggle">+</span>
+                </div>
+                <div class="era-characters">
+                    <div class="era-characters-inner">
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Scribe</p>
+                            <h3 class="character-name">Enoch</h3>
+                            <p class="character-role">"He who walks with God"</p>
+                            <p class="character-desc">A scribe of Nippur who discovers that the burning letters in his visions are the language of creation. Translated to Eden, he has watched humanity for three thousand years.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Etymology</p>
+                                    <p class="detail-content"><span class="etymology">Chanokh (חֲנוֹךְ)</span> — "dedicated" or "initiated"</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Biblical References</p>
+                                    <ul class="reference-list">
+                                        <li>Genesis 5:24 — "Enoch walked with God; then he was no more"</li>
+                                        <li>Hebrews 11:5 — "By faith Enoch was taken from this life"</li>
+                                        <li>Jude 1:14-15 — Enoch's prophecy about judgment</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 1</span>
+                                        <span class="book-tag">Book 2</span>
+                                        <span class="book-tag">Book 3</span>
+                                        <span class="book-tag">Book 6</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Fire-Bearer</p>
+                            <h3 class="character-name">Lila</h3>
+                            <p class="character-role">"Night" — The Bridge</p>
+                            <p class="character-desc">Born with sacred letters burning on her palms. She became the bridge itself, descending into the river to hold shut the door that keeps the flood at bay.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Etymology</p>
+                                    <p class="detail-content"><span class="etymology">Laylah (לַיְלָה)</span> — "night" in Hebrew</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">The Lullaby</p>
+                                    <p class="detail-content">She sings her mother's lullaby—a song she never learned but somehow knows. It holds the gears at bay. It preserves the world.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 1</span>
+                                        <span class="book-tag">Book 2</span>
+                                        <span class="book-tag">Book 3</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Mother</p>
+                            <h3 class="character-name">Namaah</h3>
+                            <p class="character-role">She Who Knew — The Vessel</p>
+                            <p class="character-desc">Enoch's wife, who died bringing Lila into the world. She knew what her daughter would become and chose death anyway. Her last words: "Promise me you'll let her become what she must."</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Etymology</p>
+                                    <p class="detail-content"><span class="etymology">Na'amah (נַעֲמָה)</span> — "pleasant" or "beautiful"</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Biblical Connection</p>
+                                    <ul class="reference-list">
+                                        <li>Genesis 4:22 — Sister of Tubal-Cain in Cain's line</li>
+                                        <li>Tradition names her as Noah's wife</li>
+                                        <li>Her frequency passed to Lila through blood</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Prism Eye</p>
+                            <h3 class="character-name">Kirin</h3>
+                            <p class="character-role">Son of Abram — The New Chronicler</p>
+                            <p class="character-desc">The potter's son who died and was pulled back by Lila's touch. Now he sees in frequencies, his left eye a prism that refracts light into truths no one else can perceive. He continues the chronicle.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">His Transformation</p>
+                                    <p class="detail-content">"Whatever I am now—it's better than dead." His prism eye shows him the song beneath reality, the frequencies that hold the world together.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 1</span>
+                                        <span class="book-tag">Book 2</span>
+                                        <span class="book-tag">Book 3</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Corrupted</p>
+                            <h3 class="character-name">Mardek</h3>
+                            <p class="character-role">Prophet of the Silence</p>
+                            <p class="character-desc">A fisherman whose son vanished into the black river. He dove after him and emerged changed—a shard of gear pressed into his flesh, a prophecy carved into his palm: "The bridge must burn."</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">His Corruption</p>
+                                    <p class="detail-content">The Silence found in his grief a door. He became its prophet, hunting Lila with the certainty of the damned.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 1</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="character-card" onclick="this.classList.toggle('expanded')">
-                <p class="character-type">The Translated Watcher</p>
-                <h3 class="character-name">Sariel</h3>
+            <!-- ERA 3: THE NEPHILIM -->
+            <div class="era-card" onclick="this.classList.toggle('expanded')">
+                <div class="era-header">
+                    <div class="era-header-content">
+                        <h3 class="era-title">The Nephilim</h3>
+                        <p class="era-description">Children of forbidden union—half angel, half human, fully condemned. They built temples, raised families, dreamed of belonging. Now they are stone, scattered across a wasteland no map remembers.</p>
+                    </div>
+                    <span class="era-toggle">+</span>
+                </div>
+                <div class="era-characters">
+                    <div class="era-characters-inner">
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">Son of Lightning</p>
+                            <h3 class="character-name">Mahaway</h3>
+                            <p class="character-role">He Who Dreamed of Thunder</p>
+                            <p class="character-desc">Son of Baraqel the Watcher. Turned to stone in the purge, his quartz eyes still stare at the sky. He dreamed of his father's lightning until the end.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Apocryphal Sources</p>
+                                    <ul class="reference-list">
+                                        <li>Book of Giants (Dead Sea Scrolls) — Mahaway's dreams</li>
+                                        <li>4Q530 — His journey to Enoch for interpretation</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Fleeing Mother</p>
+                            <h3 class="character-name">Anazya</h3>
+                            <p class="character-role">Daughter of No One</p>
+                            <p class="character-desc">A spontaneous birth, generated by the corruption itself. She loved a human man, bore him children, tried to hide. They turned her to stone in the moment of fleeing, one arm outstretched toward the ice wall.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Her Story</p>
+                                    <p class="detail-content">She lived for thirty years. She loved. She tried to escape. She almost made it.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Warrior</p>
+                            <h3 class="character-name">Ohya</h3>
+                            <p class="character-role">He Who Led the Defiance</p>
+                            <p class="character-desc">He led an army of Nephilim against the Watchers who came to destroy them. They were not all monsters. They were not all wrong.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Apocryphal Sources</p>
+                                    <ul class="reference-list">
+                                        <li>Book of Giants — One of the two famous giant brothers</li>
+                                        <li>4Q531 — His battle against the beast</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Healer</p>
+                            <h3 class="character-name">Hahyah</h3>
+                            <p class="character-role">She Who Saved Villages</p>
+                            <p class="character-desc">She used her giant's strength to dam rivers and save villages from floods. Not all Nephilim were destroyers. Some were protectors. History forgets the gentle giants.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Apocryphal Sources</p>
+                                    <ul class="reference-list">
+                                        <li>Book of Giants — Brother of Ohya</li>
+                                        <li>4Q530 — Received prophetic dreams</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Sleeper</p>
+                            <h3 class="character-name">Gilgamos</h3>
+                            <p class="character-role">The Giant of Kaş</p>
+                            <p class="character-desc">He sleeps beneath the Mediterranean, visible through crystal waters when the light is right. He waits for something. He has been waiting for a very long time.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Mythological Connection</p>
+                                    <p class="detail-content">His name echoes Gilgamesh—the ancient king who sought immortality and found only the memory of the flood.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 3</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ERA 4: NOAH'S GENERATION -->
+            <div class="era-card" onclick="this.classList.toggle('expanded')">
+                <div class="era-header">
+                    <div class="era-header-content">
+                        <h3 class="era-title">Noah's Generation</h3>
+                        <p class="era-description">Born glowing with the light of Adam's line, the builder spent ninety years constructing salvation while the world laughed. His grandfather knew Enoch. His sons would repopulate the earth.</p>
+                    </div>
+                    <span class="era-toggle">+</span>
+                </div>
+                <div class="era-characters">
+                    <div class="era-characters-inner">
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Builder</p>
+                            <h3 class="character-name">Noah</h3>
+                            <p class="character-role">"Rest" — Preserver of the Light</p>
+                            <p class="character-desc">Born with glowing eyes that lit up the room. His father fled in terror. But Enoch, from Eden, confirmed: this is not corruption. This is the remnant.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Etymology</p>
+                                    <p class="detail-content"><span class="etymology">Noach (נֹחַ)</span> — "rest" or "comfort"</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">The Miracle Birth</p>
+                                    <ul class="reference-list">
+                                        <li>1 Enoch 106 — "His eyes lit up the whole house like the sun"</li>
+                                        <li>His father Lamech thought he was Nephilim</li>
+                                        <li>He spoke to God at birth</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 4</span>
+                                        <span class="book-tag">Book 5</span>
+                                        <span class="book-tag">Book 6</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Fearful Father</p>
+                            <h3 class="character-name">Lamech</h3>
+                            <p class="character-role">He Who Fled His Own Son</p>
+                            <p class="character-desc">When Noah opened his eyes, Lamech ran. He thought the angels had touched his wife. He thought his son was one of THEM. He was wrong about everything except the importance.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Etymology</p>
+                                    <p class="detail-content"><span class="etymology">Lemekh (לֶמֶךְ)</span> — meaning uncertain, possibly "powerful"</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Genesis Apocryphon</p>
+                                    <p class="detail-content">The Dead Sea Scrolls preserve his accusation against his wife and her tearful denial. "No Watcher has touched me."</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Last Link</p>
+                            <h3 class="character-name">Methuselah</h3>
+                            <p class="character-role">He Who Knew Enoch</p>
+                            <p class="character-desc">The oldest man who ever lived—969 years. He knew Enoch directly. He died the year of the flood. His name may mean "his death shall bring" (the flood).</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Etymology</p>
+                                    <p class="detail-content"><span class="etymology">Methushelach (מְתוּשֶׁלַח)</span> — "man of the dart" or "his death shall bring"</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">The Timeline</p>
+                                    <p class="detail-content">He died at 969, the year the flood came. Did God wait until he passed naturally before sending judgment?</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">Noah's Wife</p>
+                            <h3 class="character-name">Emzara</h3>
+                            <p class="character-role">She Who Called the Light Beautiful</p>
+                            <p class="character-desc">When others feared Noah's glowing eyes, Emzara called them beautiful. She chose him before he knew how to choose himself. Three centuries together. One door that closes.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Source</p>
+                                    <p class="detail-content">Book of Jubilees 4:33 names her as Emzara, daughter of Rake'el.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 4</span>
+                                        <span class="book-tag">Book 5</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Blessed Son</p>
+                            <h3 class="character-name">Shem</h3>
+                            <p class="character-role">Bearer of Esh — The Covenant Line</p>
+                            <p class="character-desc">The son who covered his father's shame. From his line: Abraham, David, the Messiah. He wields the blade Esh—fire—and nearly died fighting Nimrod.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Etymology</p>
+                                    <p class="detail-content"><span class="etymology">Shem (שֵׁם)</span> — "name" or "renown." At Babel they said: "Let us make a SHEM for ourselves."</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 5</span>
+                                        <span class="book-tag">Book 6</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">Cain's Heir</p>
+                            <h3 class="character-name">Tubal-Cain</h3>
+                            <p class="character-role">Master of Bronze and Iron</p>
+                            <p class="character-desc">Descendant of Cain—the first murderer. Yet he taught Noah metalwork. The tools that built the ark came from the line of the curse. God uses even broken lineages.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Biblical Reference</p>
+                                    <p class="detail-content">Genesis 4:22 — "An instructor of every craftsman in bronze and iron"</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 4</span>
+                                        <span class="book-tag">Book 5</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ERA 5: AFTER THE FLOOD -->
+            <div class="era-card" onclick="this.classList.toggle('expanded')">
+                <div class="era-header">
+                    <div class="era-header-content">
+                        <h3 class="era-title">After the Flood</h3>
+                        <p class="era-description">The waters receded but the Silence remained. In Babel, a hunter-king rose from the cursed line. Beyond the ice wall, the "gods" of legend watched and remembered.</p>
+                    </div>
+                    <span class="era-toggle">+</span>
+                </div>
+                <div class="era-characters">
+                    <div class="era-characters-inner">
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">The Mighty Hunter</p>
+                            <h3 class="character-name">Nimrod</h3>
+                            <p class="character-role">"We Will Rebel" — First Warlock-King</p>
+                            <p class="character-desc">Born in silence, with eyes that absorb light. Great-grandson of Noah through the cursed line. The vessel the Silence had been waiting for. Builder of Babel.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Etymology</p>
+                                    <p class="detail-content"><span class="etymology">Nimrod (נִמְרוֹד)</span> — from "marad" (מרד), "to rebel." His name declares: "We will rebel."</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">The Cursed Line</p>
+                                    <p class="detail-content">Noah → Ham → Canaan (cursed) → Cush → Nimrod. Each generation concentrated the darkness.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 6</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">Queen of Heaven</p>
+                            <h3 class="character-name">Semiramis</h3>
+                            <p class="character-role">Daughter of Silence</p>
+                            <p class="character-desc">She came from beyond the eastern settlements. No one knew her origins. She didn't just marry Cush—she chose him. Her influence haunts humanity's religions for millennia.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Her Legacy</p>
+                                    <ul class="reference-list">
+                                        <li>Babylonian Ishtar, Phoenician Astarte</li>
+                                        <li>Greek Aphrodite, Roman Venus</li>
+                                        <li>The "Queen of Heaven" (Jeremiah 7:18)</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 6</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">All-Father of Asgard</p>
+                            <h3 class="character-name">Odin</h3>
+                            <p class="character-role">The One-Eyed Seer</p>
+                            <p class="character-desc">He sacrificed one eye at the Well of Memory, trading sight for insight. When Thor wanted to save the drowning world, Odin understood why it couldn't be done.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">Norse Sources</p>
+                                    <ul class="reference-list">
+                                        <li>Hávamál — His sacrifice for wisdom</li>
+                                        <li>Völuspá — The prophecy of Ragnarök</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">In Our Story</p>
+                                    <p class="detail-content">The Norse "gods" are Nephilim who fled over the Ice Wall before the flood. They became legends. They watch still.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 6</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">God of Thunder</p>
+                            <h3 class="character-name">Thor</h3>
+                            <p class="character-role">Young Awakened — Carrier of Guilt</p>
+                            <p class="character-desc">Young for an Awakened—barely three centuries. He wanted to save the drowning children. His father stopped him. He has carried that weight ever since.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">The Thunder</p>
+                                    <p class="detail-content">His emotion manifests as weather. What we call storms may be his grief, echoing across millennia.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 6</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="era-character-card" onclick="event.stopPropagation(); this.classList.toggle('expanded')">
+                            <p class="character-type">Sound-Weaver of Lemuria</p>
+                            <h3 class="character-name">Mirael</h3>
+                            <p class="character-role">She Who Hears the Waters</p>
+                            <p class="character-desc">In the Chamber of Echoes, Mirael communicates with the waters themselves. She understands the mathematics of creation—and weeps for the drowning while understanding the necessity.</p>
+                            <span class="character-expand-hint">Discover More +</span>
+                            <div class="character-details">
+                                <div class="detail-section">
+                                    <p class="detail-label">What the Waters Said</p>
+                                    <p class="detail-content">"The Nephilim bred with the song itself. They created harmonics that should never have existed. This is not punishment. This is recalculation."</p>
+                                </div>
+                                <div class="detail-section">
+                                    <p class="detail-label">Appears In</p>
+                                    <div class="book-appearances">
+                                        <span class="book-tag">Book 6</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUNCATION POINT A -->
                 <p class="character-role">"Prince of God" — Redeemed</p>
                 <p class="character-desc">
                     A female Watcher who was translated before the flood. She walks freely between
@@ -1696,18 +2450,7 @@
                     </div>
                     <div class="detail-section">
                         <p class="detail-label">What the Waters Said</p>
-                        <p class="detail-content">"The nephilim did not just breed with humans—they bred with the song itself. They created harmonics that should never have existed. This is not punishment. This is recalculation."</p>
-                    </div>
-                    <div class="detail-section">
-                        <p class="detail-label">Appears In</p>
-                        <div class="book-appearances">
-                            <span class="book-tag">Book 6</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                        <p class="detail-content">"The Nephilim bred with the song itself. They created harmonics that should never have existed. This is not punishment. This is recalculation."</p>
 
     <!-- Mysteries Section -->
     <section id="mysteries-section">
