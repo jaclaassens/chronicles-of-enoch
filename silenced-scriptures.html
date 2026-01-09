@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Silenced Scriptures | The Chronicles of Enoch</title>
+    <meta name="description" content="Read the Book of Enoch with annotated Ge'ez translations, Hebrew roots, and frequency connections. The scriptures they didn't want you to read.">
+
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="Book of Enoch, 1 Enoch, Ge'ez translation, Ethiopian Bible, Silenced scriptures, Watchers, Nephilim, Hebrew roots, biblical apocrypha, removed books of the Bible">
+    <meta name="author" content="Lucian Ashviel">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#c9a227">
+    <link rel="canonical" href="https://jaclaassens.github.io/chronicles-of-enoch/silenced-scriptures.html">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="The Silenced Scriptures | The Chronicles of Enoch">
+    <meta property="og:description" content="Read the Book of Enoch with annotated translations. The scriptures they didn't want you to read.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jaclaassens.github.io/chronicles-of-enoch/silenced-scriptures.html">
+    <meta property="og:site_name" content="The Chronicles of Enoch">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Silenced Scriptures | The Chronicles of Enoch">
+    <meta name="twitter:description" content="Read the Book of Enoch with annotated translations. The scriptures they didn't want you to read.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e8d48b;
+            --gold-dark: #8b6914;
+            --parchment: #f4e4bc;
+            --parchment-dark: #d4c4a0;
+            --ink: #1a1408;
+            --ink-light: #3d2f1a;
+            --blood: #6b1c1c;
+            --deep-blue: #0a1628;
+            --ocean: #1a3a5c;
+            --ice: #a8c8d8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--ink);
+            color: var(--parchment);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-atmosphere {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(201, 162, 39, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(107, 28, 28, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(26, 58, 92, 0.05) 0%, transparent 70%);
+        }
+
+        .bg-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 22, 40, 0.98);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            color: var(--parchment);
+            text-decoration: none;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+            opacity: 1;
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 2;
+            padding-top: 100px;
+        }
+
+        section {
+            padding: 4rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: var(--parchment);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .page-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--parchment-dark);
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .page-divider {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            margin: 2rem auto;
+        }
+
+        /* Work in Progress Banner */
+        .wip-banner {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), rgba(107, 28, 28, 0.1));
+            border: 1px dashed rgba(201, 162, 39, 0.4);
+            padding: 1.5rem 2rem;
+            margin: 2rem auto;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .wip-banner p {
+            font-size: 0.95rem;
+            color: var(--gold-light);
+            line-height: 1.6;
+        }
+
+        .wip-banner strong {
+            color: var(--gold);
+        }
+
+        /* Chapter Navigation */
+        .chapter-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .chapter-link {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--parchment);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .chapter-link:hover, .chapter-link.active {
+            background: rgba(201, 162, 39, 0.1);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .chapter-link.coming-soon {
+            opacity: 0.4;
+            cursor: default;
+        }
+
+        /* Chapter Header */
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .chapter-number {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--parchment);
+            margin-bottom: 1rem;
+        }
+
+        .chapter-geez {
+            font-size: 1.4rem;
+            color: var(--gold-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-transliteration {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--parchment-dark);
+        }
+
+        /* Verse Cards */
+        .verse-card {
+            background: linear-gradient(135deg, rgba(26, 20, 8, 0.3), rgba(10, 22, 40, 0.3));
+            border-left: 3px solid var(--gold);
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .verse-card:hover {
+            background: linear-gradient(135deg, rgba(26, 20, 8, 0.5), rgba(10, 22, 40, 0.5));
+        }
+
+        .verse-card.expanded {
+            border-left-width: 4px;
+        }
+
+        .verse-main {
+            padding: 1.5rem 2rem;
+        }
+
+        .verse-number {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .verse-text {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--parchment);
+            margin-bottom: 1rem;
+        }
+
+        .verse-afrikaans {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--parchment-dark);
+            font-style: italic;
+            padding-left: 1rem;
+            border-left: 2px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .verse-expand-hint {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.7;
+            display: block;
+            margin-top: 1rem;
+        }
+
+        .verse-card.expanded .verse-expand-hint {
+            display: none;
+        }
+
+        /* Side Notes Panel */
+        .side-notes {
+            display: none;
+            padding: 0 2rem 2rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.15);
+        }
+
+        .verse-card.expanded .side-notes {
+            display: block;
+        }
+
+        .note-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .note-item:last-child {
+            border-bottom: none;
+        }
+
+        .note-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--ink);
+            background: var(--gold);
+            padding: 0.2rem 0.6rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .note-tag.linguistic { background: var(--gold); }
+        .note-tag.hebrew { background: var(--ocean); color: var(--parchment); }
+        .note-tag.frequency { background: var(--blood); color: var(--parchment); }
+        .note-tag.silence { background: var(--ink); color: var(--gold); border: 1px solid var(--gold); }
+        .note-tag.question { background: var(--parchment-dark); color: var(--ink); }
+        .note-tag.compare { background: var(--ice); color: var(--ink); }
+
+        .note-content {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--parchment-dark);
+        }
+
+        .note-content strong {
+            color: var(--gold-light);
+        }
+
+        .note-content em {
+            color: var(--parchment);
+        }
+
+        .geez-term {
+            font-size: 1.1em;
+            color: var(--gold);
+        }
+
+        .hebrew-term {
+            font-size: 1.1em;
+            color: var(--ice);
+            direction: rtl;
+        }
+
+        /* Chapter Summary */
+        .chapter-summary {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.05), rgba(10, 22, 40, 0.3));
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .summary-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .summary-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .summary-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+            color: var(--parchment-dark);
+        }
+
+        .summary-list li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .key-terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .key-terms-table th {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-align: left;
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+        }
+
+        .key-terms-table td {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--parchment-dark);
+            border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .key-terms-table td:first-child {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--parchment-dark);
+            margin-bottom: 1rem;
+        }
+
+        .footer-credit {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.6rem;
+            }
+
+            .verse-main {
+                padding: 1rem 1.5rem;
+            }
+
+            .side-notes {
+                padding: 0 1.5rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-atmosphere"></div>
+    <div class="bg-noise"></div>
+
+    <nav>
+        <div class="nav-content">
+            <a href="index.html" class="logo">Chronicles of Enoch</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#books-section">Books</a></li>
+                <li><a href="archives.html">Archives</a></li>
+                <li><a href="silenced-scriptures.html" style="color: var(--gold); opacity: 1;">Scriptures</a></li>
+                <li><a href="greater-earth-flat.html">Map</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <header class="page-header">
+            <p class="page-label">For Those Who Seek</p>
+            <h1 class="page-title">The Silenced Scriptures</h1>
+            <div class="page-divider"></div>
+            <p class="page-description">
+                The Book of Enoch was read by the early church, quoted in Scripture,
+                preserved by Ethiopian Christians for millennia. Then it was... removed.
+                Hidden in plain sight. Here it is again, with the frequencies restored.
+            </p>
+        </header>
+
+        <div class="wip-banner">
+            <p>
+                <strong>This is a living document.</strong> New chapters and annotations
+                will be added over time. Click any verse to reveal the hidden frequencies
+                in the original Ge'ez and Hebrew.
+            </p>
+        </div>
+
+        <nav class="chapter-nav">
+            <a href="#chapter-1" class="chapter-link active">Chapter 1</a>
+            <span class="chapter-link coming-soon">Chapter 2</span>
+            <span class="chapter-link coming-soon">Chapter 3</span>
+            <span class="chapter-link coming-soon">...</span>
+        </nav>
+
+        <section id="chapter-1">
+            <div class="chapter-header">
+                <p class="chapter-number">Chapter One</p>
+                <h2 class="chapter-title">The Blessing of Enoch</h2>
+                <p class="chapter-geez">ቃለ ፡ በረከት ፡ ዘሄኖክ</p>
+                <p class="chapter-transliteration">Qala barakat za-Henok — "Words of blessing of Enoch"</p>
+            </div>
+
+            <!-- VERSE 1 -->
+            <div class="verse-card" onclick="this.classList.toggle('expanded')">
+                <div class="verse-main">
+                    <p class="verse-number">Verse 1</p>
+                    <p class="verse-text">
+                        "The words of the blessing of Enoch, according to which he blessed the chosen
+                        and righteous, who must be present on the Day of Distress, which is appointed,
+                        for the removal of all the wicked and impious."
+                    </p>
+                    <p class="verse-afrikaans">
+                        "Die woorde van die seen van Henok, waarmee hy die uitverkorenes en regverdiges
+                        geseen het, wat teenwoordig moet wees op die Dag van Benoudheid, wat bestem is
+                        vir die verwydering van al die goddeloses en oneerbiediges."
+                    </p>
+                    <span class="verse-expand-hint">Reveal the frequencies +</span>
+                </div>
+                <div class="side-notes">
+                    <div class="note-item">
+                        <span class="note-tag linguistic">Linguistic</span>
+                        <p class="note-content">
+                            <strong>"Blessing" — <span class="hebrew-term">ברכה</span> (berakah)</strong><br>
+                            Ge'ez: <span class="geez-term">በረከት</span> (barakat) | Hebrew root: <span class="hebrew-term">ברך</span> (b-r-k)<br>
+                            This is the same root as in "baruch" (blessed). The blessing is not passive —
+                            it is an <em>ACT</em>, a transfer of spiritual power.<br>
+                            Compare: Genesis 1:28 — God <em>BLESSED</em> them (<span class="hebrew-term">וַיְבָרֶךְ</span>)
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag frequency">Frequency</span>
+                        <p class="note-content">
+                            <strong>"Chosen and righteous"</strong><br>
+                            Ge'ez: <span class="geez-term">ኅሩያን ወጻድቃን</span> (heruyaan wa-tsaadqaan)<br>
+                            Two categories, not one:<br>
+                            • <span class="geez-term">ኅሩያን</span> (heruyaan) = chosen/elect — SELECTED by God<br>
+                            • <span class="geez-term">ጻድቃን</span> (tsaadqaan) = righteous — ALIGNED with God<br>
+                            Being chosen and being righteous are SEPARATE but connected.
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag hebrew">Hebrew</span>
+                        <p class="note-content">
+                            <strong>"Day of Distress"</strong><br>
+                            Ge'ez: <span class="geez-term">ዕለተ ፡ ምንዳቤ</span> (elata mendaabe)<br>
+                            Compare: <span class="hebrew-term">יוֹם צָרָה</span> (yom tsarah) — "day of trouble/distress"<br>
+                            Used in: Psalm 20:1, Zephaniah 1:15, Jeremiah 16:19<br>
+                            This is the YOM — the DAY — a specific <em>appointed</em> time. Not vague. DESTINED.
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag silence">The Silence</span>
+                        <p class="note-content">
+                            The opening verse makes clear: This book is about <em>JUDGMENT</em>.<br>
+                            Not generic spirituality — SEPARATION.<br>
+                            The Silence wants unity without distinction.<br>
+                            Enoch starts with: <em>There are TWO kinds of people.</em>
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag question">Question</span>
+                        <p class="note-content">
+                            Why does Enoch begin with BLESSING, not warning?<br>
+                            The blessing comes BEFORE the description of judgment.<br>
+                            The frequency is established FIRST — then the contrast is shown.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VERSE 2 -->
+            <div class="verse-card" onclick="this.classList.toggle('expanded')">
+                <div class="verse-main">
+                    <p class="verse-number">Verse 2</p>
+                    <p class="verse-text">
+                        "And Enoch took up his parable, and said: There was a righteous man, whose eyes
+                        were opened by the Lord, and he saw a Holy vision in the Heavens, which the Angels
+                        showed to me, and I heard everything from them. And I understood what I saw, but
+                        not for this generation, but for a distant generation that will come."
+                    </p>
+                    <p class="verse-afrikaans">
+                        "En Henok het sy gelykenis opgeneem en gese: Daar was 'n regverdige man, wie se oe
+                        deur die Here geopen is, en hy het 'n Heilige visioen in die Hemele gesien, wat die
+                        Engele aan my getoon het, en ek het alles van hulle gehoor. En ek het verstaan wat
+                        ek gesien het, maar nie vir hierdie geslag nie, maar vir 'n verre geslag wat sal kom."
+                    </p>
+                    <span class="verse-expand-hint">Reveal the frequencies +</span>
+                </div>
+                <div class="side-notes">
+                    <div class="note-item">
+                        <span class="note-tag linguistic">Linguistic</span>
+                        <p class="note-content">
+                            <strong>"Parable" — <span class="hebrew-term">משל</span> (mashal)</strong><br>
+                            Ge'ez: <span class="geez-term">ምሳሌ</span> (mesaale) | Hebrew: <span class="hebrew-term">מָשָׁל</span> (mashal)<br>
+                            NOT just a "story" — a mashal is: a proverb, a prophetic utterance, a wisdom
+                            saying with hidden meaning, a comparison revealing truth.<br>
+                            Enoch "lifts up" (<span class="hebrew-term">נָשָׂא</span> / nasa) his mashal —
+                            he ELEVATES it. This is prophetic speech, not casual writing.
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag frequency">Frequency</span>
+                        <p class="note-content">
+                            <strong>"Eyes were opened"</strong><br>
+                            Ge'ez: <span class="geez-term">ተከፈታ ፡ አዕይንቲሁ</span> (takaftaa aeyentiihu)<br>
+                            The passive voice: his eyes WERE OPENED — by the Lord. He did not open them himself.<br>
+                            This is REVELATION — uncovering what is already there.<br>
+                            Compare: Genesis 3:7 — "the eyes of both were opened" (after the fall)<br>
+                            Compare: 2 Kings 6:17 — Elisha prays for servant's eyes to be opened<br>
+                            <em>The capacity to SEE is given, not earned.</em>
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag hebrew">Hebrew</span>
+                        <p class="note-content">
+                            <strong>"The Lord"</strong><br>
+                            Ge'ez: <span class="geez-term">እግዚአብሔር</span> (Egzi'abher) = "Lord of the Universe"<br>
+                            This is the Ethiopian equivalent of "LORD" — but is it YHWH?<br>
+                            In Ethiopian tradition, this title IS the Name.<br>
+                            Question: Did the original Aramaic/Hebrew have <span class="hebrew-term">יהוה</span> (YHWH)?
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag silence">The Silence</span>
+                        <p class="note-content">
+                            <strong>"Not for this generation"</strong><br>
+                            Enoch explicitly states: This is NOT for his contemporaries.<br>
+                            It is for a "DISTANT generation that will come."<br>
+                            The Silence wants to keep this "historical" — safely in the past.<br>
+                            But Enoch says it's for THE FUTURE.<br>
+                            <em>Are WE that distant generation?</em>
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag compare">Compare</span>
+                        <p class="note-content">
+                            <strong>Shifts from third to first person</strong><br>
+                            "There was a righteous man" (third person)<br>
+                            "which the Angels showed TO ME" (first person)<br>
+                            This is not an error — it's a literary device. Enoch speaks of himself as if
+                            from outside, then enters the narrative. The reader is pulled from observer to participant.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VERSE 3 -->
+            <div class="verse-card" onclick="this.classList.toggle('expanded')">
+                <div class="verse-main">
+                    <p class="verse-number">Verse 3</p>
+                    <p class="verse-text">
+                        "Concerning the chosen, I spoke, and I uttered a parable concerning them:
+                        The Holy and Great One will come out from His dwelling."
+                    </p>
+                    <p class="verse-afrikaans">
+                        "Aangaande die uitverkorenes het ek gepraat, en ek het 'n gelykenis oor hulle
+                        uitgespreek: Die Heilige en Grote Een sal uit Sy woning uitgaan."
+                    </p>
+                    <span class="verse-expand-hint">Reveal the frequencies +</span>
+                </div>
+                <div class="side-notes">
+                    <div class="note-item">
+                        <span class="note-tag linguistic">Linguistic</span>
+                        <p class="note-content">
+                            <strong>"The Holy and Great One"</strong><br>
+                            Ge'ez: <span class="geez-term">ቅዱስ ፡ ወዐቢይ</span> (Qeddus wa-Abiiy)<br>
+                            <span class="geez-term">ቅዱስ</span> (Qeddus) = Holy — set apart, sacred<br>
+                            <span class="geez-term">ወዐቢይ</span> (wa-Abiiy) = and Great — mighty, vast<br>
+                            Hebrew equivalent: <span class="hebrew-term">הַקָּדוֹשׁ הַגָּדוֹל</span> (HaKadosh HaGadol)<br>
+                            This is a TITLE, not the Name. Compare: "The Holy One of Israel" in Isaiah.
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag frequency">Frequency</span>
+                        <p class="note-content">
+                            <strong>"Will come out from His dwelling"</strong><br>
+                            Ge'ez: <span class="geez-term">ይወፅእ ፡ እምነ ፡ ማኅደሩ</span> (yewatse' emna maakhdaru)<br>
+                            The Holy One does not STAY in heaven — He COMES OUT.<br>
+                            His dwelling (<span class="hebrew-term">מָעוֹן</span> / ma'on) is not His prison.<br>
+                            This is the pattern: God MOVES toward His creation.<br>
+                            <em>The Incarnation is foreshadowed here.</em>
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag silence">The Silence</span>
+                        <p class="note-content">
+                            The Silence wants God distant, abstract, impersonal.<br>
+                            Enoch says: <em>He will COME OUT.</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VERSE 4 -->
+            <div class="verse-card" onclick="this.classList.toggle('expanded')">
+                <div class="verse-main">
+                    <p class="verse-number">Verse 4</p>
+                    <p class="verse-text">
+                        "And the Eternal God will tread, from there, upon Mount Sinai, and He will appear
+                        with His Host, and will appear in the strength of His Power from Heaven."
+                    </p>
+                    <p class="verse-afrikaans">
+                        "En die Ewige God sal van daar af op die Berg Sinai trap, en Hy sal met Sy
+                        Leerskare verskyn, en sal verskyn in die krag van Sy Mag uit die Hemel."
+                    </p>
+                    <span class="verse-expand-hint">Reveal the frequencies +</span>
+                </div>
+                <div class="side-notes">
+                    <div class="note-item">
+                        <span class="note-tag linguistic">Linguistic</span>
+                        <p class="note-content">
+                            <strong>"Eternal God"</strong><br>
+                            Ge'ez: <span class="geez-term">አምላከ ፡ ዓለም</span> (Amlaaka aalam)<br>
+                            Literally: "God of the Age/World/Eternity"<br>
+                            Hebrew: <span class="hebrew-term">אֵל עוֹלָם</span> (El Olam) — "Everlasting God"<br>
+                            Used in Genesis 21:33 — Abraham planted a tree and called on El Olam.<br>
+                            This is one of the divine NAMES, not just a title.
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag frequency">Frequency</span>
+                        <p class="note-content">
+                            <strong>"Will tread upon Mount Sinai"</strong><br>
+                            The verb <span class="hebrew-term">ירגז</span> (ragaz) usually means "to tremble"
+                            or "cause to tremble" — His FOOTSTEPS cause trembling.<br>
+                            Mount Sinai — the place of the Torah's giving.<br>
+                            The same mountain will see His RETURN.<br>
+                            <em>Pattern: Where law was given, judgment will come.</em>
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag compare">Compare</span>
+                        <p class="note-content">
+                            <strong>Deuteronomy 33:2</strong><br>
+                            "YHWH came from Sinai, and dawned from Seir upon them; he shone forth from
+                            Mount Paran; he came from the ten thousands of holy ones, with flaming fire
+                            at his right hand."<br>
+                            <em>Jude 1:14-15 QUOTES 1 Enoch 1:9 — this passage is in Scripture.</em><br>
+                            The New Testament validates Enoch's prophecy.
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag hebrew">Hebrew</span>
+                        <p class="note-content">
+                            <strong>"His Host" — <span class="hebrew-term">צבא</span> (tsaba)</strong><br>
+                            Ge'ez: <span class="geez-term">ሰራዊቱ</span> (sarawiitu)<br>
+                            The heavenly army — angels, holy ones, the divine council.<br>
+                            Not alone — with TEN THOUSANDS (see verse 9).<br>
+                            This is not a private appearance — it's a cosmic invasion.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VERSE 5 -->
+            <div class="verse-card" onclick="this.classList.toggle('expanded')">
+                <div class="verse-main">
+                    <p class="verse-number">Verse 5</p>
+                    <p class="verse-text">
+                        "And all shall be smitten with fear, and the Watchers shall quake, and great fear
+                        and trembling shall seize them unto the ends of the earth."
+                    </p>
+                    <p class="verse-afrikaans">
+                        "En almal sal met vrees geslaan word, en die Watchers sal bewe, en groot vrees
+                        en bewing sal hulle aangryp tot aan die eindes van die aarde."
+                    </p>
+                    <span class="verse-expand-hint">Reveal the frequencies +</span>
+                </div>
+                <div class="side-notes">
+                    <div class="note-item">
+                        <span class="note-tag linguistic">Linguistic</span>
+                        <p class="note-content">
+                            <strong>"Watchers" — <span class="hebrew-term">עִירִין</span> (Irin)</strong><br>
+                            Ge'ez: <span class="geez-term">ትጉሓን</span> (Teguhaan)<br>
+                            From root: <span class="geez-term">ትጉህ</span> (teguh) = "awake, vigilant"<br>
+                            Aramaic: <span class="hebrew-term">עִיר</span> (Ir) = "watcher, wakeful one"<br>
+                            This is the FIRST mention of the Watchers in the text.<br>
+                            They are introduced in the context of FEAR.
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag frequency">Frequency</span>
+                        <p class="note-content">
+                            <strong>The Watchers FEAR</strong><br>
+                            The Watchers are not just any angels. They are the ones who FELL (chapter 6 onwards).<br>
+                            Even THEY — who rebelled — will tremble.<br>
+                            This is not selective judgment — it reaches THEM.<br>
+                            <em>The ends of the earth AND the fallen angels.</em>
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag silence">The Silence</span>
+                        <p class="note-content">
+                            The Silence removed this book partly because it NAMES the Watchers.<br>
+                            It provides too much detail about WHO rebelled and HOW.<br>
+                            Keeping it vague serves the Silence.<br>
+                            <em>Enoch is specific.</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VERSE 6 -->
+            <div class="verse-card" onclick="this.classList.toggle('expanded')">
+                <div class="verse-main">
+                    <p class="verse-number">Verse 6</p>
+                    <p class="verse-text">
+                        "And the high mountains shall be shaken, and the high hills shall be made low,
+                        and shall melt like wax before the flame."
+                    </p>
+                    <p class="verse-afrikaans">
+                        "En die hoe berge sal geskud word, en die hoe heuwels sal laag gemaak word,
+                        en sal smelt soos was voor die vlam."
+                    </p>
+                    <span class="verse-expand-hint">Reveal the frequencies +</span>
+                </div>
+                <div class="side-notes">
+                    <div class="note-item">
+                        <span class="note-tag compare">Compare</span>
+                        <p class="note-content">
+                            <strong>Micah 1:4</strong> — "And the mountains will melt under him, and the
+                            valleys will split open, like wax before the fire."<br><br>
+                            <strong>Psalm 97:5</strong> — "The mountains melt like wax before YHWH,
+                            before the Lord of all the earth."
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag frequency">Frequency</span>
+                        <p class="note-content">
+                            <strong>Mountains = Powers</strong><br>
+                            In prophetic literature, mountains often symbolize: Kingdoms, Powers,
+                            Proud structures, Things that seem immovable.<br>
+                            The "high hills made low" — this is LEVELING.<br>
+                            <em>What seems permanent will dissolve.</em>
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag linguistic">Linguistic</span>
+                        <p class="note-content">
+                            <strong>"Like wax before flame"</strong><br>
+                            Ge'ez: <span class="geez-term">ከመ ፡ ሰዐ</span> (kama sa'a) = "like wax"<br>
+                            The image is TOTAL dissolution. Not damaged — MELTED.<br>
+                            What seemed solid becomes liquid, formless.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VERSE 7 -->
+            <div class="verse-card" onclick="this.classList.toggle('expanded')">
+                <div class="verse-main">
+                    <p class="verse-number">Verse 7</p>
+                    <p class="verse-text">
+                        "And the earth shall be wholly rent in sunder, and all that is upon the earth
+                        shall perish, and there shall be a judgement upon all."
+                    </p>
+                    <p class="verse-afrikaans">
+                        "En die aarde sal heeltemal uitmekaar geskeur word, en alles wat op die aarde
+                        is sal vergaan, en daar sal 'n oordeel oor almal wees."
+                    </p>
+                    <span class="verse-expand-hint">Reveal the frequencies +</span>
+                </div>
+                <div class="side-notes">
+                    <div class="note-item">
+                        <span class="note-tag frequency">Frequency</span>
+                        <p class="note-content">
+                            <strong>"Judgement upon ALL"</strong><br>
+                            Ge'ez: <span class="geez-term">ኵሉ</span> (kwellu) = ALL, everyone<br>
+                            Not some. Not the especially wicked. ALL.<br>
+                            Universal judgment — then distinction (verse 8).<br>
+                            <em>The sequence: ALL face judgment, THEN separation.</em>
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag question">Question</span>
+                        <p class="note-content">
+                            Is this the Flood (Noah's time)? Or the final judgment (end times)?<br>
+                            Or BOTH — a pattern that repeats?<br>
+                            <em>Enoch seems to collapse time — what happened, what will happen.</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VERSE 8 -->
+            <div class="verse-card" onclick="this.classList.toggle('expanded')">
+                <div class="verse-main">
+                    <p class="verse-number">Verse 8</p>
+                    <p class="verse-text">
+                        "But with the righteous He will make peace, and will protect the elect, and mercy
+                        shall be upon them. And they shall all belong to God, and they shall be prospered,
+                        and they shall all be blessed. And He will help them all, and light shall appear
+                        unto them, and He will make peace with them."
+                    </p>
+                    <p class="verse-afrikaans">
+                        "Maar met die regverdiges sal Hy vrede maak, en Hy sal die uitverkorenes beskerm,
+                        en genade sal op hulle wees. En hulle sal almal aan God behoort, en hulle sal
+                        voorspoedig wees, en hulle sal almal geseen word. En Hy sal hulle almal help,
+                        en lig sal aan hulle verskyn, en Hy sal vrede met hulle maak."
+                    </p>
+                    <span class="verse-expand-hint">Reveal the frequencies +</span>
+                </div>
+                <div class="side-notes">
+                    <div class="note-item">
+                        <span class="note-tag frequency">Frequency</span>
+                        <p class="note-content">
+                            <strong>"Light shall appear"</strong><br>
+                            Ge'ez: <span class="geez-term">ብርሃን</span> (berhaan) = light<br>
+                            The righteous receive LIGHT. Not just protection — ILLUMINATION.<br>
+                            Compare: John 1:4-5 — "In Him was life, and the life was the light of men."<br>
+                            <em>The frequency of the righteous is LIGHT.</em>
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag linguistic">Linguistic</span>
+                        <p class="note-content">
+                            <strong>"Peace" — <span class="hebrew-term">שָׁלוֹם</span> (shalom)</strong><br>
+                            Ge'ez: <span class="geez-term">ሰላም</span> (salaam)<br>
+                            Appears THREE times in this verse:<br>
+                            1. "make peace" | 2. "mercy upon them" | 3. "make peace with them"<br>
+                            Triple emphasis — complete peace.<br>
+                            <span class="hebrew-term">שָׁלוֹם</span> is not just absence of conflict — it is WHOLENESS.
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag compare">Compare</span>
+                        <p class="note-content">
+                            <strong>The Contrast</strong><br>
+                            Verse 7: Judgment on ALL<br>
+                            Verse 8: Peace for the righteous<br>
+                            The contrast is stark. No middle ground.<br>
+                            This is the FREQUENCY SEPARATION.<br>
+                            <em>Same event, two outcomes, based on alignment.</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VERSE 9 -->
+            <div class="verse-card" onclick="this.classList.toggle('expanded')">
+                <div class="verse-main">
+                    <p class="verse-number">Verse 9</p>
+                    <p class="verse-text">
+                        "And behold! He comes with ten thousand of His holy ones, to execute judgment upon all,
+                        and to destroy all the ungodly, and to convict all flesh of all the works of their
+                        ungodliness which they have ungodly committed, and of all the hard things which ungodly
+                        sinners have spoken against Him."
+                    </p>
+                    <p class="verse-afrikaans">
+                        "En kyk! Hy kom met tien duisend van Sy heiliges, om oordeel oor almal uit te voer,
+                        en om al die goddeloses te vernietig, en om alle vlees te oortuig van al die werke
+                        van hulle goddeloosheid wat hulle goddeloos gepleeg het, en van al die harde dinge
+                        wat goddelose sondaars teen Hom gespreek het."
+                    </p>
+                    <span class="verse-expand-hint">Reveal the frequencies +</span>
+                </div>
+                <div class="side-notes">
+                    <div class="note-item">
+                        <span class="note-tag compare">Compare</span>
+                        <p class="note-content">
+                            <strong>JUDE 1:14-15 QUOTES THIS VERSE</strong><br>
+                            "Enoch, the seventh from Adam, prophesied about them: 'See, the Lord is coming
+                            with thousands upon thousands of his holy ones to judge everyone, and to convict
+                            all of them of all the ungodly acts they have committed in their ungodliness,
+                            and of all the defiant words ungodly sinners have spoken against him.'"<br><br>
+                            <em>This is SCRIPTURE quoting ENOCH.</em><br>
+                            The New Testament validates this prophecy.<br>
+                            The book was removed, but the quote remains.
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag frequency">Frequency</span>
+                        <p class="note-content">
+                            <strong>"Ten thousand holy ones"</strong><br>
+                            Ge'ez: <span class="geez-term">እልፍ ፡ ቅዱሳን</span> (elf qeddusaan) = "ten thousand holy ones"<br>
+                            Hebrew: <span class="hebrew-term">רִבְבוֹת קֹדֶשׁ</span> (ribb'vot qodesh)<br>
+                            Compare Deuteronomy 33:2 — "ten thousands of holy ones"<br>
+                            The number is not literal — it means INNUMERABLE.<br>
+                            <em>The holy ones are the divine army.</em>
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag linguistic">Linguistic</span>
+                        <p class="note-content">
+                            <strong>"Ungodly" repeated FOUR times</strong><br>
+                            This is not poor writing — it's emphasis.<br>
+                            • ungodly (people)<br>
+                            • ungodliness (state)<br>
+                            • ungodly committed (action)<br>
+                            • ungodly sinners (identity)<br>
+                            The word saturates the sentence.<br>
+                            <em>It describes complete corruption — being, state, action, identity.</em>
+                        </p>
+                    </div>
+                    <div class="note-item">
+                        <span class="note-tag silence">The Silence</span>
+                        <p class="note-content">
+                            <strong>This verse is WHY the book was removed.</strong><br>
+                            It's TOO clear. It names judgment. It names the method. It names the outcome.<br>
+                            The Silence prefers ambiguity.<br>
+                            <em>Enoch is precise.</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapter Summary -->
+            <div class="chapter-summary">
+                <h3 class="summary-title">Chapter 1 Summary — The Opening Pattern</h3>
+                <ul class="summary-list">
+                    <li><strong>Blessing first</strong> (v.1) — The righteous are blessed BEFORE judgment described</li>
+                    <li><strong>Eyes opened</strong> (v.2) — Revelation requires divine intervention</li>
+                    <li><strong>For a distant generation</strong> (v.2) — This is for THE FUTURE</li>
+                    <li><strong>God will COME OUT</strong> (v.3-4) — He is not distant</li>
+                    <li><strong>Watchers will fear</strong> (v.5) — Even the fallen angels tremble</li>
+                    <li><strong>Creation dissolves</strong> (v.6-7) — The old order cannot stand</li>
+                    <li><strong>Two outcomes</strong> (v.7-8) — Judgment on all, peace for the righteous</li>
+                    <li><strong>Scripture quotes this</strong> (v.9) — Jude validates Enoch</li>
+                </ul>
+
+                <h4 style="font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--gold); margin: 1.5rem 0 1rem; letter-spacing: 0.1em;">KEY GE'EZ TERMS</h4>
+                <table class="key-terms-table">
+                    <tr>
+                        <th>Ge'ez</th>
+                        <th>Transliteration</th>
+                        <th>Meaning</th>
+                    </tr>
+                    <tr>
+                        <td>መጽሐፈ ሄኖክ</td>
+                        <td>Matsehafa Henok</td>
+                        <td>Book of Enoch</td>
+                    </tr>
+                    <tr>
+                        <td>በረከት</td>
+                        <td>barakat</td>
+                        <td>blessing</td>
+                    </tr>
+                    <tr>
+                        <td>ኅሩያን</td>
+                        <td>heruyaan</td>
+                        <td>chosen/elect</td>
+                    </tr>
+                    <tr>
+                        <td>ጻድቃን</td>
+                        <td>tsaadqaan</td>
+                        <td>righteous</td>
+                    </tr>
+                    <tr>
+                        <td>ትጉሓን</td>
+                        <td>Teguhaan</td>
+                        <td>Watchers</td>
+                    </tr>
+                    <tr>
+                        <td>ቅዱስ</td>
+                        <td>Qeddus</td>
+                        <td>Holy</td>
+                    </tr>
+                    <tr>
+                        <td>ሰላም</td>
+                        <td>salaam</td>
+                        <td>peace</td>
+                    </tr>
+                    <tr>
+                        <td>ብርሃን</td>
+                        <td>berhaan</td>
+                        <td>light</td>
+                    </tr>
+                </table>
+            </div>
+
+        </section>
+
+        <footer>
+            <p class="footer-quote">"Not for this generation, but for a distant generation that will come."</p>
+            <p class="footer-credit">Translation based on Michael Knibb (1978) from the Ge'ez | Annotations by Lucian Ashviel</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--parchment-dark);">
+                <a href="index.html" style="color: var(--gold);">Return to The Chronicles</a>
+            </p>
+        </footer>
+    </main>
+</body>
+</html>
